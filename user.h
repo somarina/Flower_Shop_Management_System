@@ -318,6 +318,7 @@ void UserDesign::DesignFeature()
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 void UserDesign::DesignMenu()
 {
+	H::setcursor(0,0);
 	
 //	for(int i=0;i<n;i++)
 //	{
@@ -443,192 +444,188 @@ void UserDesign::DesignMenu()
 		H::setcolor(135);H::gotoxy(25,28);cout << "GIVE FEDBACK";
 		H::drawBoxDoubleLineWithBG(18,31,30,1,230);
 		H::HLine(20,32,26,128,255);
-		H::setcolor(139);H::gotoxy(25,32);cout << "BACK";
+		H::setcolor(135);H::gotoxy(25,32);cout << "BACK";
 
 		if(x==1)
 		{
-			H::drawBoxDoubleLineWithBG(18,15,30,1,179);
-			H::HLine(20,16,26,128,136);
+			H::drawBoxDoubleLineWithBG(18,15,30,1,213);
+			H::HLine(20,16,26,128,216);
 			H::setcolor(135);H::gotoxy(25,16);cout << "DISPLAY FLOWERS";
 			
 			////		Flower Show If in Arr key case 1
 
-				H::setcolor(6);H::gotoxy(78,22);cout << R"(     .--.   )";
-				H::setcolor(6);H::gotoxy(78,23);cout << R"(  .'_\/_'.  )";
-				H::setcolor(6);H::gotoxy(78,24);cout << R"(  '. /\ .'  )";
-				H::setcolor(6);H::gotoxy(78,25);cout << R"(    "||"    )";
-				H::setcolor(2);H::gotoxy(78,26);cout << R"(     || /\  )";
-				H::setcolor(2);H::gotoxy(78,27);cout << R"(  /\ ||//\) )";
-				H::setcolor(2);H::gotoxy(78,28);cout << R"( (/\\||/    )";
-				H::setcolor(2);H::gotoxy(78,29);cout << R"(____\||/____)";
-				
-				H::setcolor(5);H::gotoxy(90,22);cout << R"(     .--.  )";
-				H::setcolor(5);H::gotoxy(90,23);cout << R"(  .'_\/_'.   )";
-				H::setcolor(5);H::gotoxy(90,24);cout << R"(  '. /\ .'   )";
-				H::setcolor(5);H::gotoxy(90,25);cout << R"(    "||"     )";
-				H::setcolor(2);H::gotoxy(90,26);cout << R"(     || /\   )";
-				H::setcolor(2);H::gotoxy(90,27);cout << R"(  /\ ||//\)  )";
-				H::setcolor(2);H::gotoxy(90,28);cout << R"( (/\\||/     )";
-				H::setcolor(2);H::gotoxy(90,29);cout << R"(____\||/_____)";
-				
-				H::setcolor(4);H::gotoxy(102,22);cout << R"(     .--.  )";
-				H::setcolor(4);H::gotoxy(102,23);cout << R"(  .'_\/_'.   )";
-				H::setcolor(4);H::gotoxy(102,24);cout << R"(  '. /\ .'   )";
-				H::setcolor(4);H::gotoxy(102,25);cout << R"(    "||"     )";
-				H::setcolor(2);H::gotoxy(102,26);cout << R"(     || /\   )";
-				H::setcolor(2);H::gotoxy(102,27);cout << R"(  /\ ||//\)  )";
-				H::setcolor(2);H::gotoxy(102,28);cout << R"( (/\\||/     )";
-				H::setcolor(2);H::gotoxy(102,29);cout << R"(____\||/_____)";
-				
-				H::setcolor(7);H::gotoxy(114,22);cout << R"(     .--.  )";
-				H::setcolor(7);H::gotoxy(114,23);cout << R"(  .'_\/_'.   )";
-				H::setcolor(7);H::gotoxy(114,24);cout << R"(  '. /\ .'   )";
-				H::setcolor(7);H::gotoxy(114,25);cout << R"(    "||"     )";
-				H::setcolor(2);H::gotoxy(114,26);cout << R"(     || /\   )";
-				H::setcolor(2);H::gotoxy(114,27);cout << R"(  /\ ||//\)  )";
-				H::setcolor(2);H::gotoxy(114,28);cout << R"( (/\\||/     )";
-				H::setcolor(2);H::gotoxy(114,29);cout << R"(____\||/_____)";
-				
-				H::setcolor(3);H::gotoxy(126,22);cout << R"(     .--.  )";
-				H::setcolor(3);H::gotoxy(126,23);cout << R"(  .'_\/_'.   )";
-				H::setcolor(3);H::gotoxy(126,24);cout << R"(  '. /\ .'   )";
-				H::setcolor(3);H::gotoxy(126,25);cout << R"(    "||"     )";
-				H::setcolor(2);H::gotoxy(126,26);cout << R"(     || /\   )";
-				H::setcolor(2);H::gotoxy(126,27);cout << R"(  /\ ||//\)  )";
-				H::setcolor(2);H::gotoxy(126,28);cout << R"( (/\\||/     )";
-				H::setcolor(2);H::gotoxy(126,29);cout << R"(____\||/_____)";
-				
-				H::setcolor(1);H::gotoxy(138,22);cout << R"(     .--.  )";
-				H::setcolor(1);H::gotoxy(138,23);cout << R"(  .'_\/_'.   )";
-				H::setcolor(1);H::gotoxy(138,24);cout << R"(  '. /\ .'   )";
-				H::setcolor(1);H::gotoxy(138,25);cout << R"(    "||"     )";
-				H::setcolor(2);H::gotoxy(138,26);cout << R"(     || /\   )";
-				H::setcolor(2);H::gotoxy(138,27);cout << R"(  /\ ||//\)  )";
-				H::setcolor(2);H::gotoxy(138,28);cout << R"( (/\\||/     )";
-				H::setcolor(2);H::gotoxy(138,29);cout << R"(____\||/_____)";
-
+			H::setcolor(6);H::gotoxy(78,22);cout << R"(     .--.   )";
+			H::setcolor(6);H::gotoxy(78,23);cout << R"(  .'_\/_'.  )";
+			H::setcolor(6);H::gotoxy(78,24);cout << R"(  '. /\ .'  )";
+			H::setcolor(6);H::gotoxy(78,25);cout << R"(    "||"    )";
+			H::setcolor(2);H::gotoxy(78,26);cout << R"(     || /\  )";
+			H::setcolor(2);H::gotoxy(78,27);cout << R"(  /\ ||//\) )";
+			H::setcolor(2);H::gotoxy(78,28);cout << R"( (/\\||/    )";
+			H::setcolor(2);H::gotoxy(78,29);cout << R"(____\||/____)";
+			
+			H::setcolor(5);H::gotoxy(90,22);cout << R"(     .--.  )";
+			H::setcolor(5);H::gotoxy(90,23);cout << R"(  .'_\/_'.   )";
+			H::setcolor(5);H::gotoxy(90,24);cout << R"(  '. /\ .'   )";
+			H::setcolor(5);H::gotoxy(90,25);cout << R"(    "||"     )";
+			H::setcolor(2);H::gotoxy(90,26);cout << R"(     || /\   )";
+			H::setcolor(2);H::gotoxy(90,27);cout << R"(  /\ ||//\)  )";
+			H::setcolor(2);H::gotoxy(90,28);cout << R"( (/\\||/     )";
+			H::setcolor(2);H::gotoxy(90,29);cout << R"(____\||/_____)";
+			
+			H::setcolor(4);H::gotoxy(102,22);cout << R"(     .--.  )";
+			H::setcolor(4);H::gotoxy(102,23);cout << R"(  .'_\/_'.   )";
+			H::setcolor(4);H::gotoxy(102,24);cout << R"(  '. /\ .'   )";
+			H::setcolor(4);H::gotoxy(102,25);cout << R"(    "||"     )";
+			H::setcolor(2);H::gotoxy(102,26);cout << R"(     || /\   )";
+			H::setcolor(2);H::gotoxy(102,27);cout << R"(  /\ ||//\)  )";
+			H::setcolor(2);H::gotoxy(102,28);cout << R"( (/\\||/     )";
+			H::setcolor(2);H::gotoxy(102,29);cout << R"(____\||/_____)";
+			
+			H::setcolor(7);H::gotoxy(114,22);cout << R"(     .--.  )";
+			H::setcolor(7);H::gotoxy(114,23);cout << R"(  .'_\/_'.   )";
+			H::setcolor(7);H::gotoxy(114,24);cout << R"(  '. /\ .'   )";
+			H::setcolor(7);H::gotoxy(114,25);cout << R"(    "||"     )";
+			H::setcolor(2);H::gotoxy(114,26);cout << R"(     || /\   )";
+			H::setcolor(2);H::gotoxy(114,27);cout << R"(  /\ ||//\)  )";
+			H::setcolor(2);H::gotoxy(114,28);cout << R"( (/\\||/     )";
+			H::setcolor(2);H::gotoxy(114,29);cout << R"(____\||/_____)";
+			
+			H::setcolor(3);H::gotoxy(126,22);cout << R"(     .--.  )";
+			H::setcolor(3);H::gotoxy(126,23);cout << R"(  .'_\/_'.   )";
+			H::setcolor(3);H::gotoxy(126,24);cout << R"(  '. /\ .'   )";
+			H::setcolor(3);H::gotoxy(126,25);cout << R"(    "||"     )";
+			H::setcolor(2);H::gotoxy(126,26);cout << R"(     || /\   )";
+			H::setcolor(2);H::gotoxy(126,27);cout << R"(  /\ ||//\)  )";
+			H::setcolor(2);H::gotoxy(126,28);cout << R"( (/\\||/     )";
+			H::setcolor(2);H::gotoxy(126,29);cout << R"(____\||/_____)";
+			
+			H::setcolor(1);H::gotoxy(138,22);cout << R"(     .--.  )";
+			H::setcolor(1);H::gotoxy(138,23);cout << R"(  .'_\/_'.   )";
+			H::setcolor(1);H::gotoxy(138,24);cout << R"(  '. /\ .'   )";
+			H::setcolor(1);H::gotoxy(138,25);cout << R"(    "||"     )";
+			H::setcolor(2);H::gotoxy(138,26);cout << R"(     || /\   )";
+			H::setcolor(2);H::gotoxy(138,27);cout << R"(  /\ ||//\)  )";
+			H::setcolor(2);H::gotoxy(138,28);cout << R"( (/\\||/     )";
+			H::setcolor(2);H::gotoxy(138,29);cout << R"(____\||/_____)";
+			
 		}
 		if(x==2)
 		{
+			H::drawBoxDoubleLineWithBG(18,19,30,1,213);
+			H::HLine(20,20,26,128,216);
+			H::setcolor(135);H::gotoxy(25,20);cout << "SEARCH FLOWER";
+
+			//	flower arrow key in case 2 like for Search Flower 
+				H::setcolor(6);H::gotoxy(82,18);cout << R"(         ,            __ \/ __)";
+				H::setcolor(6);H::gotoxy(82,19);cout << R"(     /\^/`\          /o \{}/ o\)";
+				H::setcolor(6);H::gotoxy(82,20);cout << R"(    | \/   |         \   ()   /)";
+				H::setcolor(6);H::gotoxy(82,21);cout << R"(    | |    |          `> /\ <` )";
+				H::setcolor(6);H::gotoxy(82,22);cout << R"(    \ \    /  @@@@    (o/\/\o)  {{{}}                 _ _)";
+				H::setcolor(6);H::gotoxy(82,23);cout << R"(     '\\//'  @@()@@  _ )    (    ~Y~       @@@@     _{ ' }_)";
+				H::setcolor(6);H::gotoxy(82,24);cout << R"(       ||     @@@@ _(_)_   wWWWw .oOOo.   @@()@@   { `.!.` })";
+				H::setcolor(6);H::gotoxy(82,25);cout << R"(       ||     ,/  (_)@(_)  (___) OO()OO    @@@@  _ ',_/Y\_,')";
+				H::setcolor(6);H::gotoxy(82,26);cout << R"(       ||  ,\ | /)  (_)\     Y   'OOOO',,,(\|/ _(_)_ {_,_})";
+				H::setcolor(6);H::gotoxy(82,27);cout << R"(   |\  ||  |\\|// vVVVv`|/@@@@    _ \/{{}}}\| (_)@(_)  |  ,,,)";
+				H::setcolor(6);H::gotoxy(82,28);cout << R"(   | | ||  | |;,,,(___) |@@()@@ _(_)_| ~Y~ wWWWw(_)\ (\| {{{}})";
+				H::setcolor(6);H::gotoxy(82,29);cout << R"(   | | || / / {{}}} Y  \| @@@@ (_)#(_) \|  (___)   |  \| /~Y~)";
+				H::setcolor(2);H::gotoxy(82,30);cout << R"(    \ \||/ /\\|~Y~ \|/  | \ \/  /(_) |/ |/   Y    \|/  |//\|/)";
+				H::setcolor(2);H::gotoxy(82,31);cout << R"(     \ `\\//`,.\|/|//.|/\\|/\\|,\|/ //\|/\|.\\\| // \|\\ |/,\|/)";
+				H::setcolor(2);H::gotoxy(82,32);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
+	
 
 		}
 		if(x==3)
 		{
+			H::drawBoxDoubleLineWithBG(18,23,30,1,213);
+			H::HLine(20,24,26,128,216);
+			H::setcolor(135);H::gotoxy(25,24);cout << "BUYING FLOWER";
+
+			H::setcolor(0);H::gotoxy(90,16);cout << R"(        @(\/)       )";
+			H::setcolor(0);H::gotoxy(90,17);cout << R"(        @(\/)       )";
+			H::setcolor(0);H::gotoxy(90,18);cout << R"(     (\/)-{}-)@     )";
+			H::setcolor(0);H::gotoxy(90,19);cout << R"(   @(={}=)/\)(\/)   )";
+			H::setcolor(0);H::gotoxy(90,20);cout << R"(  (\/(/\)@| (-{}-)  )";
+			H::setcolor(0);H::gotoxy(90,21);cout << R"( (={}=)@(\/)@(/\)@  )";
+			H::setcolor(0);H::gotoxy(90,22);cout << R"(  (/\)\(={}=)/(\/)  )";
+			H::setcolor(0);H::gotoxy(90,23);cout << R"(  @(\/)\(/\)/(={}=) )";
+			H::setcolor(0);H::gotoxy(90,24);cout << R"(  (-{}-)""""@/({})  )";
+			H::setcolor(0);H::gotoxy(90,25);cout << R"(   (/\)|:   |(/\)   )";
+			H::setcolor(0);H::gotoxy(90,26);cout << R"(      /::'   \	   )";
+			H::setcolor(0);H::gotoxy(90,27);cout << R"(     /:::     \	   )";
+			H::setcolor(0);H::gotoxy(90,28);cout << R"(    |::'       |	   )";
+			H::setcolor(0);H::gotoxy(90,29);cout << R"(    |::        |    )";
+			H::setcolor(0);H::gotoxy(90,30);cout << R"(    \::.       /	   )";
+			H::setcolor(0);H::gotoxy(90,31);cout << R"(     ':______.'	   )";
 
 		}
 		if(x==4)
 		{
+			H::drawBoxDoubleLineWithBG(18,27,30,1,213);
+			H::HLine(20,28,26,128,216);
+			H::setcolor(135);H::gotoxy(25,28);cout << "GIVE FEDBACK";
 
+			//		Flower set ascii code for case 4 like 
+			H::setcolor(240);H::gotoxy(91,15);cout << R"( _______________________________________ )";
+			H::setcolor(240);H::gotoxy(91,16);cout << R"(|,---"-----------------------------"---,|)";
+			H::setcolor(240);H::gotoxy(91,17);cout << R"(||                                     ||)";
+			H::setcolor(240);H::gotoxy(91,18);cout << R"(|| Group2                              ||)";
+			H::setcolor(240);H::gotoxy(91,19);cout << R"(||                                     ||)";
+			H::setcolor(240);H::gotoxy(91,20);cout << R"(||      Flower Shop Management System  ||)";
+			H::setcolor(240);H::gotoxy(91,21);cout << R"(||                                     ||)";
+			H::setcolor(240);H::gotoxy(91,22);cout << R"(|| Fedback :: Your Flower Look so      ||)";
+			H::setcolor(240);H::gotoxy(91,23);cout << R"(||            Pretty                   ||)";
+			H::setcolor(240);H::gotoxy(91,24);cout << R"(||_____,_________________________,_____||)";
+			H::setcolor(240);H::gotoxy(91,25);cout << R"(|)_____)-----.| /Group 2 |.------(_____(|)";
+			H::setcolor(7  );H::gotoxy(84,26);cout << R"(     //"""""""|_____|=----------=|______|"""""""\)";
+			H::setcolor(7  );H::gotoxy(84,27);cout << R"(    // _| _| _| _| _| _| _| _| _| _| _| _| _| _| \)";
+			H::setcolor(7  );H::gotoxy(84,28);cout << R"(   // ___| _| _| _| _| _| _| _| _| _| _| _|  |  | \)";
+			H::setcolor(7  );H::gotoxy(84,29);cout << R"(  |/ ___| _| _| _| _| _| _| _| _| _| _| _| ______| \)";
+			H::setcolor(7  );H::gotoxy(84,30);cout << R"(  / __| _| _| _| _| _| _| _| _| _| _| _| _| _| ___| \)";
+			H::setcolor(7  );H::gotoxy(84,31);cout << R"( / _| _| _| _| ________________________| _| _| _| _| \)";
+		H::setcolor(7  );H::gotoxy(84,32);cout << R"(|------"--------------------------------------"-------|)";
+		H::setcolor(7  );H::gotoxy(84,33);cout << R"(`-----------------------------------------------------')";
+    
 		}
 		if(x==5)
 		{
+			H::drawBoxDoubleLineWithBG(18,31,30,1,213);
+			H::HLine(20,32,26,128,216);
+			H::setcolor(135);H::gotoxy(25,32);cout << "BACK";
+
+			H::setcolor(7);H::gotoxy(90,18);cout << R"(   /|         )";
+			H::setcolor(7);H::gotoxy(90,19);cout << R"(  / |         )";
+			H::setcolor(7);H::gotoxy(90,20);cout << R"( /__|_______  )";
+			H::setcolor(7);H::gotoxy(90,21);cout << R"( |  __  __  | )";
+			H::setcolor(7);H::gotoxy(90,22);cout << R"( | |  ||  | | )";
+			H::setcolor(7);H::gotoxy(90,23);cout << R"( | |__||__| | )";
+			H::setcolor(7);H::gotoxy(90,24);cout << R"( |  __  __()| )";
+			H::setcolor(7);H::gotoxy(90,25);cout << R"( | |  ||  | | )";
+			H::setcolor(7);H::gotoxy(90,26);cout << R"( | |  ||  | | )";
+			H::setcolor(7);H::gotoxy(90,27);cout << R"( | |__||__| | )";
+			H::setcolor(7);H::gotoxy(90,28);cout << R"( |__________| )";
+
+
 
 		}
+		choice = getch();
 		switch(choice)
 		{
-			// case:
-			
+			case 72: { // Up
+				if(x > 1) {
+					x--;
+				}
+				break;
+			}
+			case 80: { // Down
+				if(x < 5) {
+					x++;
+				}
+				break;
+			}
 		}
-
 	}while(choice != 13);
 	
-	
-	
 
-	////		Flower Show If in Arr key case 1
-
-//	H::setcolor(6);H::gotoxy(78,22);cout << R"(     .--.   )";
-//	H::setcolor(6);H::gotoxy(78,23);cout << R"(  .'_\/_'.  )";
-//	H::setcolor(6);H::gotoxy(78,24);cout << R"(  '. /\ .'  )";
-//	H::setcolor(6);H::gotoxy(78,25);cout << R"(    "||"    )";
-//	H::setcolor(2);H::gotoxy(78,26);cout << R"(     || /\  )";
-//	H::setcolor(2);H::gotoxy(78,27);cout << R"(  /\ ||//\) )";
-//	H::setcolor(2);H::gotoxy(78,28);cout << R"( (/\\||/    )";
-//	H::setcolor(2);H::gotoxy(78,29);cout << R"(____\||/____)";
-//	
-//	H::setcolor(5);H::gotoxy(90,22);cout << R"(     .--.  )";
-//	H::setcolor(5);H::gotoxy(90,23);cout << R"(  .'_\/_'.   )";
-//	H::setcolor(5);H::gotoxy(90,24);cout << R"(  '. /\ .'   )";
-//	H::setcolor(5);H::gotoxy(90,25);cout << R"(    "||"     )";
-//	H::setcolor(2);H::gotoxy(90,26);cout << R"(     || /\   )";
-//	H::setcolor(2);H::gotoxy(90,27);cout << R"(  /\ ||//\)  )";
-//	H::setcolor(2);H::gotoxy(90,28);cout << R"( (/\\||/     )";
-//	H::setcolor(2);H::gotoxy(90,29);cout << R"(____\||/_____)";
-//	
-//	H::setcolor(4);H::gotoxy(102,22);cout << R"(     .--.  )";
-//	H::setcolor(4);H::gotoxy(102,23);cout << R"(  .'_\/_'.   )";
-//	H::setcolor(4);H::gotoxy(102,24);cout << R"(  '. /\ .'   )";
-//	H::setcolor(4);H::gotoxy(102,25);cout << R"(    "||"     )";
-//	H::setcolor(2);H::gotoxy(102,26);cout << R"(     || /\   )";
-//	H::setcolor(2);H::gotoxy(102,27);cout << R"(  /\ ||//\)  )";
-//	H::setcolor(2);H::gotoxy(102,28);cout << R"( (/\\||/     )";
-//	H::setcolor(2);H::gotoxy(102,29);cout << R"(____\||/_____)";
-//	
-//	H::setcolor(7);H::gotoxy(114,22);cout << R"(     .--.  )";
-//	H::setcolor(7);H::gotoxy(114,23);cout << R"(  .'_\/_'.   )";
-//	H::setcolor(7);H::gotoxy(114,24);cout << R"(  '. /\ .'   )";
-//	H::setcolor(7);H::gotoxy(114,25);cout << R"(    "||"     )";
-//	H::setcolor(2);H::gotoxy(114,26);cout << R"(     || /\   )";
-//	H::setcolor(2);H::gotoxy(114,27);cout << R"(  /\ ||//\)  )";
-//	H::setcolor(2);H::gotoxy(114,28);cout << R"( (/\\||/     )";
-//	H::setcolor(2);H::gotoxy(114,29);cout << R"(____\||/_____)";
-//	
-//	H::setcolor(3);H::gotoxy(126,22);cout << R"(     .--.  )";
-//	H::setcolor(3);H::gotoxy(126,23);cout << R"(  .'_\/_'.   )";
-//	H::setcolor(3);H::gotoxy(126,24);cout << R"(  '. /\ .'   )";
-//	H::setcolor(3);H::gotoxy(126,25);cout << R"(    "||"     )";
-//	H::setcolor(2);H::gotoxy(126,26);cout << R"(     || /\   )";
-//	H::setcolor(2);H::gotoxy(126,27);cout << R"(  /\ ||//\)  )";
-//	H::setcolor(2);H::gotoxy(126,28);cout << R"( (/\\||/     )";
-//	H::setcolor(2);H::gotoxy(126,29);cout << R"(____\||/_____)";
-//	
-//	H::setcolor(1);H::gotoxy(138,22);cout << R"(     .--.  )";
-//	H::setcolor(1);H::gotoxy(138,23);cout << R"(  .'_\/_'.   )";
-//	H::setcolor(1);H::gotoxy(138,24);cout << R"(  '. /\ .'   )";
-//	H::setcolor(1);H::gotoxy(138,25);cout << R"(    "||"     )";
-//	H::setcolor(2);H::gotoxy(138,26);cout << R"(     || /\   )";
-//	H::setcolor(2);H::gotoxy(138,27);cout << R"(  /\ ||//\)  )";
-//	H::setcolor(2);H::gotoxy(138,28);cout << R"( (/\\||/     )";
-//	H::setcolor(2);H::gotoxy(138,29);cout << R"(____\||/_____)";
-
-//	flower arrow key in case 2 like for Search Flower 
-//	H::setcolor(6);H::gotoxy(82,18);cout << R"(         ,            __ \/ __)";
-//	H::setcolor(6);H::gotoxy(82,19);cout << R"(     /\^/`\          /o \{}/ o\)";
-//	H::setcolor(6);H::gotoxy(82,20);cout << R"(    | \/   |         \   ()   /)";
-//	H::setcolor(6);H::gotoxy(82,21);cout << R"(    | |    |          `> /\ <` )";
-//	H::setcolor(6);H::gotoxy(82,22);cout << R"(    \ \    /  @@@@    (o/\/\o)  {{{}}                 _ _)";
-//	H::setcolor(6);H::gotoxy(82,23);cout << R"(     '\\//'  @@()@@  _ )    (    ~Y~       @@@@     _{ ' }_)";
-//	H::setcolor(6);H::gotoxy(82,24);cout << R"(       ||     @@@@ _(_)_   wWWWw .oOOo.   @@()@@   { `.!.` })";
-//	H::setcolor(6);H::gotoxy(82,25);cout << R"(       ||     ,/  (_)@(_)  (___) OO()OO    @@@@  _ ',_/Y\_,')";
-//	H::setcolor(6);H::gotoxy(82,26);cout << R"(       ||  ,\ | /)  (_)\     Y   'OOOO',,,(\|/ _(_)_ {_,_})";
-//	H::setcolor(6);H::gotoxy(82,27);cout << R"(   |\  ||  |\\|// vVVVv`|/@@@@    _ \/{{}}}\| (_)@(_)  |  ,,,)";
-//	H::setcolor(6);H::gotoxy(82,28);cout << R"(   | | ||  | |;,,,(___) |@@()@@ _(_)_| ~Y~ wWWWw(_)\ (\| {{{}})";
-//	H::setcolor(6);H::gotoxy(82,29);cout << R"(   | | || / / {{}}} Y  \| @@@@ (_)#(_) \|  (___)   |  \| /~Y~)";
-//	H::setcolor(2);H::gotoxy(82,30);cout << R"(    \ \||/ /\\|~Y~ \|/  | \ \/  /(_) |/ |/   Y    \|/  |//\|/)";
-//	H::setcolor(2);H::gotoxy(82,31);cout << R"(     \ `\\//`,.\|/|//.|/\\|/\\|,\|/ //\|/\|.\\\| // \|\\ |/,\|/)";
-//	H::setcolor(2);H::gotoxy(82,32);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
-	
-//		Flower set ascii code for case 4 like 
-//	H::setcolor(240);H::gotoxy(91,15);cout << R"( _______________________________________ )";
-//	H::setcolor(240);H::gotoxy(91,16);cout << R"(|,---"-----------------------------"---,|)";
-//	H::setcolor(240);H::gotoxy(91,17);cout << R"(||                                     ||)";
-//	H::setcolor(240);H::gotoxy(91,18);cout << R"(|| Group2                              ||)";
-//	H::setcolor(240);H::gotoxy(91,19);cout << R"(||                                     ||)";
-//	H::setcolor(240);H::gotoxy(91,20);cout << R"(||      Flower Shop Management System  ||)";
-//	H::setcolor(240);H::gotoxy(91,21);cout << R"(||                                     ||)";
-//	H::setcolor(240);H::gotoxy(91,22);cout << R"(|| Fedback :: Your Flower Look so      ||)";
-//	H::setcolor(240);H::gotoxy(91,23);cout << R"(||            Pretty                   ||)";
-//	H::setcolor(240);H::gotoxy(91,24);cout << R"(||_____,_________________________,_____||)";
-//	H::setcolor(240);H::gotoxy(91,25);cout << R"(|)_____)-----.| /Group 2 |.------(_____(|)";
-//	H::setcolor(7  );H::gotoxy(84,26);cout << R"(     //"""""""|_____|=----------=|______|"""""""\)";
-//	H::setcolor(7  );H::gotoxy(84,27);cout << R"(    // _| _| _| _| _| _| _| _| _| _| _| _| _| _| \)";
-//	H::setcolor(7  );H::gotoxy(84,28);cout << R"(   // ___| _| _| _| _| _| _| _| _| _| _| _|  |  | \)";
-//	H::setcolor(7  );H::gotoxy(84,29);cout << R"(  |/ ___| _| _| _| _| _| _| _| _| _| _| _| ______| \)";
-//	H::setcolor(7  );H::gotoxy(84,30);cout << R"(  / __| _| _| _| _| _| _| _| _| _| _| _| _| _| ___| \)";
-//	H::setcolor(7  );H::gotoxy(84,31);cout << R"( / _| _| _| _| ________________________| _| _| _| _| \)";
-//    H::setcolor(7  );H::gotoxy(84,32);cout << R"(|------"--------------------------------------"-------|)";
-//    H::setcolor(7  );H::gotoxy(84,33);cout << R"(`-----------------------------------------------------')";
-    
     
 //		Flower Ascii Art For case 5 Like Back
 	

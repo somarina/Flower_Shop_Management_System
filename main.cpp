@@ -11,6 +11,7 @@ int main()
 {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //    H::DisableButtonClose();
+    H::setConsoleTitle("Flower Shop Management System");
     H::DisableScreenResize();
     H::setFixedScreenConsole(170,40);
     H::setFont(18,700);
