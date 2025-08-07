@@ -1,0 +1,105 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group2 Mobile App(Flutter)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+</head>
+<body data-theme="dark">
+    <!-- MANA.js Background -->
+    <div id="MANA-bg"></div>
+
+    <!-- Navigation -->
+    <nav style="background-color: rgba(15, 23, 42, 0.9);">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">&lt;Group2 MobleApp/&gt;</a>
+            <div class="nav-links">
+                <a href="index.html">Home()</a>
+                <a href="#aboutUs">About Us()</a>
+                <a href="#Project">Project()</a>
+            </div>
+            <button class="menu-toggle" id="menu-toggle" type="button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="mobile-menu hidden" id="mobile-menu">
+            <a href="index.html">home()</a>
+            <a href="#about">about()</a>
+            <a href="#projects">projects()</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero section-bg-transparent">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Kao <br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meyly <span class="text-primary typing-name typing-animation"></span></h1>
+                    <h2>Our C++/OOP Topic : Flower Shop Management System</h2>
+                    <p>We are an ANT's Schorlaship student Mobile App(Flutter) <br>   from Group2.</p>
+                    
+                    <div class="hero-buttons">
+                        <a href="https://web.facebook.com/meylyy.kao" class="btn btn-primary" target="_blank">
+                            <i class="fa-brands fa-facebook" style="margin-right: 0.5rem;"></i>FaceBook
+                        </a>
+                        <a href="http://training.antkh.com/students/?s=5308" class="btn btn-primary"​ target="_blank">
+                            <i class="fa-solid fa-school-flag" style="margin-right: 0.5rem;"></i>At ANT Training Center
+                        </a>
+                        <a href="https://t.me/Ly_ai9" class="btn btn-primary"​ target="_blank">
+                            <i class="fa-brands fa-telegram" style="margin-right: 0.5rem;"></i>Telegram
+                        </a>
+                    </div>
+                </div>
+                <div class="profile-container">
+                    <div class="profile-wrapper">
+                        <!-- Animated rings around profile -->
+                        <div class="profile-ring ring-1"></div>
+                        <div class="profile-ring ring-2"></div>
+                        <div class="profile-ring ring-3"></div>
+                        
+                        <!-- Floating particles -->
+                        <div class="floating-particle particle-1"></div>
+                        <div class="floating-particle particle-2"></div>
+                        <div class="floating-particle particle-3"></div>
+                        <div class="floating-particle particle-4"></div>
+                        <div class="floating-particle particle-5"></div>
+                        <div class="floating-particle particle-6"></div>
+                        
+                        <!-- Gradient background -->
+                        <div class="profile-bg"></div>
+                        
+                        <!-- Main profile image -->
+                        <img src="IMAGE/pic02.jpg" alt="Jai Developer" class="profile-img">
+                        
+                        <!-- Animated badge -->
+                        <div class="profile-badge">
+                            <i class="fas fa-code" style="font-size: 1.5rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <!-- MANA.js Script -->
+    <script>
+      VANTA.NET({
+        el: "#MANA-bg",
+        mouseControls: true,
+        touchControls: true,
+        minHeight: 700.00,
+        minWidth: 700.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0x00d9ff,
+        backgroundColor: 0x020617,
+        points: 12.0,
+        maxDistance: 22.0,
+        spacing: 18.0
+      })
+    </script>
+</body>
+</html>
