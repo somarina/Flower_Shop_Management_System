@@ -2,6 +2,7 @@
 #define ___INC_USER_H__
 
 // #include "ANTHinsyOOP"
+#include "Header/Product.h"
 #include "ANTHinsyOOP.hpp"
 using namespace ANTHinsyOOP;
 
@@ -115,8 +116,7 @@ void User::inputUserData()
     // user for teacher's library
     string strAge,strId;
 
-    cout<<"\n Enter your ID: ";
-    this->id=stoi(H::inputNumber(strId,9));
+    cout<<"\n Enter your ID: " << getId();
     cout<<"\n Enter your gender: ";
     H::inputLetter(this->gender,6);
     cout<<"\nEnter your age: ";
@@ -141,105 +141,6 @@ void User::showUserData()
     cout<<"\n password: "<<this->password;
     cout<<"\n phone number: "<<this->phoneNumber;
 }
-//////////////////////////////////////////////////////////////////////////////
-//////						Class Util For use Static Methods Like 
-class Util{
-	public:
-	static void createUser(User& user){
-		// these are local variales
-		char username[20];
-		char dateOfBirth[11];
-		int age;
-		int id;
-		char gender[6];
-		char password[30];
-		char phoneNumber[20];
-		
-		string strAge,strId;
-	
-		cout<<"\n Enter your ID: ";
-		id=stoi(H::inputNumber(strId,9));
-		cout<<"\n Enter your gender: ";
-		H::inputLetter(gender,6);
-		cout<<"\nEnter your age: ";
-		age=stoi(H::inputNumber(strAge,3));
-		cout<<"\nEnter your username: ";
-		(H::inputLetter(username,10));
-		cout<<"\nEnter your password: ";
-		(H::inputPasswordMask(password,10));
-		cout<<"\nEnter your Phone number";
-		H::input4Tel(phoneNumber,11);
-		cout<<"\nEnter day of bridth: ";
-		H::inputDate(dateOfBirth,'-',true);
-		
-		// set value to an object 
-		user.setId(id);
-		user.setGender(gender);
-		user.setAge(age);
-		user.setUsername(username);
-		user.setPassword(password);
-		user.setPhoneNumber(phoneNumber);
-		user.setDateOfBirdth(dateOfBirth);
-	}
-	
-	static bool UserRegister(vector<User>&users,User userRequest){
-		
-		for(User &user:users)
-        {
-			
-            if(strcmp(user.getPassword(), userRequest.getPassword())==0 && 
-            strcmp(user.getUserName(),userRequest.getUserName())==0
-            ){
-                return true;
-                break;
-            }
-		}
-			return false;
-	}
-	
-	
-	static bool login(vector<User>&users,const char* username,const char * password){
-		
-		for (User &user : users) 
-        {
-		    const char* userPassword = user.getPassword();
-		    const char* userName = user.getUserName();
-		    
-		    if (userPassword != nullptr && userName != nullptr &&
-		        strcmp(userPassword, password) == 0 && 
-		        strcmp(userName, username) == 0) 
-            {
-		        return true;
-		    }
-        }
-		return false;
-	}
-	
-    static void recoverPassword(vector<User>&users,char* username,char* phoneNumber){
-	
-        bool isFound=false;
-        // char recoveredPwd;
-            
-        for(User &user:users)
-        {
-            
-            if(strcmp(user.getPhoneNumber(),phoneNumber)==0 &&
-                strcmp(user.getUserName(),username)==0
-                )
-            {
-                isFound=true;
-                cout<<"Here is your password: "<<user.getPassword();
-                break;
-            }
-        }
-                
-        if(isFound==false)
-        {
-            cout<<"Incorrect phone number or username"<<endl;
-        }
-    }
-};
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 class UserDesign{
 	public:
@@ -327,6 +228,7 @@ void UserDesign::DesignMenu()
 	
 	//			the top of console
 	//			On  left
+	
 	H::HLine(0,0,10,145,255);
 	H::HLine(2,1,6,162,255);
 	
@@ -389,7 +291,10 @@ void UserDesign::DesignMenu()
 	H::setcolor(1);H::gotoxy(50,6);cout << R"(  / / / / ___/ _ \/ ___/  / /| |/ ___/ ___/ __ \/ / / / __ \/ __/ )";
 	H::setcolor(2);H::gotoxy(50,7);cout << R"( / /_/ (__  )  __/ /     / ___ / /__/ /__/ /_/ / /_/ / / / / /_   )";
 	H::setcolor(2);H::gotoxy(50,8);cout << R"( \____/____/\___/_/     /_/  |_\___/\___/\____/\__,_/_/ /_/\__/   )";
-	                          
+	char choice;
+	int x=1;
+	
+	do{                          
 	//   left near Text 
 	H::VLine(40,3,8,179,255);
 	H::VLine(41,3,8,179,255);
@@ -423,10 +328,7 @@ void UserDesign::DesignMenu()
 	H::HLine(61,30,2,102,255);
 	H::HLine(61,32,2,102,255);
 	
-	char choice;
-	int x=1;
-	
-	do{
+
 		H::drawBoxSingleLineWithBG(75,14,80,19,3);
 
 		//      Box under big box that have text
@@ -735,10 +637,9 @@ void UserDesign::DesignLogin()
 	
 	//			Middle Box of Big Box (For Login with User and Password)
 	H::drawBoxDoubleLineWithBG(49,17,30,1,213);
-	H::drawBoxSingleLineWithBG(90,17,30,1,162);
+	H::drawBoxSingleLineWithBG(90,17,30,1,230);
 	H::drawBoxSingleLineWithBG(49,23,30,1,213);
-	H::drawBoxSingleLineWithBG(90,23,30,1,162);
-	
+	H::drawBoxSingleLineWithBG(90,23,30,1,230);	
 	//			Design with Ascii Art Like ascii Flower
 	H::setcolor(1);H::gotoxy(29,30);cout << R"(                 _)";
 	H::setcolor(3);H::gotoxy(29,31);cout << R"(               _(_)_                          wWWWw   _ )";
@@ -1029,6 +930,110 @@ void UserDesign::DesignForgetSuccess()
 		H::setcolor(m++);H::gotoxy(44,6);cout << R"( /_/\____/\____/_/ |_|  /_/   /_/  |_/____/____/ |__/|__/\____/_/ |_/_____/   )";
 		H::delay(500);
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//===================== Data Class =====================//
+
+class UserData : public User {
+public:
+    void Register();
+    bool Login();
+    void ForgetPassword();
+};
+///////////////////////////////////////////////////////////////////////////////////
+///				Body Propotype Of Methods in class Data
+void UserData::Register() {
+    User user;
+	
+    // ===== Auto-generate ID =====
+    int newId = 1000; // starting ID
+    ifstream inFile("Data/UserData.bin", ios::binary);
+    if (inFile) {
+        User lastUser;
+        inFile.seekg(0, ios::end);
+        if (inFile.tellg() >= static_cast<std::streamoff>(sizeof(User))) {
+            inFile.seekg(-static_cast<std::streamoff>(sizeof(User)), ios::end);
+            inFile.read(reinterpret_cast<char*>(&lastUser), sizeof(User));
+            newId = lastUser.getId() + 1;
+        }
+    }
+    inFile.close();
+
+    user.setId(newId); // set auto ID
+    user.inputUserData();
+
+    ofstream file("Data/UserData.bin", ios::binary | ios::app);
+    if (!file) {
+        cout << "Error opening file for writing.\n";
+        return;
+    }
+    file.write(reinterpret_cast<char*>(&user), sizeof(User));
+    file.close();
+
+    cout << "Registration successful!";
+}
+
+bool UserData::Login() {
+	H::setcolor(0);
+	H::cls();
+	UserDesign::DesignLogin();
+    char uname[20], pass[30];
+    H::setcolor(215);H::gotoxy(54,18);cout << "Enter Username: "; 
+    H::setcolor(215);H::gotoxy(54,24);cout << "Enter Password: ";
+	
+	H::setcolor(228);H::gotoxy(95,18);H::inputLetter(uname,10);
+	H::setcolor(228);H::gotoxy(95,24);H::inputPasswordMask(pass,7);
+    ifstream file("Data/UserData.bin", ios::binary);
+    if (!file) {
+        cout << "Error opening file.\n";
+        return false;
+    }
+
+    User temp;
+    while (file.read(reinterpret_cast<char*>(&temp), sizeof(User))) {
+        if (strcmp(temp.getUserName(), uname) == 0 &&
+            strcmp(temp.getPassword(), pass) == 0) {
+            cout << "Login successful!\n";
+			H::setcolor(0);
+			getch();
+            file.close();
+            return true;
+        }
+    }
+
+	H::drawBoxSingleLineWithBG(43,14,83,13,179);
+    H::setcolor(228);H::gotoxy(95,24);cout << "Invalid username or password.\n";
+    file.close();
+    return false;
+}
+
+void UserData::ForgetPassword() {
+    char uname[20], phone[20];
+    H::setcolor(215);H::gotoxy(54,18);cout << "Enter Username: "; 
+    H::setcolor(215);H::gotoxy(54,24);cout << "Enter Phone Number: ";
+	
+	H::setcolor(167);H::gotoxy(95,18);cin >> uname;
+	H::setcolor(167);H::gotoxy(95,24);cin >> phone;
+
+    ifstream file("Data/UserData.bin", ios::binary);
+    if (!file) {
+        cout << "Error opening file.\n";
+        return;
+    }
+
+    User temp;
+    while (file.read(reinterpret_cast<char*>(&temp), sizeof(User))) {
+        if (strcmp(temp.getUserName(), uname) == 0 &&
+            strcmp(temp.getPhoneNumber(), phone) == 0) {
+            cout << "Your password is: " << temp.getPassword() << "\n";
+            file.close();
+            return;
+        }
+    }
+
+    cout << "User not found or phone number mismatch.\n";
+    file.close();
 }
 ////////////////////////////////////////////////////////////////////////////////
 //void UserDesign::TestArr()
