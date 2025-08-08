@@ -62,9 +62,9 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 ////								test for user like class UserDesign
 	// UserDesign::DesignFeature();
-	UserDesign::DesignMenu();
-//	UserDesign::DesignLogin();  
-//	UserDesign::DesignRegister();
+	// UserDesign::DesignMenu();
+	// UserDesign::DesignLogin();  
+	// UserDesign::DesignRegister();
 	// UserDesign::DesignForget();
 	// UserDesign::DesignForgetSuccess();
 	// UserDesign::DesignLoading();
@@ -79,8 +79,24 @@ int main()
 	// H::HLine(5,1,2,179,255);
 	// H::HLine(5,2,2,196,255);
 	// H::HLine(7,2,2,230,255);
+///////////////////////////////////////////////////////////////////////////////////////////
+    UserData user;
+    int choice;
 
+    do {
+    
+        cout << "\n1. Register\n2. Login\n3. Forget Password\n4. Exit\nChoice: ";
+        cin >> choice;
 
+        switch (choice) {
+            case 1: user.Register(); break;
+            case 2: user.Login(); break;
+            case 3: user.ForgetPassword(); break;
+            case 4: cout << "Goodbye!\n"; break;
+            default: cout << "Invalid choice.\n";
+        }
+    } while (choice != 4);
+/////////////////////////////////////////////////////////////////////////////
 	getch();
 	return 0;
 }
