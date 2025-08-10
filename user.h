@@ -116,30 +116,24 @@ void User::inputUserData()
     // user for teacher's library
     string strAge,strId;
 
-    cout<<"\n Enter your ID: " << getId();
-    cout<<"\n Enter your gender: ";
-    H::inputLetter(this->gender,6);
-    cout<<"\nEnter your age: ";
-    this->age=stoi(	H::inputNumber(strAge,3));
-    cout<<"\nEnter your username: ";
-    (H::inputLetter(this->username,10));
-    cout<<"\nEnter your password: ";
-    (H::inputPasswordMask(this->password,10));
-    cout<<"\nEnter your Phone number";
-    H::input4Tel(this->phoneNumber,11);
-    cout<<"\nEnter day of bridth: ";
-    H::inputDate(this->dateOfBirdth,'-',true);
+    cout<<"\n\t Your ID					: " << getId();
+	cout<<"\n\t Enter your username		: ";(H::inputLetter(this->username,10));
+    cout<<"\n\t Enter your gender		: ";H::inputLetter(this->gender,7);
+    cout<<"\n\t Enter your age			: ";age=stoi(H::inputNumber(strAge,3));
+    cout<<"\n\t Enter your password		: ";(H::inputPasswordMask(this->password,9));
+    cout<<"\n\t Enter your Phone number : ";H::input4Tel(this->phoneNumber,11);
+    cout<<"\n\t Enter day of bridth		: ";H::inputDate(this->dateOfBirdth,'-',true);
 }
 
 void User::showUserData()
 {
-    cout<<"\n ID: "<<this->id;
-    cout<<"\n Name: "<<this->username;
-    cout<<"\n Gender: "<<this->gender;
-    cout<<"\n Age: "<<this->age;
-    cout<<"\n DOB: "<<this->dateOfBirdth;
-    cout<<"\n password: "<<this->password;
-    cout<<"\n phone number: "<<this->phoneNumber;
+    cout<<"\n\t ID: "<<this->id;
+    cout<<"\n\t Name: "<<this->username;
+    cout<<"\n\t Gender: "<<this->gender;
+    cout<<"\n\t Age: "<<this->age;
+    cout<<"\n\t DOB: "<<this->dateOfBirdth;
+    cout<<"\n\t password: "<<this->password;
+    cout<<"\n\t phone number: "<<this->phoneNumber;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 class UserDesign{
@@ -944,10 +938,12 @@ public:
 ///////////////////////////////////////////////////////////////////////////////////
 ///				Body Propotype Of Methods in class Data
 void UserData::Register() {
+	H::setcolor(0);
+	H::cls();
     User user;
 	
     // ===== Auto-generate ID =====
-    int newId = 1000; // starting ID
+    int newId = 1000;
     ifstream inFile("Data/UserData.bin", ios::binary);
     if (inFile) {
         User lastUser;
@@ -986,15 +982,53 @@ bool UserData::Login() {
 	H::setcolor(228);H::gotoxy(95,24);H::inputPasswordMask(pass,7);
     ifstream file("Data/UserData.bin", ios::binary);
     if (!file) {
-        cout << "Error opening file.\n";
+        cout << "Fil Not Found\n";
         return false;
     }
 
     User temp;
-    while (file.read(reinterpret_cast<char*>(&temp), sizeof(User))) {
-        if (strcmp(temp.getUserName(), uname) == 0 &&
-            strcmp(temp.getPassword(), pass) == 0) {
-            cout << "Login successful!\n";
+    while (file.read(reinterpret_cast<char*>(&temp), sizeof(User)))
+	{
+        if (strcmp(temp.getUserName(), uname) == 0 &&strcmp(temp.getPassword(), pass) == 0) 
+		{
+			H::setcursor(0,0);
+			////		Text Under Line
+			// H::setcursor(0,0);
+			int m=1;
+			while(true)
+			{
+			
+			if(m>14)
+			{
+				m=1;
+			}
+			H::setcolor(m++);H::gotoxy(25,30);cout << R"(      wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw )";
+			H::setcolor(m++);H::gotoxy(25,31);cout << R"(vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv)";
+			H::setcolor(m++);H::gotoxy(25,32);cout << R"((___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___))";
+			H::setcolor(m++);H::gotoxy(25,33);cout << R"( ~Y~   \|    ~Y~   (___)    |/    ~Y~   ~Y~   \|    ~Y~   (___)    |/    ~Y~     ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~)";
+			H::setcolor(m++);H::gotoxy(25,34);cout << R"( \|   \ |/   \| /  \~Y~/   \|    \ |/   \|   \ |/   \| /  \~Y~/   \|    \ |/     \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |)";
+			H::setcolor(m++);H::gotoxy(25,35);cout << R"(\\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/ )";
+			H::setcolor(m++);H::gotoxy(25,36);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
+			H::delay(500);
+		
+			if (_kbhit()) {       
+					char key = _getch();
+					if (key == 27) {  
+						H::cls();
+						break;       
+				H::cls(); 
+					} 
+
+			if (key == 13) {  
+						H::cls();
+						// designUpdate();    
+				H::cls(); 
+				break;
+					} 
+				}
+				
+		}
+			cout << "Login successful!\n";
 			H::setcolor(0);
 			getch();
             file.close();
