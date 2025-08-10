@@ -979,7 +979,7 @@ bool UserData::Login() {
     H::setcolor(215);H::gotoxy(54,24);cout << "Enter Password: ";
 	
 	H::setcolor(228);H::gotoxy(95,18);H::inputLetter(uname,10);
-	H::setcolor(228);H::gotoxy(95,24);H::inputPasswordMask(pass,7);
+	H::setcolor(228);H::gotoxy(95,24);H::inputPasswordMask(pass,9);
     ifstream file("Data/UserData.bin", ios::binary);
     if (!file) {
         cout << "Fil Not Found\n";
@@ -993,42 +993,54 @@ bool UserData::Login() {
 		{
 			H::setcursor(0,0);
 			////		Text Under Line
-			// H::setcursor(0,0);
 			int m=1;
+			int x=1;
 			while(true)
 			{
 			
-			if(m>14)
-			{
-				m=1;
-			}
-			H::setcolor(m++);H::gotoxy(25,30);cout << R"(      wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw )";
-			H::setcolor(m++);H::gotoxy(25,31);cout << R"(vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv)";
-			H::setcolor(m++);H::gotoxy(25,32);cout << R"((___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___))";
-			H::setcolor(m++);H::gotoxy(25,33);cout << R"( ~Y~   \|    ~Y~   (___)    |/    ~Y~   ~Y~   \|    ~Y~   (___)    |/    ~Y~     ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~)";
-			H::setcolor(m++);H::gotoxy(25,34);cout << R"( \|   \ |/   \| /  \~Y~/   \|    \ |/   \|   \ |/   \| /  \~Y~/   \|    \ |/     \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |)";
-			H::setcolor(m++);H::gotoxy(25,35);cout << R"(\\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/ )";
-			H::setcolor(m++);H::gotoxy(25,36);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
-			H::delay(500);
-		
-			if (_kbhit()) {       
-					char key = _getch();
-					if (key == 27) {  
-						H::cls();
-						break;       
-				H::cls(); 
-					} 
-
-			if (key == 13) {  
-						H::cls();
-						// designUpdate();    
-				H::cls(); 
-				break;
-					} 
+				if(m>14)
+				{
+					m=1;
+				}
+				if(x>20)
+				{
+					H::cls();
+					break;
 				}
 				
-		}
+				H::setcolor(0);H::gotoxy(25,30);cout << R"(                                                                                                                        )";
+				H::setcolor(m++);H::gotoxy(25,31);cout << R"(      wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw         )";
+				H::setcolor(m++);H::gotoxy(25,32);cout << R"(vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  )";
+				H::setcolor(m++);H::gotoxy(25,33);cout << R"((___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  )";
+				H::setcolor(m++);H::gotoxy(25,34);cout << R"( ~Y~   \|    ~Y~   (___)    |/    ~Y~   ~Y~   \|    ~Y~   (___)    |/    ~Y~     ~Y~   \|    ~Y~   (___)    |/    ~Y~   )";
+				H::setcolor(m++);H::gotoxy(25,35);cout << R"( \|   \ |/   \| /  \~Y~/   \|    \ |/   \|   \ |/   \| /  \~Y~/   \|    \ |/     \|   \ |/   \| /  \~Y~/   \|    \ |/   )";
+				H::setcolor(m++);H::gotoxy(25,36);cout << R"(\\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// )";
+				H::setcolor(m++);H::gotoxy(25,37);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ )";
+				x++;
+				H::delay(300);
+			
+				// if (_kbhit()) {       
+				// 		char key = _getch();
+				// 		if (key == 27) {  
+				// 			H::cls();
+				// 			break;       
+				// 	H::cls(); 
+				// 		} 
+
+				// if (key == 13) {  
+				// 			H::cls();
+				// 			// designUpdate();    
+				// 	H::cls(); 
+				// 	break;
+				// 		} 
+				// 	}
+				
+			}
 			cout << "Login successful!\n";
+			H::setcolor(0);
+			H::delay(1000);
+			H::cls();
+			UserDesign::DesignMenu();
 			H::setcolor(0);
 			getch();
             file.close();
