@@ -92,7 +92,7 @@ int main()
             case 1: user.Register(); break;
             case 2: user.Login(); break;
             case 3: user.ForgetPassword(); break;
-            case 4: cout << "Goodbye!\n"; break;
+            case 4: cout << "Goodbye see you Again next time!\n"; break;
             default: cout << "Invalid choice.\n";
         }
     } while (choice != 4);
