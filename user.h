@@ -5,7 +5,7 @@
 #include "Header/Product.h"
 #include "ANTHinsyOOP.hpp"
 using namespace ANTHinsyOOP;
-
+void TesttingUser();
 class User{
 	
 	private:
@@ -113,16 +113,21 @@ const char* User::getGender() const
 
 void User::inputUserData()
 {
-    // user for teacher's library
     string strAge,strId;
 
-    cout<<"\n\t Your ID					: " << getId();
-	cout<<"\n\t Enter your username		: ";(H::inputLetter(this->username,10));
-    cout<<"\n\t Enter your gender		: ";H::inputLetter(this->gender,7);
-    cout<<"\n\t Enter your age			: ";age=stoi(H::inputNumber(strAge,3));
-    cout<<"\n\t Enter your password		: ";(H::inputPasswordMask(this->password,9));
-    cout<<"\n\t Enter your Phone number : ";H::input4Tel(this->phoneNumber,11);
-    cout<<"\n\t Enter day of bridth		: ";H::inputDate(this->dateOfBirdth,'-',true);
+    H::setcolor(215);H::gotoxy(28,15);cout<<"Your ID";
+	H::setcolor(215);H::gotoxy(28,20);cout<<"Enter your username";
+    H::setcolor(215);H::gotoxy(28,25);cout<<"Enter your gender";
+    H::setcolor(215);H::gotoxy(92,15);cout<<"Enter your password";
+    H::setcolor(215);H::gotoxy(92,20);cout<<"Enter your Phone number";
+    H::setcolor(215);H::gotoxy(92,25);cout<<"Enter day of bridth";
+
+	H::setcolor(167);H::gotoxy(57,15);cout << getId();
+	H::setcolor(167);H::gotoxy(57,20);(H::inputLetter(this->username,10));
+	H::setcolor(167);H::gotoxy(57,25);H::inputLetter(this->gender,7);
+	H::setcolor(167);H::gotoxy(122,15);(H::inputPasswordMask(this->password,9));
+	H::setcolor(167);H::gotoxy(122,20);H::input4Tel(this->phoneNumber,11);
+	H::setcolor(167);H::gotoxy(122,25);H::inputDate(this->dateOfBirdth,'-',true);
 }
 
 void User::showUserData()
@@ -214,7 +219,9 @@ void UserDesign::DesignFeature()
 void UserDesign::DesignMenu()
 {
 	H::setcursor(0,0);
-	
+	char choice;
+	int x=1;
+	do{
 //	for(int i=0;i<n;i++)
 //	{
 //		
@@ -285,9 +292,6 @@ void UserDesign::DesignMenu()
 	H::setcolor(1);H::gotoxy(50,6);cout << R"(  / / / / ___/ _ \/ ___/  / /| |/ ___/ ___/ __ \/ / / / __ \/ __/ )";
 	H::setcolor(2);H::gotoxy(50,7);cout << R"( / /_/ (__  )  __/ /     / ___ / /__/ /__/ /_/ / /_/ / / / / /_   )";
 	H::setcolor(2);H::gotoxy(50,8);cout << R"( \____/____/\___/_/     /_/  |_\___/\___/\____/\__,_/_/ /_/\__/   )";
-	char choice;
-	int x=1;
-	
 	do{                          
 	//   left near Text 
 	H::VLine(40,3,8,179,255);
@@ -571,8 +575,46 @@ void UserDesign::DesignMenu()
 			}
 		}
 	}while(choice != 13);
-	
-
+	if(x==1)
+	{
+		H::cls();
+		cout << "OPTION 1";
+		H::delay(2000);
+		H::setcolor(2);
+		H::cls();
+	}
+	if(x==2)
+	{
+		H::cls();
+		cout << "OPTION 2";
+		H::delay(2000);
+		H::setcolor(2);
+		H::cls();
+	}
+	if(x==3)
+	{
+		H::cls();
+		cout << "OPTION 3";
+		H::delay(2000);
+		H::setcolor(2);
+		H::cls();
+	}
+	if(x==4)
+	{
+		H::cls();
+		cout << "OPTION 4";
+		H::delay(2000);
+		H::setcolor(2);
+		H::cls();
+	}
+	if(x==5)
+	{
+		
+		H::setcolor(2);
+		H::cls();
+		TesttingUser();
+	}
+	}while(choice != 27);
     
 //		Flower Ascii Art For case 5 Like Back
 	
@@ -940,6 +982,7 @@ public:
 void UserData::Register() {
 	H::setcolor(0);
 	H::cls();
+	UserDesign::DesignRegister();
     User user;
 	
     // ===== Auto-generate ID =====
@@ -966,8 +1009,13 @@ void UserData::Register() {
     }
     file.write(reinterpret_cast<char*>(&user), sizeof(User));
     file.close();
-
+	
+	H::setcolor(2);
+	H::cls();
     cout << "Registration successful!";
+	H::delay(1000);
+	H::setcolor(2);
+	H::cls();
 }
 
 bool UserData::Login() {
@@ -1079,6 +1127,9 @@ void UserData::ForgetPassword() {
     }
 
     cout << "User not found or phone number mismatch.\n";
+	H::delay(1000);
+	H::setcolor(2);
+	H::cls();
     file.close();
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -1264,6 +1315,26 @@ void UserData::ForgetPassword() {
 //    getch();
 //    return 0;
 //}
+void TesttingUser()
+{
+	UserData user;
+    int choice;
+//	X:
+    do {
+    	H::cls();
+    	H::setcolor(2);
+    
+        cout << "\n1. Register\n2. Login\n3. Forget Password\n4. Exit\nChoice: ";
+        cin >> choice;
 
+        switch (choice) {
+            case 1: user.Register(); break;
+            case 2: user.Login(); break;
+            case 3: user.ForgetPassword(); break;
+            case 4: cout << "Goodbye see you Again next time!\n"; break;
+            default: cout << "Invalid choice.\n";
+        }
+    } while (choice != 4);
+}
 
 #endif  
