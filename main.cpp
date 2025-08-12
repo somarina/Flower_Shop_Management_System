@@ -1,20 +1,256 @@
-#include "user.h"
-// #include "Header/product.h"
+#include "Header/user.h"
+#include "Header/design_staff.h"
+#include "Header/staff.h"
+#include "Header/designStaff4Admin.h"
+#include "Header/ProductDesign.h"
+#include "Header/product.h"
 // #include <thread>
 // #include "ANTHinsyOOP"
 // using namespace ANTHinsyOOP;
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-// bool running = true;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+void openMyWebsite(const string& url);
+void test();
 int main()
 {
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    H::DisableButtonClose();
-    H::setConsoleTitle("Flower Shop Management System");
-    H::DisableScreenResize();
-    H::setFixedScreenConsole(170,40);
-    H::setFont(18,700);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+////  H::DisableButtonClose();
+   H::setConsoleTitle("Flower Shop Management System");
+   H::DisableScreenResize();
+   H::setFixedScreenConsole(170,40);
+   H::setFont(18,700);
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+////								test for main design on The first console
+
+	char op;
+	while(true)
+	{
+		H::cls();
+		cout << "\n\t 1. Admin";
+		cout << "\n\t 2. Staff";
+		cout << "\n\t 3. User ";
+		cout << "\n\t 4. About Us";
+		cout << "\n\t 5. Exit Program";
+		cout << "\n\t Press Option You Want :";
+
+		op = getch();
+		switch(op)
+		{
+			case '1':
+			{
+				test();
+			}break;
+			case '2':
+			{
+				H::cls();
+				StaffFeature();
+			}break;
+			case '3':
+			{
+				H::cls();
+				TesttingUser();
+			}break;
+			case '4':
+			{
+				H::cls();
+				cout << "Opening Our Develop Website ....";
+				H::delay(2000);
+				openMyWebsite("Website/index.html");
+			}break;
+			case '5':
+			{
+				H::cls();
+				cout << "E";
+				H::delay(500);
+				cout << "x";
+				H::delay(500);
+				cout << "c";
+				H::delay(500);
+				cout << "i";
+				H::delay(500);
+				cout << "t";
+				H::delay(500);
+				cout << "i";
+				H::delay(500);
+				cout << "n";
+				H::delay(500);
+				cout << "g";
+				H::delay(500);
+				cout << ".";
+				H::delay(500);
+				cout << ".";
+				H::delay(500);
+				cout << ".";
+				H::delay(500);
+				exit(0);
+			}break;
+		}
+	}
+
+	getch();
+	return 0;
+}
+///////////////////////////////////////////////////////////////////////////////
+void openMyWebsite(const string& url) {
+    string command = "start " + url;
+    system(command.c_str());
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// int main(){
+// 	Design d;
+// 	H::setConsoleTitle("Design Project");
+// 	H::DisableScreenResize(); 
+// 	H::setFixedScreenConsole(170,40);
+// 	H::setFont(18,700);
+// 	H::setcursor(0,0);
+void test(){
+	H::setcursor(0,0);
+	Design d;	
+	int x = 0;             
+	char op,key;
+	do{ 
+		H::setcolor(0);
+		H::cls();
+		start:
+		do{
+			H::setcolor(0);
+			H::cls();
+			d.check01(x);
+			op = getch(); 
+		    if (op == -32 || op == 0){
+		        op = getch(); // actual key code
+		        switch(op) {
+		            case 75:{ // LEFT
+		                x--;
+		                if (x < 0) x = 9;
+		                break;
+		            }
+		            case 77:{ // RIGHT
+		                x++;
+		                if (x > 9) x = 0;
+		                
+		            }   break;
+		        }
+		    }
+		} while (op != 13);  
+		H::setcolor(7);
+		if (x == 0) 
+		{ 	
+			while(true){
+				H::setcolor(0);
+				H::cls();
+				d.DesignInsertFlower();
+				InputFlowerData();
+				key = getch();
+				if (key == 13) {
+					continue;
+				}
+				else if (key == 27){
+					goto start;
+				}
+			}
+		}
+		else if (x == 1) 
+		{ 	
+			H::setcolor(0);
+			H::cls();
+			d.DesignDisplayFlower();
+			DisplayFlowerData();
+		}
+		else if (x == 2) 
+		{ 
+			while(true){
+				H::setcolor(0);
+				H::cls();
+				d.DesignSearchFlower();
+				SearchFlowerData();
+				key = getch();
+				if (key == 13) {
+					continue;
+				}
+				else if (key == 27){
+					goto start;
+				}
+			}
+		}
+		else if (x == 3) 
+		{ 
+			while(true){
+				H::setcolor(0);
+				H::cls();
+				d.DesignUpdateFlower();	
+				UpdateFlowerData();
+				key = getch();
+				if (key == 13) {
+					continue;
+				}
+				else if (key == 27){
+					goto start;
+				}
+			}		
+		}
+		else if (x == 4)
+		{
+			H::setcolor(0);
+			H::cls();
+			d.DesignDeleteFlower();	
+			DeleteFlowerData();
+		}
+		else if (x == 5)
+		{
+			
+		}
+		else if (x == 6)
+		{
+			
+		}
+		else if (x == 7)
+		{
+			
+		}
+		else if (x == 8)
+		{
+			BuyingFlower();
+		}
+		else if (x == 9) { 
+		    H::cls();
+		    cout << "\nExiting Program...";
+		    H::delay(1000);
+		    break; 
+		}
+	}while(true);
+}
+// //	getch();
+// 	return 0;
+// }
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//int main()
+//{
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+////    H::DisableButtonClose();
+//    H::setConsoleTitle("Flower Shop Management System");
+//    H::DisableScreenResize();
+//    H::setFixedScreenConsole(170,40);
+//    H::setFont(18,700);
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 ////								test for main design on The first console
 
@@ -22,8 +258,8 @@ int main()
 	// Start clock in background
 //    thread clockThread(showClock);
 // //
-//     int choice;
-//     do {
+    // int choice;
+    // do {
     //     Move cursor below clock (row 2)
     //    COORD coord = { 0, 2 };
     //    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
@@ -80,24 +316,8 @@ int main()
 	// H::HLine(5,2,2,196,255);
 	// H::HLine(7,2,2,230,255);
 ///////////////////////////////////////////////////////////////////////////////////////////
-    UserData user;
-    int choice;
-
-    do {
-    
-        cout << "\n1. Register\n2. Login\n3. Forget Password\n4. Exit\nChoice: ";
-        cin >> choice;
-
-        switch (choice) {
-            case 1: user.Register(); break;
-            case 2: user.Login(); break;
-            case 3: user.ForgetPassword(); break;
-            case 4: cout << "Goodbye see you Again next time!\n"; break;
-            default: cout << "Invalid choice.\n";
-        }
-    } while (choice != 4);
+//    TesttingUser();
 /////////////////////////////////////////////////////////////////////////////
-	getch();
-	return 0;
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//	getch();
+//	return 0;
+//}
