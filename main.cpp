@@ -42,7 +42,8 @@ int main()
 			case '2':
 			{
 				H::cls();
-				StaffFeature();
+				StaffAdmin();
+				// StaffFeature();
 			}break;
 			case '3':
 			{
