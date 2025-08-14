@@ -23,7 +23,7 @@ int main()
     while(true)
     {
         H::HLine(4,0,i++,m,255);
-        H::HLine(164,39,j--,m,255);
+        H::HLine(4,39,j--,m,255);
         m++;
         if(i>164 || j<2)
         {
