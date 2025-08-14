@@ -5,7 +5,7 @@
           header file data.h
         - use for take setter and getter from class Data
         - this clas have simple methods like CRUD funtion 
-
+A
 */
 
 #ifndef ___INC_PRODUCT_H___
@@ -13,7 +13,7 @@
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include "productData.h"
-#include "ProductDesign.h"
+#include"ProductDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
@@ -31,42 +31,23 @@ public:
 };
 
 // Function to generate next Flower ID
-// int GenerateNextFlowerID()
-// {
-//     fstream file("Data\\Product.bin", ios::in | ios::binary);
-//     Product temp;
-//     int maxID = 999;
-
-//     if (!file)
-//         return 1000;
-
-//     while (file.read((char*)&temp, sizeof(temp)))
-//     {
-//         if (temp.GetFlowerId() > maxID)
-//             maxID = temp.GetFlowerId();
-//     }
-
-//     file.close();
-//     return maxID + 1;
-// }
-
-void GenerateNextFlowerID(char* newId)
+int GenerateNextFlowerID()
 {
     fstream file("Data\\Product.bin", ios::in | ios::binary);
     Product temp;
-    int maxNum = 999; // start before P-1000
+    int maxID = 999;
 
-    if (file) {
-        while (file.read((char*)&temp, sizeof(temp))) {
-            int numPart = atoi(temp.GetFlowerId() + 2); // skip "P-"
-            if (numPart > maxNum)
-                maxNum = numPart;
-        }
-        file.close();
+    if (!file)
+        return 1000;
+
+    while (file.read((char*)&temp, sizeof(temp)))
+    {
+        if (temp.GetFlowerId() > maxID)
+            maxID = temp.GetFlowerId();
     }
 
-    // Create ID with P-
-    sprintf(newId, "P-%d", maxNum + 1);
+    file.close();
+    return maxID + 1;
 }
 //design for  update
 void Product::DesignUpdateInsert(){
@@ -94,25 +75,26 @@ void Product::DesignUpdateInsert(){
 	H::HLine(90,24,43,196,220);
 	H::HLine(90,26,43,196,220);
 	
-H::setcolor(6);H::gotoxy(12,16);cout<<R"(      .--.)" ;  
-H::setcolor(6);H::gotoxy(12,17);cout<<R"(    .'_\/_'.)" ;  
-H::setcolor(6);H::gotoxy(12,18);cout<<R"(    '. /\ .')" ;  
-H::setcolor(2);H::gotoxy(12,19);cout<<R"(      "||")" ;  
-H::setcolor(2);H::gotoxy(12,20);cout<<R"(       || /\)" ;  
-H::setcolor(2);H::gotoxy(12,21);cout<<R"(    /\ ||//\))" ;  
-H::setcolor(2);H::gotoxy(12,22);cout<<R"(   (/\\||/)" ;  
-H::setcolor(2);H::gotoxy(12,23);cout<<R"(______\||/_______)" ;  
-H::setcolor(2);H::gotoxy(12,24);cout<<R"(^^^^^^^^^^^^^^^^^)" ; 
+H::setcolor(6);H::gotoxy(12,16);cout<<R"(      .--.)" ;H::delay(20);  
+H::setcolor(6);H::gotoxy(12,17);cout<<R"(    .'_\/_'.)" ;H::delay(20);  
+H::setcolor(6);H::gotoxy(12,18);cout<<R"(    '. /\ .')" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(12,19);cout<<R"(      "||")" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(12,20);cout<<R"(       || /\)" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(12,21);cout<<R"(    /\ ||//\))" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(12,22);cout<<R"(   (/\\||/)" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(12,23);cout<<R"(______\||/_______)" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(12,24);cout<<R"(^^^^^^^^^^^^^^^^^)" ;H::delay(20); 
 
-H::setcolor(1);H::gotoxy(141,16);cout<<R"(      .--.)" ;  
-H::setcolor(1);H::gotoxy(141,17);cout<<R"(    .'_\/_'.)" ;  
-H::setcolor(1);H::gotoxy(141,18);cout<<R"(    '. /\ .')" ;  
-H::setcolor(2);H::gotoxy(141,19);cout<<R"(      "||")" ;  
-H::setcolor(2);H::gotoxy(141,20);cout<<R"(       || /\)" ;  
-H::setcolor(2);H::gotoxy(141,21);cout<<R"(    /\ ||//\))" ;  
-H::setcolor(2);H::gotoxy(141,22);cout<<R"(   (/\\||/)" ;  
-H::setcolor(2);H::gotoxy(141,23);cout<<R"(______\||/_______)" ;  
-H::setcolor(2);H::gotoxy(141,24);cout<<R"(^^^^^^^^^^^^^^^^^)" ; 
+
+H::setcolor(1);H::gotoxy(141,16);cout<<R"(      .--.)" ;H::delay(20);  
+H::setcolor(1);H::gotoxy(141,17);cout<<R"(    .'_\/_'.)" ;H::delay(20);  
+H::setcolor(1);H::gotoxy(141,18);cout<<R"(    '. /\ .')" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(141,19);cout<<R"(      "||")" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(141,20);cout<<R"(       || /\)" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(141,21);cout<<R"(    /\ ||//\))" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(141,22);cout<<R"(   (/\\||/)" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(141,23);cout<<R"(______\||/_______)" ;H::delay(20);  
+H::setcolor(2);H::gotoxy(141,24);cout<<R"(^^^^^^^^^^^^^^^^^)" ;H::delay(20); 
  
 
 	
@@ -147,14 +129,9 @@ void Product::InputFlowerData()
     char name[50], type[30], description[100], date[20];
     string strQty, strPrice;
 
-    // int id = GenerateNextFlowerID(); // auto ID
-    // SetFlowerID(id);
-
-    char id[10];
-    GenerateNextFlowerID(id);
-    SetFlowerID(id); // store as char[]
-
-    H::setcolor(199);H::gotoxy(69,16);cout <<"Enter Flower ID ";          
+    int id = GenerateNextFlowerID(); // auto ID
+    SetFlowerID(id);
+    H::setcolor(199);H::gotoxy(69,16);cout <<"Flower ID ";          
     H::setcolor(199);H::gotoxy(69,18);cout <<"Enter Flower Name";         
     H::setcolor(199);H::gotoxy(69,20);cout <<"Enter Flower Type";         
     H::setcolor(199);H::gotoxy(69,22);cout <<"Enter Flower Price";        
@@ -163,7 +140,7 @@ void Product::InputFlowerData()
     H::setcolor(199);H::gotoxy(69,28);cout <<"Enter Flower Date";         
 
 
-	H::setcolor(199);H::gotoxy(117,16); cout<<":  "<< GetFlowerId();
+	H::setcolor(199);H::gotoxy(117,16); cout<<":  P-"<< GetFlowerId();
 	H::setcolor(199);H::gotoxy(117,18); cout<<":  "; H::inputLetter(name, 15);
 	H::setcolor(199);H::gotoxy(117,20); cout<<":  "; H::inputLetter(type, 15);
 	H::setcolor(199);H::gotoxy(117,22); cout<<":  "; price = stod(H::inputUNumber(strPrice, 6));
@@ -194,7 +171,7 @@ void Product::Header()
 
 void Product::DisplayFlowerData()
 {
-    H::setcolor(6);cout << left << setw(10) << GetFlowerId()
+    H::setcolor(6);cout << left << "P-" << setw(10) << GetFlowerId()
         << setw(20) << GetFlowerName()
         << setw(20) << GetFlowerTpye()
         << setw(20) << fixed << setprecision(2) << GetFlowerPrice() << "$"
@@ -212,7 +189,7 @@ void Product::EditFlowerData()
     char type[30], description[100], date[20];
     string strQty, strPrice;
 
-    H::setcolor(199);H::gotoxy(44,14);cout << "Enter Flower ID           : ";
+    H::setcolor(199);H::gotoxy(44,14);cout << "Flower ID           : ";
     H::setcolor(199);H::gotoxy(44,16);cout << "Enter Flower Name         : ";
     H::setcolor(199);H::gotoxy(44,18);cout << "Enter Flower Type         : "; 
     H::setcolor(199);H::gotoxy(44,20);cout << "Enter Flower Price        : "; 
@@ -220,7 +197,7 @@ void Product::EditFlowerData()
     H::setcolor(199);H::gotoxy(44,24);cout << "Enter Flower Description  : "; 
     H::setcolor(199);H::gotoxy(44,26);cout << "Enter Flower Date         : "; 
 
-	H::setcolor(199);H::gotoxy(97,14); cout<<": "<< GetFlowerId();
+	H::setcolor(199);H::gotoxy(97,14); cout<<": P-"<< GetFlowerId();
 	H::setcolor(199);H::gotoxy(97,16); cout<<": " << GetFlowerName();
 	H::setcolor(199);H::gotoxy(97,18); cout<<": "; H::inputLetter(type, 15);
 	H::setcolor(199);H::gotoxy(97,20); cout<<": "; price = stod(H::inputUNumber(strPrice, 6));
@@ -279,11 +256,12 @@ void DisplayFlowerData()
 void UpdateFlowerData()
 {	
 	Design::Search();
-    char updateId[10];
+    int updateId;
+    string strID;
     bool isUpdated = false;
 
     H::setcolor(4);H::gotoxy(53,22);cout << "Input Product ID TO Update  ";
-    H::setcolor(4);H::gotoxy(86,22);cout<<":  ";H::inputUNumber(updateId,10);
+    H::setcolor(4);H::gotoxy(86,22);cout<<":  ";updateId = stoi(H::inputUNumber(strID, 10));
 	H::clearBox(48,20,73,5,1);
     proF.open("Data\\Product.bin", ios::in | ios::out | ios::binary);
     if (!proF) {
@@ -292,7 +270,7 @@ void UpdateFlowerData()
     }
 
     while (proF.read((char*)&p, sizeof(p))) {
-        if (strcmp(updateId,p.GetFlowerId()) ==0 ) {
+        if (updateId == p.GetFlowerId()) {
             isUpdated = true;
             p.EditFlowerData();
             proF.seekp((int)proF.tellg() - sizeof(p));
@@ -306,24 +284,21 @@ void UpdateFlowerData()
     if (!isUpdated)
         cout << "\tThis Product ID is not found for Update!" << endl;
     else
-    {
         H::drawBoxDoubleLine(76,28,59,1,2);
 		H::setcolor(6);H::gotoxy(82,29);cout<<">>>>>>>> FLOWER  UPDATE SUCCESSFULLY <<<<<<<<";
-		Design::FlowerChoice();
-		Design::Style();
 		Design::Footer();
-    }
 }
 //###############################################################################################
 
 //###############################################################################################
 void SearchFlowerData()
 {
-    char id[10];
+    int id;
+    string strID;
     bool found = false;
 
     H::setcolor(3);H::gotoxy(53,22);cout<<"Input Product ID to Search ";
-    H::setcolor(3);H::gotoxy(86,22);cout<<":  ";H::inputUNumber(id,5);
+    H::setcolor(3);H::gotoxy(86,22);cout<<":  ";id = stoi(H::inputUNumber(strID, 5));
 	H::clearBox(48,20,73,5,1);
 	H::clearBox(19,8,4,30,0);
 	H::clearBox(146,7,4,30,0);
@@ -333,7 +308,7 @@ void SearchFlowerData()
         return;
     }
     while (proF.read((char*)&p, sizeof(p))) {
-        if (strcmp(p.GetFlowerId(),id) == 0) {
+        if (p.GetFlowerId() == id) {
 	    	p.DesignSearchDisplay();
 			H::setcolor(1);H::gotoxy(22,15);Product::Header();
             H::setcolor(5);H::gotoxy(22,18);p.DisplayFlowerData();
@@ -355,11 +330,12 @@ void SearchFlowerData()
 //###############################################################################################
 void DeleteFlowerData()
 {
-    char id[10];
+    int id;
+    string strID;
     bool isDeleted = false;
 
     H::setcolor(1);H::gotoxy(53,22);cout << "Input ID of Product to Delete  ";
-    H::setcolor(1);H::gotoxy(86,22);cout<<":  ";H::inputUNumber(id,10);
+    H::setcolor(1);H::gotoxy(86,22);cout<<":  ";id = stoi(H::inputUNumber(strID, 10));
 
     proF.open("Data\\Product.bin", ios::in | ios::binary);
     if (proF.fail())
@@ -378,7 +354,7 @@ void DeleteFlowerData()
 
     while (proF.read((char*)&p, sizeof(p)))
     {
-        if (strcmp(p.GetFlowerId(),id) == 0)
+        if (p.GetFlowerId() == id)
             isDeleted = true;
         else
             backup.write((char*)&p, sizeof(p));
@@ -401,7 +377,7 @@ void DeleteFlowerData()
 }
 //###############################################################################################
 void ImportFlowerQty() {
-    char id[10];
+    int id;
     int addQty;
     string strID, strQty;
     bool found = false;
@@ -410,7 +386,7 @@ void ImportFlowerQty() {
         found = false;
 
         cout << "\n\tEnter Flower ID to Import Quantity: ";
-        H::inputUNumber(id, 5);
+        id = stoi(H::inputUNumber(strID, 5));
 
         proF.open("Data\\Product.bin", ios::in | ios::out | ios::binary);
         if (!proF) {
@@ -419,7 +395,7 @@ void ImportFlowerQty() {
         }
 
         while (proF.read((char*)&p, sizeof(p))) {
-            if (strcmp(id,p.GetFlowerId()) == 0) {
+            if (id == p.GetFlowerId()) {
                 found = true;
                 cout << "\tEnter Quantity to Add: ";
                 addQty = stoi(H::inputUNumber(strQty, 4));
