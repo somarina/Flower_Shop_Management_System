@@ -16,7 +16,7 @@ using namespace ANTHinsyOOP;
 class Data{
 	private: 
 		//Data Member
-		int flower_id;            		 // Unique ID for each flower Product
+		char flower_id[10];            		 // Unique ID for each flower Product
 	    char flower_name[50];            // Name of the flower
 	    char flower_type[30];            // Type/category of flower (e.g. Rose, Orchid)
 	    double flower_price;             // Price of the flower
@@ -28,7 +28,7 @@ class Data{
 	public:
 		//@@@@ 	Function Prototype 
 		//										setter 
-		void SetFlowerID(int id);
+		void SetFlowerID(char* id);
 		void SetFlowerName(const char* name);
 		void SetFlowerType(const char* type);
 		void SetFlowerPrice(double price);
@@ -39,7 +39,7 @@ class Data{
 		void SetFlowerDate(const char* date);
 
 		//											Getter
-		int GetFlowerId() const;
+		const char* GetFlowerId() const;
 		const char* GetFlowerName() const;
 		const char* GetFlowerTpye() const;
 		double GetFlowerPrice() const;
@@ -56,9 +56,9 @@ class Data{
 											Setter or Mutator
 	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 */
-void Data::SetFlowerID(int id)
+void Data::SetFlowerID(char* id)
 {
-	this->flower_id = id;
+	strcpy(this->flower_id, id);
 }
 void Data::SetFlowerName(const char* name)
 {
@@ -99,7 +99,7 @@ void Data::SetFlowerDate(const char* date)
 											Getter or Accessor
 	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 */
-int Data::GetFlowerId() const
+const char* Data::GetFlowerId() const
 {
 	return this->flower_id;
 }

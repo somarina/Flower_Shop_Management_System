@@ -294,7 +294,7 @@ fstream autoId;
 		    staff_count = 1000;
 		}
 		
-		sprintf(this->staff_id, "%d", staff_count++);
+		sprintf(this->staff_id, "S-%d", staff_count++);
 //		this->staff_id, staff_count++;
 		
 		ofstream idOut("Data/lastStaffId.bin", ios::binary);
