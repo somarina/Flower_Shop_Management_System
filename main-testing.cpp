@@ -160,9 +160,6 @@ int main()
 //   H::HLine(148,23,4,6,223);
 
 
-
-
-
   H::setcolor(3); H::gotoxy(100,12); cout << R"(                                 _ " _  )";
   H::setcolor(4); H::gotoxy(100,13); cout << R"(  _ " _                         (_\|/_) )";
   H::setcolor(6); H::gotoxy(100,14); cout << R"( (_\|/_)  _ " _         _ " _    (/|\)  )";
