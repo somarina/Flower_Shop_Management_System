@@ -561,15 +561,13 @@ void UserDesign::DesignMenu()
 		switch(choice)
 		{
 			case 72: { // Up
-				if(x > 1) {
-					x--;
-				}
+				x--;
+				if(x<1) x=5;
 				break;
 			}
 			case 80: { // Down
-				if(x < 5) {
-					x++;
-				}
+				x++;
+				if(x > 5) x=1;
 				break;
 			}
 		}
@@ -1130,6 +1128,7 @@ void UserData::ForgetPassword() {
 	H::cls();
     file.close();
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //void UserDesign::TestArr()

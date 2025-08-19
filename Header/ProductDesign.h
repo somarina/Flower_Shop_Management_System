@@ -568,7 +568,7 @@ void Design::check01(int x){
 	H::setcolor(215);H::gotoxy(41,25);cout<<"[8]. IMPORT";
 	H::setcolor(215);H::gotoxy(18,17);cout<<"[9]. BUY FLOWER";
 	H::setcolor(215);H::gotoxy(10,9);cout<<"[10]. BACK";
-	FlowerAll();
+	// FlowerAll();
 	
 	if(x==0){
 		H::drawBoxDoubleLineWithBG(35,0,23,1,230);

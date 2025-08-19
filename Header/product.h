@@ -15,8 +15,381 @@ A
 #include "productData.h"
 #include"ProductDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void test();
+void DesignImportFlowerData(){
+	Design::BoxOfHeader();
+	H::setcolor(1);H::gotoxy(35,6);cout<<R"(   ______   ____ _      _________     ______  ______  ____  ___  ______   ______________  _______ __)";
+	H::setcolor(2);H::gotoxy(35,7);cout<<R"(  / __/ /  / __ \ | /| / / __/ _ \   /  _/  |/  / _ \/ __ \/ _ \/_  __/  / __/_  __/ __ \/ ___/ //_/)";
+	H::setcolor(3);H::gotoxy(35,8);cout<<R"( / _// /__/ /_/ / |/ |/ / _// , _/  _/ // /|_/ / ___/ /_/ / , _/ / /    _\ \  / / / /_/ / /__/ ,< )";  
+	H::setcolor(4);H::gotoxy(35,9);cout<<R"(/_/ /____/\____/|__/|__/___/_/|_|  /___/_/  /_/_/   \____/_/|_| /_/    /___/ /_/  \____/\___/_/|_| )"; 
+	
+	H::setcolor(1);H::gotoxy(10,3);cout<<R"(     .-.    )";                                
+	H::setcolor(1);H::gotoxy(10,4);cout<<R"(  .-(   )-.  )";                           
+	H::setcolor(1);H::gotoxy(10,5);cout<<R"( (     __) )-. )";                      
+	H::setcolor(1);H::gotoxy(10,6);cout<<R"(  `-(       __) )";                     
+	H::setcolor(1);H::gotoxy(10,7);cout<<R"(    `(____)-',  )";                      
+	H::setcolor(4);H::gotoxy(10,8);cout<<R"(  - -  :   :  - -)";
+	H::setcolor(4);H::gotoxy(10,9);cout<<R"(      / `-' \)";
+	H::setcolor(4);H::gotoxy(10,10);cout<<R"(    ,    |   .)";
+	H::setcolor(4);H::gotoxy(10,11);cout<<R"(         .    )"; 	
+	
+	H::setcolor(6);H::gotoxy(143,4);cout<<R"(        .)";
+	H::setcolor(2);H::gotoxy(143,5);cout<<R"(      \ | /)";
+	H::setcolor(6);H::gotoxy(143,6);cout<<R"(    '-.;;;.-')";
+	H::setcolor(2);H::gotoxy(143,7);cout<<R"(   -==;;;;;==-)";
+	H::setcolor(6);H::gotoxy(143,8);cout<<R"(    .-';;;'-.)";
+	H::setcolor(2);H::gotoxy(143,9);cout<<R"(      / | \)";
+	H::setcolor(6);H::gotoxy(143,10);cout<<R"(        ')";
+	//HLine VLine
+	//near box left 
+	H::VLine(13,16,13,70,233);
+	H::VLine(14,16,13,70,233);
+	//near box right
+	H::VLine(157,16,13,70,233);
+	H::VLine(158,16,13,70,233);
+	
+	H::VLine(20,14,18,4,219);
+	H::VLine(151,14,18,4,219);
+	
+	H::HLine(20,16,130,7,220);
+	H::HLine(20,18,130,7,220);
+	H::HLine(20,20,130,7,220);
+	H::HLine(20,22,130,7,220);
+	H::HLine(20,24,130,7,220);
+	H::HLine(20,26,130,7,220);
+	H::HLine(20,28,130,7,220);
+	H::HLine(20,30,130,7,220);
+	//box for input 1-3
+	H::drawBoxSingleLineWithBG(40,18,30,3,153);
+	H::drawBoxSingleLineWithBG(100,18,30,3,153);
+	H::drawBoxSingleLineWithBG(60,24,48,3,153);
+	
+////// Import already and then show presss//////////////////////////////////////////////////////////////////////////
+	H::setcolor(7);H::gotoxy(67,30);cout<<"PRESS         FOR ";
+	H::setcolor(2);H::gotoxy(73,30);cout<<"[ENTER]";
+	H::setcolor(1);H::gotoxy(85,30);cout<<"IMPORT MORE";
+	H::setcolor(7);H::gotoxy(74,31);cout<<"PRESS       FOR ";
+	H::setcolor(3);H::gotoxy(80,31);cout<<"[ESC]";
+	H::setcolor(6);H::gotoxy(86,31);cout<<"BACK";
+//////////////////////////////////////////////////////////////////////////////////////////////////////////	
+    Design::FlowerChoice(); 
+}
+void DesignBuyingFlower(){
+	//HLINE UP	
+	H::HLine(1,0,168,162,220);
+	H::HLine(3,1,5,187,220); 
+	H::HLine(162,1,5,187,220);
+	//VLINE left	
+	H::VLine(6,1,36,221,219); 
+	//H:INE Down
+	H::HLine(1,39,168,162,220);
+	H::HLine(3,38,5,187,220);
+	H::HLine(162,38,5,187,220);
+	//VLINE right
+	H::VLine(165,1,36,221,219); 
+	
+	//HLine Vline header
+	//left
+	H::HLine(12,3,30,3,223);
+	H::HLine(12,5,20,3,223);
+	H::HLine(20,7,22,3,223);
+	H::HLine(12,9,30,3,223);
+	
+	//right
+	H::HLine(128,3,30,3,223);
+	H::HLine(128,5,20,3,223);
+	H::HLine(136,7,22,3,223);
+	H::HLine(128,9,30,3,223);
+	
+	
+/////////////////////////////////////////////Make anime/////////////////////////////////////////////////////////////////
+	//between
+	H::VLine(48,4,3,6,219);
+	H::HLine(48,5,74,8,220);
+	H::HLine(48,7,74,8,223);
+	H::VLine(122,4,3,6,219);
+	
+	H::VLine(50,3,5,1,219);
+	H::VLine(52,2,7,2,219);
+	H::VLine(54,1,9,4,219);
+	H::VLine(56,1,9,7,219);
+	H::VLine(58,1,9,7,219);
+	H::VLine(60,1,9,7,219);
+	H::VLine(62,1,9,7,219);
+	H::VLine(64,1,9,7,219);
+	H::VLine(66,1,9,7,219);
+	H::VLine(68,1,9,7,219);
+	H::VLine(70,1,9,7,219);
+	H::VLine(72,1,9,7,219);
+	H::VLine(74,1,9,7,219);
+	H::VLine(76,1,9,7,219);
+	H::VLine(78,1,9,7,219);
+	H::VLine(80,1,9,7,219);
+	H::VLine(82,1,9,7,219);
+	H::VLine(84,1,9,7,219);
+	H::VLine(86,1,9,7,219);
+	H::VLine(88,1,9,7,219);
+	H::VLine(90,1,9,7,219);
+	H::VLine(92,1,9,7,219);
+	H::VLine(94,1,9,7,219);
+	H::VLine(96,1,9,7,219);
+	H::VLine(98,1,9,7,219);
+	H::VLine(100,1,9,7,219);
+	H::VLine(102,1,9,7,219);
+	H::VLine(104,1,9,7,219);
+	H::VLine(106,1,9,7,219);
+	H::VLine(108,1,9,7,219);
+	H::VLine(110,1,9,7,219);
+	H::VLine(112,1,9,7,219);
+	H::VLine(114,1,9,7,219);
+	H::VLine(116,1,9,7,219);
+	H::VLine(120,3,5,7,219);
+	H::VLine(118,2,7,7,219);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	H::setcolor(1);  H::gotoxy(48,4);cout << R"(   ___  __  ____  _______  _______  ______   ____ _      _________  ____ )"; 
+	H::setcolor(2);  H::gotoxy(48,5);cout << R"(  / _ )/ / / /\ \/ /  _/ |/ / ___/ / __/ /  / __ \ | /| / / __/ _ \/ __/ )"; 
+	H::setcolor(3);  H::gotoxy(48,6);cout << R"( / _  / /_/ /  \  // //    / (_ / / _// /__/ /_/ / |/ |/ / _// , _/\ \   )"; 
+	H::setcolor(4);  H::gotoxy(48,7);cout << R"(/____/\____/   /_/___/_/|_/\___/ /_/ /____/\____/|__/|__/___/_/|_/___/   )"; 
+                                                                        
+    H::HLine(30,13,110,4,223);
+    H::HLine(35,15,100,4,223);
+    H::HLine(30,29,110,4,223);
+    H::HLine(35,27,100,4,223);
+    
+    //Box
+    H::drawBoxSingleLineWithBG(49,16,35,3,6);
+    H::drawBoxSingleLineWithBG(86,16,35,3,6);
+    H::drawBoxSingleLineWithBG(49,21,35,3,6);
+    H::drawBoxSingleLineWithBG(86,21,35,3,6);
+
+ 
+	system("chcp 65001 > nul");             
+	H::setcolor(1);  H::gotoxy(31,15);cout << R"(╔═╗)"; 
+	H::setcolor(1);  H::gotoxy(31,16);cout << R"(╠╣ )"; 
+	H::setcolor(1);  H::gotoxy(31,17);cout << R"(╚  )"; 
+	H::setcolor(2);  H::gotoxy(31,18);cout << R"(╔═╗)"; 
+	H::setcolor(2);  H::gotoxy(31,19);cout << R"(╚═╗)"; 
+	H::setcolor(2);  H::gotoxy(31,20);cout << R"(╚═╝)"; 
+	H::setcolor(3);  H::gotoxy(31,21);cout << R"(╔╦╗)"; 
+	H::setcolor(3);  H::gotoxy(31,22);cout << R"(║║║)"; 
+	H::setcolor(3);  H::gotoxy(31,23);cout << R"(╩ ╩)"; 
+	H::setcolor(5);  H::gotoxy(31,24);cout << R"(╔═╗)"; 
+	H::setcolor(5);  H::gotoxy(31,25);cout << R"(╚═╗)"; 
+	H::setcolor(5);  H::gotoxy(31,26);cout << R"(╚═╝ )";    
+	system("chcp 437 > nul");  
+	
+	system("chcp 65001 > nul");             
+	H::setcolor(1);  H::gotoxy(136,15);cout << R"(╔═╗)"; 
+	H::setcolor(1);  H::gotoxy(136,16);cout << R"(╠╣ )"; 
+	H::setcolor(1);  H::gotoxy(136,17);cout << R"(╚  )"; 
+	H::setcolor(2);  H::gotoxy(136,18);cout << R"(╔═╗)"; 
+	H::setcolor(2);  H::gotoxy(136,19);cout << R"(╚═╗)"; 
+	H::setcolor(2);  H::gotoxy(136,20);cout << R"(╚═╝)"; 
+	H::setcolor(3);  H::gotoxy(136,21);cout << R"(╔╦╗)"; 
+	H::setcolor(3);  H::gotoxy(136,22);cout << R"(║║║)"; 
+	H::setcolor(3);  H::gotoxy(136,23);cout << R"(╩ ╩)"; 
+	H::setcolor(5);  H::gotoxy(136,24);cout << R"(╔═╗)"; 
+	H::setcolor(5);  H::gotoxy(136,25);cout << R"(╚═╗)"; 
+	H::setcolor(5);  H::gotoxy(136,26);cout << R"(╚═╝ )";    
+	system("chcp 437 > nul");  
+	  
+	
+	
+	H::setcolor(2);H::gotoxy(7,27);cout<<R"(        a@@@@a    )";         
+	H::setcolor(2);H::gotoxy(7,28);cout<<R"(    a@@@@@@@@@@@@a )";        
+	H::setcolor(2);H::gotoxy(7,29);cout<<R"(  a@@@@@@by@@@@@@@@a )";      
+	H::setcolor(2);H::gotoxy(7,30);cout<<R"(a@@@@@S@C@E@S@W@@@@@@a )";    
+	H::setcolor(2);H::gotoxy(7,31);cout<<R"(@@@@@@@@@@@@@@@@@@@@@@ )";    
+	H::setcolor(2);H::gotoxy(7,32);cout<<R"( `@@@@@@`\\//'@@@@@@' )";     
+	H::setcolor(8);H::gotoxy(7,33);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(7,34);cout<<R"(          ||   )";      
+	H::setcolor(8);H::gotoxy(7,35);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(7,36);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(7,37);cout<<R"(         /MM\)";
+	H::setcolor(2);H::gotoxy(7,38);cout<<R"( ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
+	
+	
+	H::setcolor(4);H::gotoxy(28,30);cout<<R"(                  _)";
+	H::setcolor(6);H::gotoxy(28,31);cout<<R"(                _(_)_                          wWWWw   _)";
+	H::setcolor(3);H::gotoxy(28,32);cout<<R"(    @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_)";
+	H::setcolor(1);H::gotoxy(28,33);cout<<R"(   @@()@@ wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_))";
+	H::setcolor(5);H::gotoxy(28,34);cout<<R"(    @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\)";
+	H::setcolor(2);H::gotoxy(28,35);cout<<R"(     /      Y       \|    \|/    /(_)    \|      |/      |)";
+	H::setcolor(2);H::gotoxy(28,36);cout<<R"(  \ |     \ |/       | / \ | /  \|/       |/    \|      \|/)";
+	H::setcolor(2);H::gotoxy(28,37);cout<<R"(  \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|// )";
+	H::setcolor(2);H::gotoxy(28,38);cout<<R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^	)";
+	
+	
+	H::setcolor(6);H::gotoxy(87,30);cout<<R"(                    _)";
+	H::setcolor(5);H::gotoxy(87,31);cout<<R"(                  _(_)_             )";
+	H::setcolor(4);H::gotoxy(87,32);cout<<R"(    @@@@         (_)@(_) vVVVv )";
+	H::setcolor(3);H::gotoxy(87,33);cout<<R"(   @@()@@ wWWWw    (_)   (___)  )";
+	H::setcolor(6);H::gotoxy(87,34);cout<<R"(    @@@@  (___)     `|/    Y   )";
+	H::setcolor(2);H::gotoxy(87,35);cout<<R"(     /      Y       \|    \|/   )";
+	H::setcolor(2);H::gotoxy(87,36);cout<<R"(  \ |     \ |/       | / \ | /  )";
+	H::setcolor(2);H::gotoxy(87,37);cout<<R"(  \\|//   \\|///  \\\|//\\\|///)";
+	H::setcolor(2);H::gotoxy(87,38);cout<<R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
+	
+	
+	H::setcolor(1);H::gotoxy(117,32);cout<<R"(	      wWWWw               )";
+	H::setcolor(3);H::gotoxy(117,33);cout<<R"(   vVVVv (___) wWWWw        )";
+	H::setcolor(5);H::gotoxy(117,34);cout<<R"(   (___)  ~Y~  (___)    )";
+	H::setcolor(2);H::gotoxy(117,35);cout<<R"(    ~Y~   \|    ~Y~   )";
+	H::setcolor(2);H::gotoxy(117,36);cout<<R"(    \|   \ |/   \| / )";
+	H::setcolor(2);H::gotoxy(117,37);cout<<R"(   \\|// \\|// \\|/// )";
+	H::setcolor(2);H::gotoxy(117,38);cout<<R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)"; 
+	
+	H::setcolor(2);H::gotoxy(141,27);cout<<R"(        a@@@@a    )";         
+	H::setcolor(2);H::gotoxy(141,28);cout<<R"(    a@@@@@@@@@@@@a )";        
+	H::setcolor(2);H::gotoxy(141,29);cout<<R"(  a@@@@@@by@@@@@@@@a )";      
+	H::setcolor(2);H::gotoxy(141,30);cout<<R"(a@@@@@S@C@E@S@W@@@@@@a )";    
+	H::setcolor(2);H::gotoxy(141,31);cout<<R"(@@@@@@@@@@@@@@@@@@@@@@ )";    
+	H::setcolor(2);H::gotoxy(141,32);cout<<R"( `@@@@@@`\\//'@@@@@@' )";     
+	H::setcolor(8);H::gotoxy(141,33);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(141,34);cout<<R"(          ||   )";      
+	H::setcolor(8);H::gotoxy(141,35);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(141,36);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(141,37);cout<<R"(         /MM\)";
+	H::setcolor(2);H::gotoxy(141,38);cout<<R"(^^^^^^^^^^^^^^^^^^^^)";                                              
+
+//////////////////////////////////////////// buy already and then show presss//////////////////////////////////////////////////////////////////////////
+	H::setcolor(7);H::gotoxy(10,19);cout<<"PRESS         FOR ";
+	H::setcolor(2);H::gotoxy(16,19);cout<<"[ENTER]";
+	H::setcolor(1);H::gotoxy(13,21);cout<<"BUYING MORE";
+	H::setcolor(7);H::gotoxy(143,19);cout<<"PRESS       FOR ";
+	H::setcolor(4);H::gotoxy(149,19);cout<<"[ESC]";
+	H::setcolor(6);H::gotoxy(147,21);cout<<"BACK...";
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+void DesignInvoice(){
+	//HLINe vline this for box
+	H::HLine(1,-1,168,88,255);
+	H::HLine(1,39,168,88,255);
+	
+	H::VLine(1,-1,39,88,255);
+	H::VLine(2,-1,39,88,255);
+	H::VLine(170,-1,39,88,255);
+	H::VLine(169,-1,39,88,255);
+	
+	//HLine for header
+	H::HLine(35,2,100,1,223);
+	//left
+	H::HLine(39,3,20,2,223);
+	H::HLine(43,4,12,3,223);
+	H::HLine(46,5,6,4,223);
+	//right
+	H::HLine(111,3,20,2,223);
+	H::HLine(115,4,12,3,223);
+	H::HLine(118,5,6,4,223);
+	
+	H::setcolor(1);H::gotoxy(61,3);cout<<R"(   _____  ___   ______  _________________)";
+	H::setcolor(2);H::gotoxy(61,4);cout<<R"(  /  _/ |/ / | / / __ \/  _/ ___/ __/ __/)";
+	H::setcolor(3);H::gotoxy(61,5);cout<<R"( _/ //    /| |/ / /_/ // // /__/ _/_\ \  )";
+	H::setcolor(4);H::gotoxy(61,6);cout<<R"(/___/_/|_/ |___/\____/___/\___/___/___/  )";
+	                                         	
+	H::setcolor(2);H::gotoxy(7,1);cout<<R"(           ')";
+	H::setcolor(2);H::gotoxy(7,2);cout<<R"(        \  ,  /)";
+	H::setcolor(3);H::gotoxy(7,3);cout<<R"(    ' ,___/_\___, ')";
+	H::setcolor(3);H::gotoxy(7,4);cout<<R"(       \ /o.o\ /)";
+	H::setcolor(4);H::gotoxy(7,5);cout<<R"(   -=   > \_/ <   =-)";
+	H::setcolor(4);H::gotoxy(7,6);cout<<R"(       /_\___/_\)";
+	H::setcolor(5);H::gotoxy(7,7);cout<<R"(    . `   \ /   ` .)";
+	H::setcolor(5);H::gotoxy(7,8);cout<<R"(        /  `  \)";
+	H::setcolor(2);H::gotoxy(7,9);cout<<R"(           .)";	
+	
+
+	H::setcolor(6);H::gotoxy(141,1);cout<<R"(          |   .)";
+	H::setcolor(6);H::gotoxy(141,2);cout<<R"(   `.  *  |     .')";
+	H::setcolor(5);H::gotoxy(141,3);cout<<R"(     `. ._|_* .'  .)";
+	H::setcolor(5);H::gotoxy(141,4);cout<<R"(   . * .'   `.  *)";
+	H::setcolor(4);H::gotoxy(141,5);cout<<R"(-------|     |-------)";
+	H::setcolor(4);H::gotoxy(141,6);cout<<R"(   .  *`.___.' *  .)";
+	H::setcolor(3);H::gotoxy(141,7);cout<<R"(      .'  |* `.  *)";
+	H::setcolor(3);H::gotoxy(141,8);cout<<R"(    .' *  |  . `.)";
+	H::setcolor(1);H::gotoxy(141,9);cout<<R"(        . |)";
+	
+
+	H::setcolor(4); H::gotoxy(7,12);cout << R"(  _ " _ )";
+	H::setcolor(6); H::gotoxy(7,13);cout << R"( (_\|/_))";
+	H::setcolor(2); H::gotoxy(7,14);cout << R"(  (/|\) )";	
+	
+	H::setcolor(4); H::gotoxy(17,19);cout << R"(  _ " _ )";
+	H::setcolor(6); H::gotoxy(17,20);cout << R"( (_\|/_))";
+	H::setcolor(2); H::gotoxy(17,21);cout << R"(  (/|\) )";
+	
+	H::setcolor(4); H::gotoxy(5,25);cout << R"(  _ " _ )";
+	H::setcolor(6); H::gotoxy(5,26);cout << R"( (_\|/_))";
+	H::setcolor(2); H::gotoxy(5,27);cout << R"(  (/|\) )";
+
+	H::setcolor(4); H::gotoxy(19,31);cout << R"(  _ " _ )";
+	H::setcolor(6); H::gotoxy(19,32);cout << R"( (_\|/_))";
+	H::setcolor(2); H::gotoxy(19,33);cout << R"(  (/|\) )";
+
+	////////////////////////Right/////////////////////////////
+	
+	H::setcolor(4); H::gotoxy(155,12);cout << R"(  _ " _ )";
+	H::setcolor(6); H::gotoxy(155,13);cout << R"( (_\|/_))";
+	H::setcolor(2); H::gotoxy(155,14);cout << R"(  (/|\) )";	
+	
+	H::setcolor(4); H::gotoxy(146,19);cout << R"(  _ " _ )";
+	H::setcolor(6); H::gotoxy(146,20);cout << R"( (_\|/_))";
+	H::setcolor(2); H::gotoxy(146,21);cout << R"(  (/|\) )";
+	
+	H::setcolor(4); H::gotoxy(157,25);cout << R"(  _ " _ )";
+	H::setcolor(6); H::gotoxy(157,26);cout << R"( (_\|/_))";
+	H::setcolor(2); H::gotoxy(157,27);cout << R"(  (/|\) )";
+
+	H::setcolor(4); H::gotoxy(144,31);cout << R"(  _ " _ )";
+	H::setcolor(6); H::gotoxy(144,32);cout << R"( (_\|/_))";
+	H::setcolor(2); H::gotoxy(144,33);cout << R"(  (/|\) )";
 
 
+/////////////////////////////////////////////////////////////Make Invoice//////////////////////////////////////////
+//big box invoice
+	H::drawBoxDoubleLine(31,8,109,27,3);
+	H::setcolor(5);H::gotoxy(38,9);cout<<R"(  ___   ___   __  __   ___)"; 
+	H::setcolor(4);H::gotoxy(38,10);cout<<R"( | __| / __| |  \/  | / __|)";
+	H::setcolor(6);H::gotoxy(38,11);cout<<R"( | _|  \__ \ | |\/| | \__ \)";
+	H::setcolor(2);H::gotoxy(38,12);cout<<R"( |_|   |___/ |_|  |_| |___/)";
+	
+ ////////For output invoice date and exchange/////////////////////////
+	H::setcolor(4);H::gotoxy(102,10);cout<<"INVOICE NO  : ";
+	H::setcolor(5);H::gotoxy(102,11);cout<<"DATE        : ";
+	H::setcolor(6);H::gotoxy(102,12);cout<<"EXCHANGE    : ";
+////////////////////HLINe/////////////////////////////////////////////
+//	H::HLine(31,14,109,3,223);
+	H::HLine(31,13,109,2,196);
+///////////////////For ID  username phone number////////////////////
+	H::setcolor(1);H::gotoxy(40,14);cout<<"ID            : ";
+	H::setcolor(2);H::gotoxy(40,15);cout<<"USERNAME      : ";
+	H::setcolor(3);H::gotoxy(40,16);cout<<"PHONE NUMBER  : ";
+////////////////////HLINe/////////////////////////////////////////////
+//	H::HLine(31,20,109,3,223);
+	H::HLine(31,17,109,2,196);
+///////////////////For pRODUCT////////////////////
+	H::setcolor(5);H::gotoxy(37,18);cout<<"NO";
+	H::setcolor(4);H::gotoxy(53,18);cout<<"PRODUCT NAME";
+	H::setcolor(3);H::gotoxy(85,18);cout<<"QUANTITY";
+	H::setcolor(2);H::gotoxy(108,18);cout<<"PRICE";
+	H::setcolor(1);H::gotoxy(128,18);cout<<"TOTAL";	
+///////Total price and payment////////////////////////////////
+	H::HLine(31,30,109,2,196);
+	H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
+	H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
+	H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : ";
+	H::setcolor(4);H::gotoxy(115,32);cout<<"KHR : ";	
+	H::HLine(31,33,109,2,196);	
+	H::setcolor(8);H::gotoxy(35,34);cout<<"ACLEDA BANK : USD 3873-05255697-17 | KH 3873-05255697-17";
+	H::setcolor(8);H::gotoxy(35,35);cout<<"ABA BANK    : USD 010 116 890      | KH 010 116 915";
+	H::setcolor(3);H::gotoxy(95,34);cout<<"Thank you for buying flowers from our shop.";
+	H::setcolor(3);H::gotoxy(105,35);cout<<"Have a good day ^_^.";
+	                      	
+	H::setcolor(7);H::gotoxy(54,37);cout<<"[TIP] : PRESS       OR              FOR GO TO ";
+	H::setcolor(2);H::gotoxy(68,37);cout<<"[ESC]";
+	H::setcolor(4);H::gotoxy(77,37);cout<<"[BACK SPACE]";
+	H::setcolor(6);H::gotoxy(100,37);cout<<"MAIN MENU...";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 // Derived class Product
@@ -146,7 +519,7 @@ void Product::InputFlowerData()
 	H::setcolor(199);H::gotoxy(117,22); cout<<":  "; price = stod(H::inputUNumber(strPrice, 6));
 	H::setcolor(199);H::gotoxy(117,24); cout<<":  "; qty = stoi(H::inputUNumber(strQty, 4));
 	H::setcolor(199);H::gotoxy(117,26); cout<<":  "; H::inputLetter(description, 20);
-	H::setcolor(199);H::gotoxy(117,28); cout<<":  "; H::inputDate(date, true);
+	H::setcolor(199);H::gotoxy(117,28); cout<<":  "; H::inputDate(date,'-');
 	
 	
     SetFlowerName(name);
@@ -172,11 +545,11 @@ void Product::Header()
 void Product::DisplayFlowerData()
 {
     H::setcolor(6);cout << left << "P-" << setw(10) << GetFlowerId()
-        << setw(20) << GetFlowerName()
-        << setw(20) << GetFlowerTpye()
-        << setw(20) << fixed << setprecision(2) << GetFlowerPrice() << "$"
-        << setw(15) << GetFlowerQty()
-        << setw(28) << GetFlowerDescription()
+        << "P-" << setw(18) << GetFlowerName()
+        << setw(20) << GetFlowerTpye() << "$"
+        << setw(19) << fixed << setprecision(2) << GetFlowerPrice()
+        << setw(14) << GetFlowerQty()
+        << setw(26) << GetFlowerDescription()
         << GetFlowerDate();
         
 }
@@ -215,10 +588,37 @@ void Product::EditFlowerData()
 // Global objects
 Product p;
 fstream proF;
+extern User currentUser;    // logged-in user (from Login system)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+struct BoughtItem {
+    Product product;
+    int qty;
+};
+
+vector<BoughtItem> cart; // stores all purchases
+int invoiceCounter = 1000; // starting invoice number
+void AddToCart(const Product& boughtFlower, int qty) {
+    cart.push_back({boughtFlower, qty});
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ================= HELPER FUNCTION ==================
+string getCurrentDate() {
+    time_t now = time(0);
+    tm* ltm = localtime(&now);
+    char buffer[20];
+    sprintf(buffer, "%02d-%02d-%d", 
+            ltm->tm_mday, ltm->tm_mon + 1, 1900 + ltm->tm_year);
+    return string(buffer);
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Function to input flower and save to file
 void InputFlowerData()
 {
+    H::setcursor(1,8);
     proF.open("Data\\Product.bin", ios::out | ios::app | ios::binary);
     if (!proF)
     {
@@ -255,13 +655,14 @@ void DisplayFlowerData()
 //###############################################################################################
 void UpdateFlowerData()
 {	
+    H::setcursor(1,8);
 	Design::Search();
     int updateId;
     string strID;
     bool isUpdated = false;
 
     H::setcolor(4);H::gotoxy(53,22);cout << "Input Product ID TO Update  ";
-    H::setcolor(4);H::gotoxy(86,22);cout<<":  ";updateId = stoi(H::inputUNumber(strID, 10));
+    H::setcolor(4);H::gotoxy(86,22);cout<<":  P-";updateId = stoi(H::inputUNumber(strID, 10));
 	H::clearBox(48,20,73,5,1);
     proF.open("Data\\Product.bin", ios::in | ios::out | ios::binary);
     if (!proF) {
@@ -289,16 +690,15 @@ void UpdateFlowerData()
 		Design::Footer();
 }
 //###############################################################################################
-
-//###############################################################################################
 void SearchFlowerData()
 {
+    H::setcursor(1,8);
     int id;
     string strID;
     bool found = false;
 
     H::setcolor(3);H::gotoxy(53,22);cout<<"Input Product ID to Search ";
-    H::setcolor(3);H::gotoxy(86,22);cout<<":  ";id = stoi(H::inputUNumber(strID, 5));
+    H::setcolor(3);H::gotoxy(86,22);cout<<":  P-";id = stoi(H::inputUNumber(strID, 5));
 	H::clearBox(48,20,73,5,1);
 	H::clearBox(19,8,4,30,0);
 	H::clearBox(146,7,4,30,0);
@@ -309,6 +709,7 @@ void SearchFlowerData()
     }
     while (proF.read((char*)&p, sizeof(p))) {
         if (p.GetFlowerId() == id) {
+            H::setcursor(false,8);
 	    	p.DesignSearchDisplay();
 			H::setcolor(1);H::gotoxy(22,15);Product::Header();
             H::setcolor(5);H::gotoxy(22,18);p.DisplayFlowerData();
@@ -330,12 +731,13 @@ void SearchFlowerData()
 //###############################################################################################
 void DeleteFlowerData()
 {
+    H::setcursor(1,8);
     int id;
     string strID;
     bool isDeleted = false;
 
     H::setcolor(1);H::gotoxy(53,22);cout << "Input ID of Product to Delete  ";
-    H::setcolor(1);H::gotoxy(86,22);cout<<":  ";id = stoi(H::inputUNumber(strID, 10));
+    H::setcolor(1);H::gotoxy(86,22);cout<<": P-";id = stoi(H::inputUNumber(strID, 10));
 
     proF.open("Data\\Product.bin", ios::in | ios::binary);
     if (proF.fail())
@@ -377,6 +779,7 @@ void DeleteFlowerData()
 }
 //###############################################################################################
 void ImportFlowerQty() {
+    H::setcursor(1,8);
     int id;
     int addQty;
     string strID, strQty;
@@ -385,7 +788,7 @@ void ImportFlowerQty() {
     do {
         found = false;
 
-        cout << "\n\tEnter Flower ID to Import Quantity: ";
+        cout << "\n\tEnter Flower ID to Import Quantity: P-";
         id = stoi(H::inputUNumber(strID, 5));
 
         proF.open("Data\\Product.bin", ios::in | ios::out | ios::binary);
@@ -453,49 +856,268 @@ void SortFlowerData() {
     }
 }
 //###############################################################################################
-void BuyingFlower()
-{
-    string name;
-    int buyQty;
-    string strQty;
-    bool found = false;
+void ShowInvoice() {
+    H::cls();
+    DesignInvoice();
+    double totalUSD = 0;
+    int no =1;
+    int y=20;
 
-    cout << "\n\tEnter Flower Name to Buy: ";
-    H::inputLetter(name, 15);
+    // Get current date
+    time_t now = time(0);
+    tm* ltm = localtime(&now);
 
-    cout << "\tEnter Quantity to Buy: ";
-    buyQty = stoi(H::inputUNumber(strQty, 4));
+     ////////For output invoice date and exchange/////////////////////////
+	H::setcolor(4);H::gotoxy(102,10);cout<<"INVOICE NO  : INV-" << invoiceCounter++;
+	H::setcolor(5);H::gotoxy(102,11);cout<<"DATE        : " << 1900 + ltm->tm_year << "-" << 1 + ltm->tm_mon << "-" << ltm->tm_mday;
+	H::setcolor(6);H::gotoxy(102,12);cout<<"EXCHANGE    : 1$ = 4100KHR";
+////////////////////HLINe/////////////////////////////////////////////
+//	H::HLine(31,14,109,3,223);
+	H::HLine(31,13,109,2,196);
+///////////////////For ID  username phone number////////////////////
+	H::setcolor(1);H::gotoxy(40,14);cout<<"ID            : ";
+	H::setcolor(2);H::gotoxy(40,15);cout<<"USERNAME      : ";
+	H::setcolor(3);H::gotoxy(40,16);cout<<"PHONE NUMBER  : ";
+////////////////////HLINe/////////////////////////////////////////////
+//	H::HLine(31,20,109,3,223);
+	H::HLine(31,17,109,2,196);
+///////////////////For pRODUCT////////////////////
+	H::setcolor(5);H::gotoxy(37,18);cout<<"NO";
+	H::setcolor(4);H::gotoxy(53,18);cout<<"PRODUCT NAME";
+	H::setcolor(3);H::gotoxy(85,18);cout<<"QUANTITY";
+	H::setcolor(2);H::gotoxy(108,18);cout<<"PRICE";
+	H::setcolor(1);H::gotoxy(128,18);cout<<"TOTAL";	
 
-    proF.open("Data\\Product.bin", ios::in | ios::out | ios::binary);
-    if (!proF) {
-        cout << "\tFile not found!" << endl;
-        return;
+    for (const auto& item : cart) {
+        double price = item.product.GetFlowerPrice();
+        double total = price * item.qty;
+        totalUSD += total;
+
+        H::setcolor(3);H::gotoxy(37,y++);cout << left << setw(20) << no
+             << setw(30) << item.product.GetFlowerName()
+             << setw(21) << item.qty
+             << setw(20) << fixed << setprecision(2) << price
+             << setw(8) << fixed << setprecision(2) << total << endl;
+
+             no++;
     }
+	double totalKHR = totalUSD * 4100;
+	///////Total price and payment////////////////////////////////
+	H::HLine(31,30,109,2,196);
+	H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
+	H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
+	H::setcolor(4);H::gotoxy(95,32);cout<<"(USD): $" << totalUSD ;
+	H::setcolor(4);H::gotoxy(115,32);cout<<"(KHR) : " << totalKHR ;
+	H::HLine(31,33,109,2,196);	
+	H::setcolor(8);H::gotoxy(35,34);cout<<"ACLEDA BANK : USD 3873-05255697-17 | KH 3873-05255697-17";
+	H::setcolor(8);H::gotoxy(35,35);cout<<"ABA BANK    : USD 010 116 890      | KH 010 116 915";
+	H::setcolor(3);H::gotoxy(95,34);cout<<"Thank you for buying flowers from our shop.";
+	H::setcolor(3);H::gotoxy(105,35);cout<<"Have a good day ^_^.";
+	                      	
 
-    while (proF.read((char*)&p, sizeof(p))) {
-        if (name == p.GetFlowerName()) {
-            if (p.GetFlowerQty() >= buyQty) {
-                p.SetFlowerQty(p.GetFlowerQty() - buyQty);
-                proF.seekp((int)proF.tellg() - sizeof(p));
-                proF.write((char*)&p, sizeof(p));
-                cout << "\tFlower bought successfully!" << endl;
-            } else {
-                cout << "\tNot enough quantity in stock!" << endl;
-            }
-            found = true;
-            break;
-        }
-    }
 
-    if (!found)
-        cout << "\tFlower not found!" << endl;
-
-    proF.close();
+    cart.clear(); // clear cart after invoice
+    getch();      // wait for key press
 }
 //###############################################################################################
-void ShowInvoiceAll() {}
-//###############################################################################################
-void AlertForLowStock() {}
-//###############################################################################################
+void BuyingFlower()
+{
+    // DesignBuyingFlower();
+    H::setcursor(true,8);
+    char choice = ' ';  // User choice to continue or exit
 
+    do {
+        string input;      
+        int buyQty;
+        string strQty;
+        bool found = false;
+
+        proF.open("Data\\Product.bin", ios::in | ios::out | ios::binary);
+        if (!proF) {
+            cout << "\tFile not found!" << endl;
+            return;
+        }
+        // H::drawBoxSingleLineWithBG(49,16,35,3,6);
+        // H::drawBoxSingleLineWithBG(86,16,35,3,6);
+        // H::drawBoxSingleLineWithBG(49,21,35,3,6);
+        // H::drawBoxSingleLineWithBG(86,21,35,3,6);
+
+        cout << "\n\tEnter Flower Name or ID : P-";
+        H::inputAll(input, 9);
+
+        bool isID = all_of(input.begin(), input.end(), ::isdigit);
+        int searchID = 0;
+        if (isID) searchID = stoi(input);
+
+        while (proF.read((char*)&p, sizeof(p))) {
+            if ((isID && p.GetFlowerId() == searchID) || (!isID && input == p.GetFlowerName())) {
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            cout << "\t>>>>>> Flower not found in the system! <<<<<< " << endl;
+            proF.close();
+            getch();
+            return;
+        }
+
+        cout << "\tEnter Quantity to Buy: ";
+        buyQty = stoi(H::inputUNumber(strQty, 4));
+
+        proF.seekp((int)proF.tellg() - sizeof(p));
+
+        if (p.GetFlowerQty() >= buyQty) {
+            p.SetFlowerQty(p.GetFlowerQty() - buyQty);
+            proF.write((char*)&p, sizeof(p));
+            cout << "\tFlower bought successfully!" << endl;
+
+            // Add purchase to cart
+            cart.push_back({p, buyQty});
+
+            cout << "\tPress [ESC] to Show Invoice or [ENTER] to Buy Again: ";
+            choice = _getch();
+
+            if (choice == 27) { // ESC
+                ShowInvoice(); // invoice will show and exit program
+                test();
+            }
+
+        } else {
+            cout << "\tNot enough quantity in stock!" << endl;
+            choice = 13; // Treat as ENTER to continue
+        }
+
+        proF.close();
+        H::cls();
+
+    } while (choice == 13); // ENTER to buy again
+}
+
+//###############################################################################################
+void test(){
+	H::setcursor(0,0);
+	int x = 0;             
+	char op,key;
+	do{ 
+		H::setcursor(0,0);
+		Design d;	
+		H::setcolor(0);
+		H::cls();
+		start:
+		do{
+			H::setcolor(0);
+			H::cls();
+			d.FlowerAll();
+			d.check01(x);
+			d.FlowerAll();
+			op = getch(); 
+		    if (op == -32 || op == 0){
+		        op = getch(); // actual key code
+		        switch(op) {
+		            case 75:{ // LEFT
+		                x--;
+		                if (x < 0) x = 9;
+		                break;
+		            }
+		            case 77:{ // RIGHT
+		                x++;
+		                if (x > 9) x = 0;
+		                
+		            }   break;
+		        }
+		    }
+		} while (op != 13);  
+		H::setcolor(7);
+		if (x == 0) 
+		{ 	
+			while(true){
+				H::setcolor(0);
+				H::cls();
+				d.DesignInsertFlower();
+				InputFlowerData();
+				key = getch();
+				if (key == 13) {
+					continue;
+				}
+				else if (key == 27){
+					goto start;
+				}
+			}
+		}
+		else if (x == 1) 
+		{ 	
+			H::setcolor(0);
+			H::cls();
+			d.DesignDisplayFlower();
+			DisplayFlowerData();
+		}
+		else if (x == 2) 
+		{ 
+			while(true){
+				H::setcolor(0);
+				H::cls();
+				d.DesignSearchFlower();
+				SearchFlowerData();
+				key = getch();
+				if (key == 13) {
+					continue;
+				}
+				else if (key == 27){
+					goto start;
+				}
+			}
+		}
+		else if (x == 3) 
+		{ 
+			while(true){
+				H::setcolor(0);
+				H::cls();
+				d.DesignUpdateFlower();	
+				UpdateFlowerData();
+				key = getch();
+				if (key == 13) {
+					continue;
+				}
+				else if (key == 27){
+					goto start;
+				}
+			}		
+		}
+		else if (x == 4)
+		{
+			H::setcolor(0);
+			H::cls();
+			d.DesignDeleteFlower();	
+			DeleteFlowerData();
+		}
+		else if (x == 5)
+		{
+			
+		}
+		else if (x == 6)
+		{
+			
+		}
+		else if (x == 7)
+		{
+			
+		}
+		else if (x == 8)
+		{
+			while(true)
+			{
+				H::cls();
+				BuyingFlower();
+				getch();
+				H::cls();
+			}
+		}
+		else if (x == 9) { 
+		    H::cls();
+		    break; 
+		}
+	}while(true);
+}
 #endif
