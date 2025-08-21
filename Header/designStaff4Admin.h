@@ -309,8 +309,6 @@ void StaffAdmin()
 		        break;
 		    }
                 case 27: { // ESC
-                    cout << "\nExiting Program...";
-                    H::delay(1000);
                     break;
                 }
             }
@@ -322,6 +320,7 @@ void StaffAdmin()
 
         // Handle selected function
         if (x == 0 && y == 0) {
+
             designInsert(); 
         }
         else if (x == 0 && y == 1) {
@@ -337,8 +336,6 @@ void StaffAdmin()
             designDelete();
         }
         else if (x == 1 && y == 2) {
-            cout << "\nExiting Program...";
-            H::delay(1000);
             break;
         }
 
@@ -347,6 +344,36 @@ void StaffAdmin()
     } while (true);
 }
 
+void TestAdmin()
+{
+	p:
+	char choice;
+	H::cls();
+	H::setcolor(2);
+
+		cout << "\n\t\t1. Staff Feature\n\t\t2. User Feature\n\t\t3. Back ";
+		
+		choice = getch();
+		switch (choice) {
+			case '1': 
+			{
+				H::cls();
+				H::setcolor(2);
+				StaffAdmin();
+				goto p;
+				break;
+			}
+			case '2': 
+			{
+				H::cls();
+				H::setcolor(2);
+				test();
+				goto p;
+			} break;
+			case '3':
+			break;
+		}
+}
 
 
 #endif

@@ -210,7 +210,7 @@ fstream autoId;
 		H::VLine(141,25,1,0,188);
 		
 		H::setcolor(1);
-		H::gotoxy(35,25); cout << this->staff_id;
+		H::gotoxy(35,25); cout << "S-" << this->staff_id;
 		H::gotoxy(53,25); cout << this->staff_name;
 		H::gotoxy(76,25); cout << this->staff_gender;
 		H::gotoxy(95,25); cout << this->staff_email;
@@ -283,6 +283,7 @@ fstream autoId;
 	
 	
 	void Staff::InsertStaff() {
+		H::setcursor(1,8);
 	    char strPhoneNum[12];
 		mkdir("Data");
 
@@ -294,7 +295,7 @@ fstream autoId;
 		    staff_count = 1000;
 		}
 		
-		sprintf(this->staff_id, "S-%d", staff_count++);
+		sprintf(this->staff_id, "%d", staff_count++);
 //		this->staff_id, staff_count++;
 		
 		ofstream idOut("Data/lastStaffId.bin", ios::binary);
@@ -305,7 +306,7 @@ fstream autoId;
 	    H::setcolor(135); H::gotoxy(50,17); cout << "STAFF ID : "; 
 	    
 	   	H::HLine(92,17,33,135,255);
-	    H::setcolor(135); H::gotoxy(97,17); cout << this->staff_id;
+	    H::setcolor(135); H::gotoxy(97,17); cout << "S-" << this->staff_id;
 				
 	    H::HLine(45,19,33,135,255);
 		H::setcolor(135); H::gotoxy(50,19); cout << "ENTER STAFF NAME ";
@@ -332,6 +333,7 @@ fstream autoId;
 	}
 	
 	void Staff::DisplayStaff(int i) {	
+		H::setcursor(0,8);
 		int y = 19 + i*2; 
    
 //		H::drawBoxSingleLine(30,18,110,9,0);
@@ -346,7 +348,7 @@ fstream autoId;
 		H::VLine(141,27,1,0,188);
 		
 		H::setcolor(1);
-		H::gotoxy(35,y); cout << this->staff_id;
+		H::gotoxy(35,y); cout << "S-" << this->staff_id;
 		H::gotoxy(53,y); cout << this->staff_name;
 		H::gotoxy(76,y); cout << this->staff_gender;
 		H::gotoxy(95,y); cout << this->staff_email;
@@ -378,13 +380,14 @@ fstream autoId;
 	}
 	
 	void Staff::SearchFromFile() {
+		H::setcursor(1,8);
 		int i=0;
 	    char searchId[10];
 	    Myfile.open("Data/staff.bin", ios::in | ios::binary);
 	    	    
 	    
 	    H::setcolor(7); H::gotoxy(58,16); cout << "ENTER ID TO SEARCH: "; 
-		H::setcolor(6); H::gotoxy(88,16);  H::inputNumber(searchId, 10); strcpy(this->staff_id, searchId); 
+		H::setcolor(6); H::gotoxy(88,16); cout << "S-" << H::inputNumber(searchId, 10); strcpy(this->staff_id, searchId); 
 	
 	    bool found = false;
 	
@@ -409,13 +412,14 @@ fstream autoId;
 	}
 	
 		void Staff::UpdateFromFile() {
+			H::setcursor(1,8);
 			int i=0;
 		    char updateId[10];
 		    char strPhoneNum[12];
 		    Myfile.open("Data/staff.bin", ios::in | ios::out | ios::binary);
 
 		    H::setcolor(7); H::gotoxy(58,16); cout << "ENTER ID TO UPDATE: ";
-			H::setcolor(6); H::gotoxy(88,16);  H::inputNumber(updateId, 10);  strcpy(this->staff_id, updateId); 
+			H::setcolor(6); H::gotoxy(88,16); cout << "S-" <<H::inputNumber(updateId, 10);  strcpy(this->staff_id, updateId); 
 	
 		    bool updated = false;	    
 			
@@ -485,6 +489,7 @@ fstream autoId;
 
 		void Staff::DeleteFromFile()
 		{
+			H::setcursor(1,8);
 			int i=0;
 			ofstream backupData;
 			mkdir("Data");
@@ -494,7 +499,7 @@ fstream autoId;
 			char deleteId[10];
 			bool deleted = false;
 			H::setcolor(7); H::gotoxy(58,16); cout << "ENTER ID TO DELETE: "; 
-			H::setcolor(6); H::gotoxy(88,16); H::inputNumber(deleteId, 10);  strcpy(this->staff_id, deleteId); 
+			H::setcolor(6); H::gotoxy(88,16); cout << "S-" <<H::inputNumber(deleteId, 10);  strcpy(this->staff_id, deleteId); 
 					
 			while (Myfile.read((char*)&staffs, sizeof(Staff))) {
 			    if (strcmp(staffs.GetStaffId(), deleteId) == 0) {

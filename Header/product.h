@@ -13,7 +13,7 @@ A
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include "productData.h"
-#include"ProductDesign.h"
+#include "ProductDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void test();
 void DesignImportFlowerData(){
@@ -70,11 +70,12 @@ void DesignImportFlowerData(){
 	H::setcolor(1);H::gotoxy(85,30);cout<<"IMPORT MORE";
 	H::setcolor(7);H::gotoxy(74,31);cout<<"PRESS       FOR ";
 	H::setcolor(3);H::gotoxy(80,31);cout<<"[ESC]";
-	H::setcolor(6);H::gotoxy(86,31);cout<<"BACK";
+	H::setcolor(6);H::gotoxy(86,31);cout<<"FOR Invoice";
 //////////////////////////////////////////////////////////////////////////////////////////////////////////	
     Design::FlowerChoice(); 
 }
 void DesignBuyingFlower(){
+
 	//HLINE UP	
 	H::HLine(1,0,168,162,220);
 	H::HLine(3,1,5,187,220); 
@@ -262,15 +263,26 @@ void DesignBuyingFlower(){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 void DesignInvoice(){
-	//HLINe vline this for box
-	H::HLine(1,-1,168,88,255);
-	H::HLine(1,39,168,88,255);
-	
-	H::VLine(1,-1,39,88,255);
-	H::VLine(2,-1,39,88,255);
-	H::VLine(170,-1,39,88,255);
-	H::VLine(169,-1,39,88,255);
-	
+	//animation top left
+	H::HLine(0,0,85,88,255);
+
+	//animation top left
+	H::HLine(85,0,85,88,255);
+
+	//animation bottom left
+	H::HLine(0,39,85,88,255);
+
+	//animation bottom right
+	H::HLine(85,39,85,88,255);
+
+	//border left
+	H::VLine(1,0,39,88,255);
+	H::VLine(2,0,39,88,255);
+
+	//border right
+	H::VLine(169,0,39,88,255);
+	H::VLine(170,0,39,88,255);
+
 	//HLine for header
 	H::HLine(35,2,100,1,223);
 	//left
@@ -576,7 +588,7 @@ void Product::EditFlowerData()
 	H::setcolor(199);H::gotoxy(97,20); cout<<": "; price = stod(H::inputUNumber(strPrice, 6));
 	H::setcolor(199);H::gotoxy(97,22); cout<<": "; qty = stoi(H::inputUNumber(strQty, 4));
 	H::setcolor(199);H::gotoxy(97,24); cout<<": "; H::inputLetter(description, 20);
-	H::setcolor(199);H::gotoxy(97,26); cout<<": "; H::inputDate(date, true);
+	H::setcolor(199);H::gotoxy(97,26); cout<<": "; H::inputDate(date,'-');
 	
     SetFlowerType(type);
     SetFlowerPrice(price);
@@ -588,7 +600,7 @@ void Product::EditFlowerData()
 // Global objects
 Product p;
 fstream proF;
-extern User currentUser;    // logged-in user (from Login system)
+// extern User currentUser;    // logged-in user (from Login system)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -692,6 +704,8 @@ void UpdateFlowerData()
 //###############################################################################################
 void SearchFlowerData()
 {
+	Design d;
+	
     H::setcursor(1,8);
     int id;
     string strID;
@@ -719,7 +733,11 @@ void SearchFlowerData()
     }
 
     if (!found)
-        cout << "\tProduct ID not found!" << endl;
+	{
+		d.DesignSearchFlower();
+        H::setcolor(3);H::gotoxy(53,22);cout << "\tProduct ID not found!";
+		H::setcolor(3);H::gotoxy(86,22);cout << "\tProduct ID not found!";
+	}	
     else
     {
 		H::drawBoxDoubleLine(76,28,59,1,2);
@@ -737,7 +755,7 @@ void DeleteFlowerData()
     bool isDeleted = false;
 
     H::setcolor(1);H::gotoxy(53,22);cout << "Input ID of Product to Delete  ";
-    H::setcolor(1);H::gotoxy(86,22);cout<<": P-";id = stoi(H::inputUNumber(strID, 10));
+    H::setcolor(1);H::gotoxy(86,22);cout<<": P-";id = stoi(H::inputUNumber(strID, 5));
 
     proF.open("Data\\Product.bin", ios::in | ios::binary);
     if (proF.fail())
@@ -754,12 +772,21 @@ void DeleteFlowerData()
         return;
     }
 
+    int deletedID = -1;      // store deleted ID
+    char deletedName[50];    // store deleted flower name (if you want to show name too)
+
     while (proF.read((char*)&p, sizeof(p)))
     {
         if (p.GetFlowerId() == id)
+        {
             isDeleted = true;
+            deletedID = p.GetFlowerId();
+            strcpy(deletedName, p.GetFlowerName()); // keep name (if your class has char[] for name)
+        }
         else
+        {
             backup.write((char*)&p, sizeof(p));
+        }
     }
 
     proF.close();
@@ -769,14 +796,18 @@ void DeleteFlowerData()
     {
         remove("Data\\Product.bin");
         rename("Data\\Temp.bin", "Data\\Product.bin");
-        cout << "\t Product Is Deleted Successfully!" << endl;
+        
+        H::setcolor(6);H::gotoxy(52,27);cout << "\t Product with ID: P-" << deletedID 
+             << " (" << deletedName << ") is deleted successfully!" << endl;
+        	getch();
     }
     else
     {
         remove("Data\\Temp.bin");
-        cout << "\t Product ID not found!" << endl;
+        H::setcolor(6);H::gotoxy(69,27);cout << "\t Product ID not found!" << endl;
     }
 }
+
 //###############################################################################################
 void ImportFlowerQty() {
     H::setcursor(1,8);
@@ -788,39 +819,58 @@ void ImportFlowerQty() {
     do {
         found = false;
 
-        cout << "\n\tEnter Flower ID to Import Quantity: P-";
-        id = stoi(H::inputUNumber(strID, 5));
+        // Ask user for ID (just label)
+        cout << "Enter Flower ID to Search: P-";
 
+        // Get input (modify inputUNumber so it DOES NOT echo to screen)
+        strID = H::inputUNumber(strID, 5);   // this should only return the string
+        id = stoi(strID);
+
+        // Now print the ID nicely
+        cout << "\n";
+
+        // --- Open file ---
         proF.open("Data\\Product.bin", ios::in | ios::out | ios::binary);
         if (!proF) {
-            cout << "\tFile not found!" << endl;
+            cout << " File not found!" << endl;
             return;
         }
 
+        // --- Search for flower ---
         while (proF.read((char*)&p, sizeof(p))) {
             if (id == p.GetFlowerId()) {
                 found = true;
-                cout << "\tEnter Quantity to Add: ";
-                addQty = stoi(H::inputUNumber(strQty, 4));
+                cout << "\n\tEnter Quantity to Add: ";
 
+                strQty = H::inputUNumber(strQty, 4);  // again, only return string
+                addQty = stoi(strQty);
+
+                // Update quantity
                 int currentQty = p.GetFlowerQty();
                 p.SetFlowerQty(currentQty + addQty);
 
+                // Move back and overwrite record
                 proF.seekp((int)proF.tellg() - sizeof(p));
                 proF.write((char*)&p, sizeof(p));
 
-                cout << "\t? Quantity Imported Successfully!" << endl;
+                cout << " Quantity Imported Successfully!" << endl;
                 break;
             }
         }
 
         proF.close();
 
-        if (!found)
-            cout << "\t? ID not found! Please try again.\n";
+        if (!found) {
+            cout << "\n ID not found! Press ENTER to try again...";
+            while (_getch() != 13) {
+                // wait for ENTER
+            }
+            H::cls(); // clear screen for new search
+        }
 
     } while (!found);
 }
+
 //###############################################################################################
 void SortFlowerData() {
     Product products[100];
@@ -856,143 +906,168 @@ void SortFlowerData() {
     }
 }
 //###############################################################################################
+//===================== ShowInvoice =====================
 void ShowInvoice() {
     H::cls();
     DesignInvoice();
     double totalUSD = 0;
-    int no =1;
-    int y=20;
+    int no = 1;
+    int y = 20;
 
     // Get current date
     time_t now = time(0);
     tm* ltm = localtime(&now);
 
-     ////////For output invoice date and exchange/////////////////////////
-	H::setcolor(4);H::gotoxy(102,10);cout<<"INVOICE NO  : INV-" << invoiceCounter++;
-	H::setcolor(5);H::gotoxy(102,11);cout<<"DATE        : " << 1900 + ltm->tm_year << "-" << 1 + ltm->tm_mon << "-" << ltm->tm_mday;
-	H::setcolor(6);H::gotoxy(102,12);cout<<"EXCHANGE    : 1$ = 4100KHR";
-////////////////////HLINe/////////////////////////////////////////////
-//	H::HLine(31,14,109,3,223);
-	H::HLine(31,13,109,2,196);
-///////////////////For ID  username phone number////////////////////
-	H::setcolor(1);H::gotoxy(40,14);cout<<"ID            : ";
-	H::setcolor(2);H::gotoxy(40,15);cout<<"USERNAME      : ";
-	H::setcolor(3);H::gotoxy(40,16);cout<<"PHONE NUMBER  : ";
-////////////////////HLINe/////////////////////////////////////////////
-//	H::HLine(31,20,109,3,223);
-	H::HLine(31,17,109,2,196);
-///////////////////For pRODUCT////////////////////
-	H::setcolor(5);H::gotoxy(37,18);cout<<"NO";
-	H::setcolor(4);H::gotoxy(53,18);cout<<"PRODUCT NAME";
-	H::setcolor(3);H::gotoxy(85,18);cout<<"QUANTITY";
-	H::setcolor(2);H::gotoxy(108,18);cout<<"PRICE";
-	H::setcolor(1);H::gotoxy(128,18);cout<<"TOTAL";	
+    ////////For output invoice date and exchange/////////////////////////
+    H::setcolor(4); H::gotoxy(102,10); cout << "INVOICE NO  : INV-" << invoiceCounter++;
+    H::setcolor(5); H::gotoxy(102,11); cout << "DATE        : " 
+        << 1900 + ltm->tm_year << "-" << 1 + ltm->tm_mon << "-" << ltm->tm_mday;
+    H::setcolor(6); H::gotoxy(102,12); cout << "EXCHANGE    : 1$ = 4100KHR";
+
+    // Header line
+    H::HLine(31,13,109,2,196);
+
+    // Table header
+    H::setcolor(5); H::gotoxy(37,18); cout << "NO";
+    H::setcolor(4); H::gotoxy(53,18); cout << "PRODUCT NAME";
+    H::setcolor(3); H::gotoxy(85,18); cout << "QUANTITY";
+    H::setcolor(2); H::gotoxy(108,18); cout << "PRICE";
+    H::setcolor(1); H::gotoxy(128,18); cout << "TOTAL";	
 
     for (const auto& item : cart) {
         double price = item.product.GetFlowerPrice();
         double total = price * item.qty;
         totalUSD += total;
 
-        H::setcolor(3);H::gotoxy(37,y++);cout << left << setw(20) << no
+        H::setcolor(3); H::gotoxy(37,y++); cout << left << setw(20) << no
              << setw(30) << item.product.GetFlowerName()
              << setw(21) << item.qty
              << setw(20) << fixed << setprecision(2) << price
              << setw(8) << fixed << setprecision(2) << total << endl;
 
-             no++;
+        no++;
     }
-	double totalKHR = totalUSD * 4100;
-	///////Total price and payment////////////////////////////////
-	H::HLine(31,30,109,2,196);
-	H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
-	H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
-	H::setcolor(4);H::gotoxy(95,32);cout<<"(USD): $" << totalUSD ;
-	H::setcolor(4);H::gotoxy(115,32);cout<<"(KHR) : " << totalKHR ;
-	H::HLine(31,33,109,2,196);	
-	H::setcolor(8);H::gotoxy(35,34);cout<<"ACLEDA BANK : USD 3873-05255697-17 | KH 3873-05255697-17";
-	H::setcolor(8);H::gotoxy(35,35);cout<<"ABA BANK    : USD 010 116 890      | KH 010 116 915";
-	H::setcolor(3);H::gotoxy(95,34);cout<<"Thank you for buying flowers from our shop.";
-	H::setcolor(3);H::gotoxy(105,35);cout<<"Have a good day ^_^.";
-	                      	
 
+    double totalKHR = totalUSD * 4100;
 
-    cart.clear(); // clear cart after invoice
+    // Total price section
+    H::HLine(31,30,109,2,196);
+    H::setcolor(3); H::gotoxy(35,31); cout << "DISCOUNT";
+    H::setcolor(1); H::gotoxy(35,32); cout << "TOTAL PRICE : ";
+    H::setcolor(4); H::gotoxy(95,32); cout << "(USD): $" << totalUSD;
+    H::setcolor(4); H::gotoxy(115,32); cout << "(KHR) : " << totalKHR;
+    H::HLine(31,33,109,2,196);	
+    H::setcolor(8); H::gotoxy(35,34); cout << "ACLEDA BANK : USD 3873-05255697-17 | KH 3873-05255697-17";
+    H::setcolor(8); H::gotoxy(35,35); cout << "ABA BANK    : USD 010 116 890      | KH 010 116 915";
+    H::setcolor(3); H::gotoxy(95,34); cout << "Thank you for buying flowers from our shop.";
+    H::setcolor(3); H::gotoxy(105,35); cout << "Have a good day ^_^.";
+
     getch();      // wait for key press
+    cart.clear(); // clear cart after invoice
 }
-//###############################################################################################
+
+//===================== BuyingFlower =====================
 void BuyingFlower()
 {
-    // DesignBuyingFlower();
+	DesignBuyingFlower();
+	//  H::drawBoxSingleLineWithBG(49,16,35,3,6);
+    // H::drawBoxSingleLineWithBG(86,16,35,3,6);
+    // H::drawBoxSingleLineWithBG(49,21,35,3,6);
+    // H::drawBoxSingleLineWithBG(86,21,35,3,6);
     H::setcursor(true,8);
-    char choice = ' ';  // User choice to continue or exit
+    char choice = ' ';  // outer choice after invoice
 
     do {
-        string input;      
-        int buyQty;
-        string strQty;
-        bool found = false;
+        bool exitBuying = false; // exit flag for buying
+        do {
+            string input;      
+            int buyQty;
+            string strQty;
+            bool found = false;
 
-        proF.open("Data\\Product.bin", ios::in | ios::out | ios::binary);
-        if (!proF) {
-            cout << "\tFile not found!" << endl;
-            return;
-        }
-        // H::drawBoxSingleLineWithBG(49,16,35,3,6);
-        // H::drawBoxSingleLineWithBG(86,16,35,3,6);
-        // H::drawBoxSingleLineWithBG(49,21,35,3,6);
-        // H::drawBoxSingleLineWithBG(86,21,35,3,6);
-
-        cout << "\n\tEnter Flower Name or ID : P-";
-        H::inputAll(input, 9);
-
-        bool isID = all_of(input.begin(), input.end(), ::isdigit);
-        int searchID = 0;
-        if (isID) searchID = stoi(input);
-
-        while (proF.read((char*)&p, sizeof(p))) {
-            if ((isID && p.GetFlowerId() == searchID) || (!isID && input == p.GetFlowerName())) {
-                found = true;
-                break;
+            // Use local fstream to avoid conflicts
+            fstream proF("Data\\Product.bin", ios::in | ios::out | ios::binary);
+            if (!proF) {
+                cout << "\tFile not found!" << endl;
+                return;
             }
-        }
+			DesignBuyingFlower();
+            H::gotoxy(50,18);cout << "Enter Flower Name or ID : ";
+            H::gotoxy(88,18);cout << "P-";H::inputAll(input, 9);
 
-        if (!found) {
-            cout << "\t>>>>>> Flower not found in the system! <<<<<< " << endl;
+            bool isID = all_of(input.begin(), input.end(), ::isdigit);
+            int searchID = 0;
+            if (isID) searchID = stoi(input);
+
+            while (proF.read((char*)&p, sizeof(p))) {
+                if ((isID && p.GetFlowerId() == searchID) || (!isID && input == p.GetFlowerName())) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+				H::drawBoxSingleLineWithBG(49,21,72,3,6);
+                H::gotoxy(52,23);cout << "\t>>>>>> Flower not found in the system! <<<<<< " << endl;
+				getch();
+				H::cls();
+				DesignBuyingFlower();
+                proF.close();
+                break; // back to outer menu
+            }
+
+            H::gotoxy(50,23);cout << "\tEnter Quantity to Buy: ";
+            H::gotoxy(90,23);buyQty = stoi(H::inputUNumber(strQty, 4));
+
+            proF.seekp((int)proF.tellg() - sizeof(p));
+
+            if (p.GetFlowerQty() >= buyQty) {
+                p.SetFlowerQty(p.GetFlowerQty() - buyQty);
+                proF.write((char*)&p, sizeof(p));
+				DesignBuyingFlower();
+				H::drawBoxSingleLineWithBG(49,21,72,3,6);
+                H::gotoxy(52,23);cout << "Flower bought successfully!" << endl;
+				
+                // Add purchase to cart
+                cart.push_back({p, buyQty});
+
+                char subChoice = getch();
+				
+				DesignBuyingFlower();
+                if (subChoice == 27) { // ESC → Show invoice
+                    proF.close();
+                    ShowInvoice();
+
+                    // After showing invoice, decide:
+                    choice = getch();
+                    if (choice == 27 || choice == 8) {
+                        exitBuying = true; // exit to main menu
+						H::cls();
+                    } else if (choice == 13) {
+                        H::cls();         // continue buying
+                        exitBuying = false;
+                    }
+                    break; // break inner buying loop
+                } 
+                else if (subChoice == 13) { // ENTER → buy again
+                    H::cls();
+                    continue; // inner loop continues
+                }
+
+            } else {
+                cout << "\tNot enough quantity in stock!" << endl;
+				H::delay(2000);
+                H::cls();
+                continue; // try again
+            }
+
             proF.close();
-            getch();
-            return;
-        }
 
-        cout << "\tEnter Quantity to Buy: ";
-        buyQty = stoi(H::inputUNumber(strQty, 4));
+        } while (!exitBuying);
 
-        proF.seekp((int)proF.tellg() - sizeof(p));
+        if (exitBuying) break; // go to main menu
 
-        if (p.GetFlowerQty() >= buyQty) {
-            p.SetFlowerQty(p.GetFlowerQty() - buyQty);
-            proF.write((char*)&p, sizeof(p));
-            cout << "\tFlower bought successfully!" << endl;
-
-            // Add purchase to cart
-            cart.push_back({p, buyQty});
-
-            cout << "\tPress [ESC] to Show Invoice or [ENTER] to Buy Again: ";
-            choice = _getch();
-
-            if (choice == 27) { // ESC
-                ShowInvoice(); // invoice will show and exit program
-                test();
-            }
-
-        } else {
-            cout << "\tNot enough quantity in stock!" << endl;
-            choice = 13; // Treat as ENTER to continue
-        }
-
-        proF.close();
-        H::cls();
-
-    } while (choice == 13); // ENTER to buy again
+    } while (true); // keep buying until user chooses to exit
 }
 
 //###############################################################################################
@@ -1037,6 +1112,11 @@ void test(){
 				H::cls();
 				d.DesignInsertFlower();
 				InputFlowerData();
+				H::setcolor(6);H::gotoxy(56,31);cout<< "Press [ESC] For Back and Press [ENTER] For Input More..";
+				H::setcolor(2);H::gotoxy(62,31);cout<< "[ESC]";
+				H::setcolor(2);H::gotoxy(87,31);cout<< "[ENTER]";
+				d.Flowercut();
+				
 				key = getch();
 				if (key == 13) {
 					continue;
@@ -1051,6 +1131,7 @@ void test(){
 			H::setcolor(0);
 			H::cls();
 			d.DesignDisplayFlower();
+			H::setcolor(4);H::gotoxy(76,31);cout<< "Press [ESC] For Back";
 			DisplayFlowerData();
 		}
 		else if (x == 2) 
@@ -1060,6 +1141,8 @@ void test(){
 				H::cls();
 				d.DesignSearchFlower();
 				SearchFlowerData();
+				d.Flowercut();
+
 				key = getch();
 				if (key == 13) {
 					continue;
@@ -1087,10 +1170,22 @@ void test(){
 		}
 		else if (x == 4)
 		{
-			H::setcolor(0);
-			H::cls();
-			d.DesignDeleteFlower();	
-			DeleteFlowerData();
+			while(true){
+				H::setcolor(0);
+				H::cls();
+				d.DesignDeleteFlower();	
+				DeleteFlowerData();
+				H::setcolor(7);H::gotoxy(56,29);cout<< "Press [ESC] For Back and Press [ENTER] For Input More..";
+				H::setcolor(2);H::gotoxy(62,29);cout<< "[ESC]";
+				H::setcolor(2);H::gotoxy(87,29);cout<< "[ENTER]";
+				key = getch();
+				if (key == 13) {
+					continue;
+				}
+				else if (key == 27){
+					goto start;
+				}
+			}	
 		}
 		else if (x == 5)
 		{
@@ -1098,20 +1193,47 @@ void test(){
 		}
 		else if (x == 6)
 		{
-			
+			H::cls();
+			ShowInvoice();	
 		}
 		else if (x == 7)
 		{
+			while(true){
+				H::setcolor(0);
+				H::cls();
+				// DesignImportFlowerData();
+				ImportFlowerQty();
+				H::setcolor(7);H::gotoxy(56,29);cout<< "Press [ESC] For Back and Press [ENTER] For Input More..";
+				H::setcolor(2);H::gotoxy(62,29);cout<< "[ESC]";
+				H::setcolor(2);H::gotoxy(87,29);cout<< "[ENTER]";
+				key = getch();
+				if (key == 13) {
+					H::cls();
+					continue;
+				}
+				else if (key == 27){
+					goto start;
+				}
+			}	
 			
 		}
 		else if (x == 8)
 		{
-			while(true)
-			{
+			while(true){
+				H::cls();
+				d.DesignDisplayFlower();
+				H::setcolor(7);H::gotoxy(61,31);cout<< "Press [ENTER] For Buying Product";
+				H::setcolor(2);H::gotoxy(67,31);cout<< "[ENTER]";
+				DisplayFlowerData();
 				H::cls();
 				BuyingFlower();
-				getch();
-				H::cls();
+				key = getch();
+				if (key == 13) {
+					continue;
+				}
+				else if (key == 27){
+					goto start;
+				}
 			}
 		}
 		else if (x == 9) { 
@@ -1120,4 +1242,6 @@ void test(){
 		}
 	}while(true);
 }
+
+
 #endif

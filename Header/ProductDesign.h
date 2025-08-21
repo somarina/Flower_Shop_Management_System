@@ -893,6 +893,7 @@ void Design::DesignInsertFlower(){
 	H::HLine(110,26,43,196,220);
 	H::HLine(110,28,43,196,220);
 	
+	FlowerChoice();
 }
 void Design::DesignDisplayFlower(){
 	//DisPlay flower data
