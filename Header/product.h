@@ -16,6 +16,9 @@ A
 #include "ProductDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void test();
+void LoginAsAdmin();
+void NewFlowerEdit();
+/////////////////////////////////////////////////////////////////
 void DesignImportFlowerData(){
 	Design::BoxOfHeader();
 	H::setcolor(1);H::gotoxy(35,6);cout<<R"(   ______   ____ _      _________     ______  ______  ____  ___  ______   ______________  _______ __)";
@@ -405,7 +408,7 @@ void DesignInvoice(){
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 // Derived class Product
-class Product : public Data {
+class Product:public Data {
 public:
     void InputFlowerData();
     void DisplayFlowerData();
@@ -604,17 +607,38 @@ fstream proF;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// struct BoughtItem {
+//     Product product;
+//     int qty;
+// };
+
+// vector<BoughtItem> cart; // stores all purchases
+// int invoiceCounter = 1000; // starting invoice number
+// void AddToCart(const Product& boughtFlower, int qty) {
+//     cart.push_back({boughtFlower, qty});
+// }
+
+//================ Bought Item =================
 struct BoughtItem {
     Product product;
     int qty;
+	/////////////////////////////////////////////////////////////
+    double getTotal() const {
+        return product.GetFlowerPrice() * qty;
+    }
 };
 
-vector<BoughtItem> cart; // stores all purchases
-int invoiceCounter = 1000; // starting invoice number
-void AddToCart(const Product& boughtFlower, int qty) {
-    cart.push_back({boughtFlower, qty});
-}
+//================ Cart & Invoice =================
+vector<BoughtItem> cart; 
+int invoiceCounter = 1000; // Starting invoice number
 
+//================ Add to Cart =================
+void AddToCart(const Product& boughtFlower, int qty) {
+    BoughtItem item;
+    item.product = boughtFlower; // copy product object
+    item.qty = qty;
+    cart.push_back(item);
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ================= HELPER FUNCTION ==================
@@ -1241,6 +1265,244 @@ void test(){
 		    break; 
 		}
 	}while(true);
+}
+
+void NewFlowerEdit()
+{
+    
+//////////////////////////////////////////////////////////////////////////////
+
+    H::gotoxy(24,31);H::setcolor(2);cout << R"(                    _)";
+    H::gotoxy(24,32);H::setcolor(2);cout << R"(                  _(_)_                          wWWWw   _ )";
+    H::gotoxy(24,33);H::setcolor(2);cout << R"(      @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_ )";
+    H::gotoxy(24,34);H::setcolor(2);cout << R"(     @@()@@ wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_) )";
+    H::gotoxy(24,35);H::setcolor(2);cout << R"(      @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\ )";
+    H::gotoxy(24,36);H::setcolor(2);cout << R"(       /      Y       \|    \|/    /(_)    \|      |/      | )";
+    H::gotoxy(24,37);H::setcolor(2);cout << R"(    \ |     \ |/       | / \ | /  \|/       |/    \|      \|/ )";
+    H::gotoxy(24,38);H::setcolor(2);cout << R"(    \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|// )";
+    H::gotoxy(24,39);H::setcolor(2);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ )";
+
+    H::gotoxy(85,32);H::setcolor(2);cout << R"(               _(_)_                          wWWWw   _)";
+    H::gotoxy(85,33);H::setcolor(2);cout << R"(   @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_)";
+    H::gotoxy(85,34);H::setcolor(2);cout << R"(  @@()@@ wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_))";
+    H::gotoxy(85,35);H::setcolor(2);cout << R"(   @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\)";
+    H::gotoxy(85,36);H::setcolor(2);cout << R"(    /      Y       \|    \|/    /(_)    \|      |/      |)";
+    H::gotoxy(85,37);H::setcolor(2);cout << R"( \ |     \ |/       | / \ | /  \|/       |/    \|      \|/)";
+    H::gotoxy(85,38);H::setcolor(2);cout << R"( \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|//)";
+    H::gotoxy(85,39);H::setcolor(2);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(24,33);H::setcolor(4);cout << R"(      @@@@  )";
+    H::gotoxy(24,34);H::setcolor(4);cout << R"(     @@()@@ )";
+    H::gotoxy(24,35);H::setcolor(4);cout << R"(      @@@@  )";
+
+    H::gotoxy(85,33);H::setcolor(4);cout << R"(   @@@@  )";
+    H::gotoxy(85,34);H::setcolor(4);cout << R"(  @@()@@ )";
+    H::gotoxy(85,35);H::setcolor(4);cout << R"(   @@@@  )";
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(36,34);H::setcolor(5);cout << R"(wWWWw )";
+    H::gotoxy(36,35);H::setcolor(5);cout << R"((___) )";
+
+    H::gotoxy(94,34);H::setcolor(5);cout << R"(wWWWw)";
+    H::gotoxy(94,35);H::setcolor(5);cout << R"((___))"; 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    H::gotoxy(99,31);H::setcolor(1);cout << R"(   _  )";
+    H::gotoxy(99,32);H::setcolor(1);cout << R"( _(_)_)";
+    H::gotoxy(99,33);H::setcolor(1);cout << R"((_)@(_))";
+    H::gotoxy(99,34);H::setcolor(1);cout << R"(  (_)\ )";
+    H::gotoxy(104,34);H::setcolor(2);cout<< R"(\)";
+
+    H::gotoxy(41,31);H::setcolor(1);cout << R"(   _)";
+    H::gotoxy(41,32);H::setcolor(1);cout << R"( _(_)_)";
+    H::gotoxy(41,33);H::setcolor(1);cout << R"((_)@(_))";
+    H::gotoxy(41,34);H::setcolor(1);cout << R"(  (_)\)"; 
+    H::gotoxy(46,34);H::setcolor(2);cout << R"(\)";
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(51,33);H::setcolor(1);cout << R"(vVVVv)";
+    H::gotoxy(51,34);H::setcolor(1);cout << R"((___))";
+
+    H::gotoxy(109,33);H::setcolor(1);cout << R"(vVVVv)";
+    H::gotoxy(109,34);H::setcolor(1);cout << R"((___))";
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(57,33);H::setcolor(6);cout << R"(    _)";
+    H::gotoxy(57,34);H::setcolor(6);cout << R"(  _(_)_)";
+    H::gotoxy(57,35);H::setcolor(6);cout << R"( (_)@(_))";
+    H::gotoxy(57,36);H::setcolor(6);cout << R"(  /(_))";
+    H::gotoxy(58,36);H::setcolor(2);cout << R"( /)";
+
+    H::gotoxy(116,33);H::setcolor(6);cout << R"(   _)";
+    H::gotoxy(116,34);H::setcolor(6);cout << R"( _(_)_)";
+    H::gotoxy(116,35);H::setcolor(6);cout << R"((_)@(_))";
+    H::gotoxy(116,36);H::setcolor(6);cout << R"( /(_))";
+    H::gotoxy(117,36);H::setcolor(2);cout << R"(/)";
+    
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    H::gotoxy(66,33);H::setcolor(5);cout << R"( @@@@)";
+    H::gotoxy(66,34);H::setcolor(5);cout << R"(@@()@@)";
+    H::gotoxy(66,35);H::setcolor(5);cout << R"( @@@@)";
+
+    H::gotoxy(124,33);H::setcolor(5);cout << R"( @@@@)";
+    H::gotoxy(124,34);H::setcolor(5);cout << R"(@@()@@)";
+    H::gotoxy(124,35);H::setcolor(5);cout << R"( @@@@)";
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(73,32);H::setcolor(5);cout << R"(wWWWw)";
+    H::gotoxy(73,33);H::setcolor(5);cout << R"((___))";
+
+    H::gotoxy(131,32);H::setcolor(5);cout << R"(wWWWw)";
+    H::gotoxy(131,33);H::setcolor(5);cout << R"((___))";
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(78,32);H::setcolor(4);cout << R"(   _ )";
+    H::gotoxy(78,33);H::setcolor(4);cout << R"( _(_)_ )";
+    H::gotoxy(78,34);H::setcolor(4);cout << R"((_)@(_) )";
+    H::gotoxy(78,35);H::setcolor(4);cout << R"(  (_)\ )";
+    H::gotoxy(83,35);H::setcolor(2);cout << R"(\)";
+
+    H::gotoxy(136,32);H::setcolor(4);cout << R"(   _)";
+    H::gotoxy(136,33);H::setcolor(4);cout << R"( _(_)_)";
+    H::gotoxy(136,34);H::setcolor(4);cout << R"((_)@(_))";
+    H::gotoxy(136,35);H::setcolor(4);cout << R"(  (_)\)";
+    H::gotoxy(141,35);H::setcolor(2);cout << R"(\)";
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//              Treee
+	H::setcolor(1);H::gotoxy(6,28);cout<<R"(        a@@@@a    )";         
+	H::setcolor(2);H::gotoxy(6,29);cout<<R"(    a@@@@@@@@@@@@a )";        
+	H::setcolor(3);H::gotoxy(6,30);cout<<R"(  a@@@@@@by@@@@@@@@a )";      
+	H::setcolor(4);H::gotoxy(6,31);cout<<R"(a@@@@@S@C@E@S@W@@@@@@a )";    
+	H::setcolor(5);H::gotoxy(6,32);cout<<R"(@@@@@@@@@@@@@@@@@@@@@@ )";    
+	H::setcolor(6);H::gotoxy(6,33);cout<<R"( `@@@@@@`\\//'@@@@@@' )";     
+	H::setcolor(8);H::gotoxy(6,34);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(6,35);cout<<R"(          ||   )";      
+	H::setcolor(8);H::gotoxy(6,36);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(6,37);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(6,38);cout<<R"(         /MM\)";
+	H::setcolor(2);H::gotoxy(6,39);cout<<R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
+	
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+    H::setcolor(1);H::gotoxy(143,28);cout<<R"(        a@@@@a    )";         
+	H::setcolor(2);H::gotoxy(143,29);cout<<R"(    a@@@@@@@@@@@@a )";        
+	H::setcolor(3);H::gotoxy(143,30);cout<<R"(  a@@@@@@by@@@@@@@@a )";      
+	H::setcolor(4);H::gotoxy(143,31);cout<<R"(a@@@@@S@C@E@S@W@@@@@@a )";    
+	H::setcolor(5);H::gotoxy(143,32);cout<<R"(@@@@@@@@@@@@@@@@@@@@@@ )";    
+	H::setcolor(6);H::gotoxy(143,33);cout<<R"( `@@@@@@`\\//'@@@@@@' )";     
+	H::setcolor(8);H::gotoxy(143,34);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(143,35);cout<<R"(          ||   )";      
+	H::setcolor(8);H::gotoxy(143,36);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(143,37);cout<<R"(          ||)";
+	H::setcolor(8);H::gotoxy(143,38);cout<<R"(         /MM\)";
+	H::setcolor(2);H::gotoxy(143,39);cout<<R"(^^^^^^^^^^^^^^^^^^^^^^)";
+
+
+}
+
+void LoginAsAdmin()
+{
+	NewFlowerEdit();
+    //animation top left
+	H::HLine(0,0,85,51,219);
+	
+	//animation top left
+	H::HLine(85,0,85,51,219);
+	
+    //border left
+	H::VLine(2,0,39,51,219);
+	H::VLine(3,0,39,51,219);
+
+    //border right
+	H::VLine(168,0,39,51,219);
+	H::VLine(169,0,39,51,219);
+
+    H::drawBoxSingleLineWithBG(47,3,81,3,136); //grey
+    H::drawBoxSingleLineWithBG(45,4,81,3,145); //blue
+
+//////////////////////////////////////
+    H::VLine(52,0,2,68,219);
+    H::VLine(54,0,2,68,219);
+
+    H::VLine(122,0,2,68,219);
+    H::VLine(124,0,2,68,219);
+
+
+//////////////////////////////////////
+                                                
+
+    H::setcolor(151); H::gotoxy(50,4); cout << R"( __     __    ___  __  __ _     __   ____     __   ____  _  _  __  __ _ )";
+    H::setcolor(151); H::gotoxy(50,5); cout << R"((  )   /  \  / __)(  )(  ( \   / _\ / ___)   / _\ (    \( \/ )(  )(  ( \)";
+    H::setcolor(151); H::gotoxy(50,6); cout << R"(/ (_/\(  O )( (_ \ )( /    /  /    \\___ \  /    \ ) D (/ \/ \ )( /    /)";
+    H::setcolor(151); H::gotoxy(50,7); cout << R"(\____/ \__/  \___/(__)\_)__)  \_/\_/(____/  \_/\_/(____/\_)(_/(__)\_)__))";
+
+
+    //arrow left (animation)
+    H::HLine(5,14,20,4,220);
+    H::HLine(9,15,20,1,220);
+    H::HLine(13,16,20,6,220);
+    H::HLine(18,17,20,3,220);
+
+    H::HLine(22,18,20,5,220);
+
+    H::HLine(18,19,20,3,220);
+    H::HLine(13,20,20,6,220);
+    H::HLine(9,21,20,1,220);
+    H::HLine(5,22,20,4,220);
+
+
+    //arrow right (animation)
+    H::HLine(145,14,20,4,220);
+    H::HLine(141,15,20,1,220);
+    H::HLine(137,16,20,6,220);
+    H::HLine(133,17,20,3,220);
+
+    H::HLine(129,18,20,5,220);
+
+    H::HLine(133,19,20,3,220);
+    H::HLine(137,20,20,6,220);
+    H::HLine(141,21,20,1,220);
+    H::HLine(145,22,20,4,220);
+
+    //upper box username
+    H::VLine(61,10,3,6,219);
+    H::VLine(111,10,3,6,219);
+    H::HLine(61,11,49,6,223);
+
+    H::HLine(64,12,10,5,220);
+    H::HLine(75,12,10,2,220);
+    H::HLine(86,12,10,3,220);
+    H::HLine(97,12,10,4,220);
+
+    //left box username
+    H::VLine(51,15,11,6,219);
+    H::HLine(50,15,5,6,220);
+    H::HLine(50,26,5,6,223);
+    H::VLine(53,15,10,70,237);
+    H::VLine(54,15,10,70,237);
+
+    //right box username
+    H::VLine(121,15,11,6,219);
+    H::HLine(116,15,5,6,220);
+    H::HLine(116,26,5,6,223);
+    H::VLine(118,15,10,70,237);
+    H::VLine(119,15,10,70,237);
+
+    //box username
+    H::drawBoxSingleLineWithBG(56,14,59,12,136); 
+
+    H::setcolor(135); H::gotoxy(66,16); cout << "USERNAME";
+    H::drawBoxSingleLineWithBG(66,17,39,1,145); H::setcolor(151); H::gotoxy(70,18); cout << "FSMS";
+
+    H::setcolor(135); H::gotoxy(66,22); cout << "PASSWORD";
+    H::drawBoxSingleLineWithBG(66,23,39,1,145); H::setcolor(151); H::gotoxy(70,24); cout << "Fsms168";
+
+
+    H::VLine(66,27,3,145,219);
+    H::HLine(65,31,41,1,223);
+    H::VLine(106,27,3,145,219);
+    H::setcolor(244); H::gotoxy(69,29); cout << " Incorrect Password And Username ";
+
 }
 
 

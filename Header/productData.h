@@ -27,6 +27,10 @@ class Data{
 	    char flower_description[100];    // Short description
 	    char flower_date[20];            // Date added or harvested (dd-mm-yyyy)
 	public:
+		// Extra helpers
+		void InputFlower();
+		void DisplayFlower();
+
 		//@@@@ 	Function Prototype 
 		//										setter 
 		void SetFlowerID(int id);
@@ -137,6 +141,53 @@ const char* Data::GetFlowerDescription() const
 const char* Data::GetFlowerDate() const
 {
 	return this->flower_date;
+}
+////////////////////////////////////////////////////////////////////////////
+
+// ================= Helpers =================
+void Data::InputFlower() {
+    cout << "Enter Flower ID: ";
+    int id; cin >> id;
+    SetFlowerID(id);
+
+    cout << "Enter Flower Name: ";
+    cin.ignore();
+    cin.getline(flower_name, 50);
+
+    cout << "Enter Flower Type: ";
+    cin.getline(flower_type, 30);
+
+    cout << "Enter Price: ";
+    double price; cin >> price;
+    SetFlowerPrice(price);
+
+    cout << "Enter Quantity: ";
+    int qty; cin >> qty;
+    SetFlowerQty(qty);
+
+    cout << "Enter Color: ";
+    cin.ignore();
+    cin.getline(flower_color, 20);
+
+    cout << "Enter Origin: ";
+    cin.getline(flower_origin, 50);
+
+    cout << "Enter Description: ";
+    cin.getline(flower_description, 100);
+
+    cout << "Enter Date (dd-mm-yyyy): ";
+    cin.getline(flower_date, 20);
+}
+
+void Data::DisplayFlower() {
+    cout << left << setw(6) << GetFlowerId()
+         << setw(20) << GetFlowerName()
+         << setw(15) << GetFlowerTpye()
+         << setw(10) << GetFlowerPrice()
+         << setw(8) << GetFlowerQty()
+         << setw(10) << GetFlowerColor()
+         << setw(15) << GetFlowerOrigin()
+         << setw(20) << GetFlowerDate() << endl;
 }
 
 

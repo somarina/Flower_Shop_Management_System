@@ -344,36 +344,5 @@ void StaffAdmin()
     } while (true);
 }
 
-void TestAdmin()
-{
-	p:
-	char choice;
-	H::cls();
-	H::setcolor(2);
-
-		cout << "\n\t\t1. Staff Feature\n\t\t2. User Feature\n\t\t3. Back ";
-		
-		choice = getch();
-		switch (choice) {
-			case '1': 
-			{
-				H::cls();
-				H::setcolor(2);
-				StaffAdmin();
-				goto p;
-				break;
-			}
-			case '2': 
-			{
-				H::cls();
-				H::setcolor(2);
-				test();
-				goto p;
-			} break;
-			case '3':
-			break;
-		}
-}
-
 
 #endif
