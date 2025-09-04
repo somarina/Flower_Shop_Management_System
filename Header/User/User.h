@@ -557,7 +557,6 @@ void ShowInvoice(UserData &user, BoughtItem items[], int count) {
     tm* ltm = localtime(&now);
 
     while (true) {
-        system("cls");
 		DesignInvoice();
         double grandTotal = 0;
 
@@ -571,26 +570,11 @@ void ShowInvoice(UserData &user, BoughtItem items[], int count) {
         H::setcolor(1);H::gotoxy(60,14);cout << user.getId();
         H::setcolor(2);H::gotoxy(60,15);cout << user.getUserName();
         H::setcolor(3);H::gotoxy(60,16);cout << user.getPhoneNumber();
-
-        // cout << "\n-------------------------------------------------\n";
-        // cout << left << setw(4) << "No"
-        //      << setw(15) << "Flower"
-        //      << setw(6) << "Qty"
-        //      << setw(8) << "Price"
-        //      << setw(10) << "Total" << endl;
-        // cout << "-------------------------------------------------\n";
-
         int start = page * pageSize;
         int end = min(start + pageSize, count);
 		int y=20;
         for (int i = start; i < end; i++) {
-			// cout << endl;
-            // cout << left << setw(4) << i + 1
-            //      << setw(15) << items[i].product.GetFlowerName()
-            //      << setw(6) << items[i].qty
-            //      << setw(8) << items[i].product.GetFlowerPrice()
-            //      << setw(10) << items[i].getTotal() << endl;
-				 H::setcolor(5);H::gotoxy(37,y);cout<<i + 1;
+				H::setcolor(5);H::gotoxy(37,y);cout<<i + 1;
 				H::setcolor(4);H::gotoxy(53,y);cout<<items[i].product.GetFlowerName();
 				H::setcolor(3);H::gotoxy(85,y);cout<<items[i].qty;
 				H::setcolor(2);H::gotoxy(108,y);cout<<"$"<<items[i].product.GetFlowerPrice();
@@ -601,8 +585,9 @@ void ShowInvoice(UserData &user, BoughtItem items[], int count) {
 		H::HLine(31,30,109,2,196);
 		H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
 		H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
-		H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : $" << grandTotal;
-		H::setcolor(4);H::gotoxy(115,32);cout<<"KHR : " << (grandTotal*4100);	
+		H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : $" << fixed << setprecision(2) << grandTotal;
+		double kh = (inv.grandTotal * 4100);
+		H::setcolor(4);H::gotoxy(115,32);cout << "KHR : " << fixed << setprecision(0) << kh;
 		H::HLine(31,33,109,2,196);	
         // cout << "-------------------------------------------------\n";
         // cout << "Grand Total: $" << grandTotal << endl;
@@ -755,8 +740,7 @@ void Buying()
                     cart.push_back(item);
 
 //                    cout << "\nItem added successfully!\n";
-					
-					
+				
                     break;
                 }
             }
@@ -793,6 +777,7 @@ void Buying()
 }
 //================ ShowAllInvoices Function =================
 void ShowAllInvoices() {
+	H::setcursor(0,8);
     struct Invoice {
         UserData user;
         int count;
@@ -802,6 +787,8 @@ void ShowAllInvoices() {
 
     ifstream fin("Data/Invoice.flower", ios::binary);
     if (!fin || fin.peek() == ifstream::traits_type::eof()) {
+		H::setcursor(0,8);
+		DesignInvoice();
         cout << "No invoices.\n";
         return;
     }
@@ -820,6 +807,8 @@ void ShowAllInvoices() {
     fin.close();
 
     if (invoices.empty()) {
+		H::setcursor(0,8);
+		DesignInvoice();
         cout << "No invoices.\n";
         return;
     }
@@ -827,39 +816,42 @@ void ShowAllInvoices() {
     int index = 0;
     int page = 0;
     const int ITEMS_PER_PAGE = 10;
-
+	H::setcursor(0,8);
     while (true) {
-        system("cls");
+		int y=20;
+		DesignInvoice();
         Invoice &inv = invoices[index];
 
-        cout << "========== Invoice " << index + 1 << " / " << invoices.size() << " ==========\n";
-        cout << "\nUser      : " << inv.user.getId();
-        cout << "\nUsername  : " << inv.user.getUserName();
-        cout << "\nPhone     : " << inv.user.getPhoneNumber() << "\n";
-
-        cout << left << setw(4) << "No"
-             << setw(15) << "Flower"
-             << setw(6) << "Qty"
-             << setw(8) << "Price"
-             << setw(10) << "Total" << endl;
-        cout << "-------------------------------------------------\n";
+        // cout << "========== Invoice " << index + 1 << " / " << invoices.size() << " ==========\n";
+		H::setcolor(1);H::gotoxy(60,14);cout << inv.user.getId();
+        H::setcolor(2);H::gotoxy(60,15);cout << inv.user.getUserName();
+        H::setcolor(3);H::gotoxy(60,16);cout << inv.user.getPhoneNumber();
 
         int start = page * ITEMS_PER_PAGE;
         int end = min(start + ITEMS_PER_PAGE, inv.count);
-
-        for (int j = start; j < end; j++) {
-            cout << left << setw(4) << j + 1
-                 << setw(15) << inv.items[j].product.GetFlowerName()
-                 << setw(6) << inv.items[j].qty
-                 << setw(8) << inv.items[j].product.GetFlowerPrice()
-                 << setw(10) << inv.items[j].getTotal() << endl;
+        for (int j = start; j < end; j++) 
+		{
+			////////////////////////////////////////////////////////////////////////
+			H::setcolor(5);H::gotoxy(37,y);cout<<"       ";
+			H::setcolor(4);H::gotoxy(53,y);cout<<"       ";
+			H::setcolor(3);H::gotoxy(85,y);cout<<"       ";
+			H::setcolor(2);H::gotoxy(108,y);cout<<"       ";
+			H::setcolor(1);H::gotoxy(128,y);cout<<"       ";
+			////////////////////////////////////////////////////////////////////////
+			H::setcolor(5);H::gotoxy(37,y);cout<<j + 1;
+			H::setcolor(4);H::gotoxy(53,y);cout<<inv.items[j].product.GetFlowerName();
+			H::setcolor(3);H::gotoxy(85,y);cout<<inv.items[j].qty;
+			H::setcolor(2);H::gotoxy(108,y);cout<<"$"<<inv.items[j].product.GetFlowerPrice();
+			H::setcolor(1);H::gotoxy(128,y);cout<<"$"<<inv.items[j].getTotal() << endl;
+			y++;
         }
-
-        cout << "-------------------------------------------------\n";
-        cout << "Page " << page + 1 << " / " << ((inv.count + ITEMS_PER_PAGE - 1) / ITEMS_PER_PAGE) << endl;
-        cout << "Grand Total: $" << inv.grandTotal << "\n";
-        cout << "=================================================\n";
-        cout << "LEFT/RIGHT = switch invoice | UP/DOWN = scroll items | ESC = exit\n";
+		H::HLine(31,30,109,2,196);
+		H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
+		H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
+		H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : $" << fixed << setprecision(2) << inv.grandTotal;
+		double kh = (inv.grandTotal*4100);
+		H::setcolor(4);H::gotoxy(115,32);cout << "KHR : " << fixed << setprecision(0) << kh;
+		H::HLine(31,33,109,2,196);	
 
         int key = _getch();
         if (key == 27)  // ESC
