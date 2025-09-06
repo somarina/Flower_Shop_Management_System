@@ -2082,7 +2082,6 @@ void test(){
 			// while(true){
 				H::setcolor(3);
 				H::cls();
-				// DesignImportFlowerData();
 				ImportFlowerQty();
 				H::setcolor(3);
 				H::cls();

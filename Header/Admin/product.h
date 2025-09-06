@@ -68,12 +68,7 @@ void DesignImportFlowerData(){
 	H::drawBoxSingleLineWithBG(60,24,48,3,153);
 	
 ////// Import already and then show presss//////////////////////////////////////////////////////////////////////////
-	H::setcolor(7);H::gotoxy(67,30);cout<<"PRESS         FOR ";
-	H::setcolor(2);H::gotoxy(73,30);cout<<"[ENTER]";
-	H::setcolor(1);H::gotoxy(85,30);cout<<"IMPORT MORE";
-	H::setcolor(7);H::gotoxy(74,31);cout<<"PRESS       FOR ";
-	H::setcolor(3);H::gotoxy(80,31);cout<<"[ESC]";
-	H::setcolor(6);H::gotoxy(86,31);cout<<"FOR Invoice";
+	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////	
     Design::FlowerChoice(); 
 }
@@ -981,67 +976,7 @@ void DeleteFlowerData()
 }
 
 //###############################################################################################
-// void ImportFlowerQty() {
-//     H::setcursor(1,8);
-//     int id;
-//     int addQty;
-//     string strID, strQty;
-//     bool found = false;
 
-//     do {
-//         found = false;
-
-//         // Ask user for ID (just label)
-//         cout << "Enter Flower ID to Search: P-";
-
-//         // Get input (modify inputUNumber so it DOES NOT echo to screen)
-//         strID = H::inputUNumber(strID, 5);   // this should only return the string
-//         id = stoi(strID);
-
-//         // Now print the ID nicely
-//         cout << "\n";
-
-//         // --- Open file ---
-//         proF.open("Data\\Product.flower", ios::in | ios::out | ios::binary);
-//         if (!proF) {
-//             cout << " File not found!" << endl;
-//             return;
-//         }
-
-//         // --- Search for flower ---
-//         while (proF.read((char*)&p, sizeof(p))) {
-//             if (id == p.GetFlowerId()) {
-//                 found = true;
-//                 cout << "\n\tEnter Quantity to Add: ";
-
-//                 strQty = H::inputUNumber(strQty, 4);  // again, only return string
-//                 addQty = stoi(strQty);
-
-//                 // Update quantity
-//                 int currentQty = p.GetFlowerQty();
-//                 p.SetFlowerQty(currentQty + addQty);
-
-//                 // Move back and overwrite record
-//                 proF.seekp((int)proF.tellg() - sizeof(p));
-//                 proF.write((char*)&p, sizeof(p));
-
-//                 cout << " Quantity Imported Successfully!" << endl;
-//                 break;
-//             }
-//         }
-
-//         proF.close();
-
-//         if (!found) {
-//             cout << "\n ID not found! Press ENTER to try again...";
-//             while (_getch() != 13) {
-//                 // wait for ENTER
-//             }
-//             H::cls(); // clear screen for new search
-//         }
-
-//     } while (!found);
-// }
 void ImportFlowerQty() {
     H::setcursor(1,8);
     int id;
@@ -1049,20 +984,26 @@ void ImportFlowerQty() {
     string strID, strQty;
     bool found = false;
     char key;
+	DesignImportFlowerData();
 
     do {
+		H::setcursor(0,8);
         found = false;
-        system("cls");
-        cout << "==== Import Flower Quantity ====\n";
-        cout << "Enter Flower ID to Search: P-";
+		H::clearBox(62,26,44,1,136);
+		DesignImportFlowerData();
+		H::setcursor(1,8);
+		H::drawBoxSingleLineWithBG(42,19,26,1,136);
+		H::setcolor(134);H::gotoxy(42,20); cout << "Enter Flower ID to Search:";
 
-        // Input ID
-        strID = H::inputUNumber(strID, 5);
+		H::drawBoxSingleLineWithBG(102,19,26,1,136);
+		H::setcolor(134);H::gotoxy(110,20);cout << "P-";strID = H::inputUNumber(strID, 5);
         id = stoi(strID);
 
         // --- Open file ---
         proF.open("Data\\Product.flower", ios::in | ios::out | ios::binary);
         if (!proF) {
+			H::setcursor(0,8);
+			DesignImportFlowerData();
             cout << " File not found!" << endl;
             return;
         }
@@ -1071,9 +1012,13 @@ void ImportFlowerQty() {
         while (proF.read((char*)&p, sizeof(p))) {
             if (id == p.GetFlowerId()) {
                 found = true;
-                cout << "\nEnter Quantity to Add: ";
+				H::clearBox(42,20,26,1,136);
+				H::drawBoxSingleLineWithBG(42,19,26,1,136);
+                H::setcolor(134);H::gotoxy(42,20); cout << "Enter Quantity to Add: ";
 
-                strQty = H::inputUNumber(strQty, 4);
+				H::clearBox(102,20,26,1,136);
+				H::drawBoxSingleLineWithBG(102,19,26,1,136);
+                H::setcolor(134);H::gotoxy(110,20); strQty = H::inputUNumber(strQty, 4);
                 addQty = stoi(strQty);
 
                 // Update quantity
@@ -1084,23 +1029,41 @@ void ImportFlowerQty() {
                 proF.seekp((int)proF.tellg() - sizeof(p));
                 proF.write((char*)&p, sizeof(p));
 
-                cout << " Quantity Imported Successfully!\n";
+				H::drawBoxSingleLineWithBG(62,25,44,1,136);
+                H::setcolor(138);H::gotoxy(69,26);cout << "Quantity Imported Successfully";
                 break;
             }
         }
         proF.close();
 
         if (!found) {
-            cout << " ID not found!\n";
-            cout << "Press ENTER to try again or ESC to go back...";
+			H::setcursor(0,8);
+            H::drawBoxSingleLineWithBG(62,25,44,1,136);
+            H::setcolor(132);H::gotoxy(76,26);cout << "ID NOT FOUND";
+            // cout << "Press ENTER to try again or ESC to go back...";
+			H::setcolor(7);H::gotoxy(67,30);cout<<"PRESS         FOR ";
+			H::setcolor(2);H::gotoxy(73,30);cout<<"[ENTER]";
+			H::setcolor(1);H::gotoxy(85,30);cout<<"TRY AGAIN";
+			H::setcolor(7);H::gotoxy(71,31);cout<<"PRESS       FOR ";
+			H::setcolor(3);H::gotoxy(77,31);cout<<"[ESC]";
+			H::setcolor(6);H::gotoxy(83,31);cout<<"FOR BACK";
             while (true) {
+				H::setcursor(0,8);
                 key = _getch();
                 if (key == 13) break; // ENTER -> try again
                 else if (key == 27) return; // ESC -> exit
             }
         } else {
-            cout << "\nPress ENTER to import another or ESC to exit...";
+			H::setcursor(0,8);
+            // cout << "\nPress ENTER to import another or ESC to exit...";
+			H::setcolor(7);H::gotoxy(67,30);cout<<"PRESS         FOR ";
+			H::setcolor(2);H::gotoxy(73,30);cout<<"[ENTER]";
+			H::setcolor(1);H::gotoxy(85,30);cout<<"IMPORT MORE";
+			H::setcolor(7);H::gotoxy(71,31);cout<<"PRESS       FOR ";
+			H::setcolor(3);H::gotoxy(77,31);cout<<"[ESC]";
+			H::setcolor(6);H::gotoxy(83,31);cout<<"FOR BACK";
             while (true) {
+				H::setcursor(0,8);
                 key = _getch();
                 if (key == 13) break; // ENTER -> continue loop
                 else if (key == 27) return; // ESC -> exit function
