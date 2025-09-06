@@ -16,7 +16,8 @@ int main()
     // Buying();
     // DesignBuyingFlower();
     // main1();
-    ShowAllInvoices();
+    // ShowAllInvoices();
+    ShowUserData();
     // ShowInvoice();
 
     getch();
