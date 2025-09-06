@@ -334,7 +334,6 @@ void LoginAsAdmin()
 	// b:
     while (true)
     {
-	H::setcursor(1,8);
 	NewFlowerEdit();
     //animation top left
 	H::HLine(0,0,85,51,219);
@@ -439,17 +438,18 @@ void LoginAsAdmin()
 
 		H::drawBoxSingleLineWithBG(66,17,39,1,145); 
 		H::drawBoxSingleLineWithBG(66,23,39,1,145);
-
+		H::setcursor(1,8);
     	H::setcolor(135); H::gotoxy(66,16); cout << "USERNAME";
         H::setcolor(135); H::gotoxy(66,22); cout << "PASSWORD";
    		H::setcolor(151); H::gotoxy(70,18); H::inputLetter(username,5);
     	H::setcolor(151); H::gotoxy(70,24); H::inputPasswordMask(password,8);
 
-		H::setcursor(0,0);
+		H::setcursor(0,8);
         // ===== Check login =====
         if ((strcmp(username, "fsms") == 0 || strcmp(username, "FSMS") == 0) &&
             (strcmp(password, "fsms168") == 0 || strcmp(password, "FSMS168") == 0))
         {
+			H::setcursor(0,8);
             H::setcolor(10);
 			H::gotoxy(69,29); cout << "                                 ";
             H::gotoxy(69,29); cout << "         Login Success           ";
@@ -460,6 +460,7 @@ void LoginAsAdmin()
         }
         else
         {
+			H::setcursor(0,8);
             attempts++;
             H::setcolor(244);
             H::gotoxy(69,28); cout << " Incorrect Password  Or Username ";
@@ -476,6 +477,7 @@ void LoginAsAdmin()
             }
             else
             {
+				H::setcursor(0,8);
                 H::gotoxy(74,29); cout << " Try again (" << (3 - attempts) << " left)....";
 
             }
