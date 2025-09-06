@@ -23,6 +23,10 @@ void AboutUs();
 void openMyWebsite(const string& url);
 void MNM2(const string &str);
 void test();
+void DesignShowUserDate();
+void SearchUserData();
+void ShowUserData2();
+void DesignShowUserDate2();
 //================================ User Class ==============================
 class UserData {
 private:
@@ -49,6 +53,7 @@ public:
 
     const char* getId() const { return id; }
     const char* getUserName() const { return username; }
+	const char* getGender() const {return gender; }
     const char* getPassword() const { return password; }
     const char* getPhoneNumber() const { return phoneNumber; }
     const char* getEmail() const { return email; }
@@ -119,22 +124,181 @@ void UserData::DisplayUserData() {
          << "/nGender: " << gender
          << "/nPhone: " << phoneNumber << endl;
 }
+// void ShowUserData() {
+//     ifstream fin("Data/UserData.flower", ios::binary);
+//     if (!fin) {
+// 		DesignShowUserDate();
+//         cout << "No user data file found!" << endl;
+//         return;
+//     }
+
+//     UserData user;
+// 	DesignShowUserDate();
+//     cout << "\n===== All User Data =====\n";
+//     while (fin.read((char*)&user, sizeof(UserData))) {
+		
+//         user.DisplayUserData();
+//     }
+
+//     fin.close();
+// }
 void ShowUserData() {
+	a:
+	H::setcursor(0,8);
     ifstream fin("Data/UserData.flower", ios::binary);
     if (!fin) {
+        DesignShowUserDate();
+        H::gotoxy(37, 14);
         cout << "No user data file found!" << endl;
         return;
     }
 
-    UserData user;
-    cout << "\n===== All User Data =====\n";
-    while (fin.read((char*)&user, sizeof(UserData))) {
-        user.DisplayUserData();
-		
-        cout << "-----------------------------\n";
+    // First, count total users
+    fin.seekg(0, ios::end);
+    int totalUsers = fin.tellg() / sizeof(UserData);
+    fin.seekg(0, ios::beg);
+
+    if (totalUsers == 0) {
+        DesignShowUserDate();
+        H::gotoxy(37, 14);
+        cout << "No users to display." << endl;
+        return;
     }
 
+    int pageSize = 7;                     // Users per page
+    int totalPages = (totalUsers + pageSize - 1) / pageSize;
+    int currentPage = 0;
+
+    UserData users[totalUsers];
+    // Load all users into memory
+    for (int i = 0; i < totalUsers; i++) {
+        fin.read((char*)&users[i], sizeof(UserData));
+    }
     fin.close();
+
+    char key;
+	DesignShowUserDate();
+    do {
+		H::clearBox(35,15,97,6,0);
+		
+        int startIdx = currentPage * pageSize;
+        int endIdx = min(startIdx + pageSize, totalUsers);
+        int startY = 15;
+		int m=1;
+
+        for (int i = startIdx, line = 0; i < endIdx; i++, line++,m++) {
+			H::setcolor(m);H::gotoxy(36, startY + line); cout << users[i].getId();          
+			H::setcolor(m);H::gotoxy(54, startY + line); cout << users[i].getUserName();    
+			H::setcolor(m);H::gotoxy(76, startY + line); cout << users[i].getGender();      
+			H::setcolor(m);H::gotoxy(98, startY + line); cout << users[i].getPhoneNumber(); 
+			H::setcolor(m);H::gotoxy(123,startY + line); cout << users[i].getPassword();
+
+			if(m>6)
+			{
+				m=1;
+			}
+		}
+	
+
+        // H::gotoxy(37, startY + pageSize + 1);
+        // cout << "Page " << currentPage + 1 << " / " << totalPages;
+		H::setcolor(7);H::gotoxy(79,24);cout<<"PAGE";
+		H::setcolor(1);H::gotoxy(84,24);cout << currentPage + 1 << " / " << totalPages;
+        key = _getch();
+
+        if (key == 0 || key == 224) key = _getch(); // handle arrow keys
+        if (key == 75) {
+            currentPage--;
+            if (currentPage < 0) currentPage = totalPages - 1; // circular
+        } else if (key == 77) {
+            currentPage++;
+            if (currentPage >= totalPages) currentPage = 0; // circular
+        } else if (key == 13)
+		{
+			H::cls();
+			H::setcursor(1,8);
+			SearchUserData();
+			H::cls();
+			H::setcursor(0,8);
+			goto a;
+		}
+        // system("cls"); // clear screen for next page
+    } while (key != 27); // ESC key to exit
+}
+
+void ShowUserData2() {
+	H::setcursor(0,8);
+    ifstream fin("Data/UserData.flower", ios::binary);
+    if (!fin) {
+        DesignShowUserDate2();
+        H::gotoxy(37, 14);
+        cout << "No user data file found!" << endl;
+        return;
+    }
+
+    // First, count total users
+    fin.seekg(0, ios::end);
+    int totalUsers = fin.tellg() / sizeof(UserData);
+    fin.seekg(0, ios::beg);
+
+    if (totalUsers == 0) {
+        DesignShowUserDate2();
+        H::gotoxy(37, 14);
+        cout << "No users to display." << endl;
+        return;
+    }
+
+    int pageSize = 7;                     // Users per page
+    int totalPages = (totalUsers + pageSize - 1) / pageSize;
+    int currentPage = 0;
+
+    UserData users[totalUsers];
+    // Load all users into memory
+    for (int i = 0; i < totalUsers; i++) {
+        fin.read((char*)&users[i], sizeof(UserData));
+    }
+    fin.close();
+
+    char key;
+	DesignShowUserDate2();
+    do {
+		H::clearBox(35,15,97,6,0);
+		
+        int startIdx = currentPage * pageSize;
+        int endIdx = min(startIdx + pageSize, totalUsers);
+        int startY = 15;
+		int m=1;
+
+        for (int i = startIdx, line = 0; i < endIdx; i++, line++,m++) {
+			H::setcolor(m);H::gotoxy(34, startY + line); cout << "U-" << users[i].getId();          
+			H::setcolor(m);H::gotoxy(54, startY + line); cout << users[i].getUserName();    
+			H::setcolor(m);H::gotoxy(76, startY + line); cout << users[i].getGender();      
+			H::setcolor(m);H::gotoxy(98, startY + line); cout << users[i].getPhoneNumber(); 
+			H::setcolor(m);H::gotoxy(123,startY + line); cout << users[i].getPassword();
+
+			if(m>6)
+			{
+				m=1;
+			}
+		}
+	
+
+        // H::gotoxy(37, startY + pageSize + 1);
+        // cout << "Page " << currentPage + 1 << " / " << totalPages;
+		H::setcolor(7);H::gotoxy(79,24);cout<<"PAGE";
+		H::setcolor(1);H::gotoxy(84,24);cout << currentPage + 1 << " / " << totalPages;
+        key = _getch();
+
+        if (key == 0 || key == 224) key = _getch(); // handle arrow keys
+        if (key == 75) {
+            currentPage--;
+            if (currentPage < 0) currentPage = totalPages - 1; // circular
+        } else if (key == 77) {
+            currentPage++;
+            if (currentPage >= totalPages) currentPage = 0; // circular
+        }
+        // system("cls"); // clear screen for next page
+    } while (key != 27); // ESC key to exit
 }
 
 void SearchUserData() {
@@ -154,6 +318,7 @@ void SearchUserData() {
         if (strcmp(user.getUserName(), search) == 0 || strcmp(user.getId(), search) == 0) {
             cout << "\nUser Found!\n";
             user.DisplayUserData();
+			_getch();
             found = true;
             break;
         }
@@ -586,7 +751,7 @@ void ShowInvoice(UserData &user, BoughtItem items[], int count) {
 		H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
 		H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
 		H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : $" << fixed << setprecision(2) << grandTotal;
-		double kh = (inv.grandTotal * 4100);
+		double kh = (grandTotal * 4100);
 		H::setcolor(4);H::gotoxy(115,32);cout << "KHR : " << fixed << setprecision(0) << kh;
 		H::HLine(31,33,109,2,196);	
         // cout << "-------------------------------------------------\n";
@@ -611,7 +776,8 @@ void ShowInvoice(UserData &user, BoughtItem items[], int count) {
             else if (ch == 72 && page > 0) page--;           // UP
         }
     }
-}void MessageBox(){
+}
+void MessageBox(){
 	H::setcursor(0,0);
 	H::clearBox(49,16,35,3,0);
 	H::clearBox(86,21,35,3,0);
@@ -820,6 +986,8 @@ void ShowAllInvoices() {
     while (true) {
 		int y=20;
 		DesignInvoice();
+		H::clearBox(36,20,100,9,7);
+		H::clearBox(58,15,15,1,7);
         Invoice &inv = invoices[index];
 
         // cout << "========== Invoice " << index + 1 << " / " << invoices.size() << " ==========\n";
@@ -831,12 +999,6 @@ void ShowAllInvoices() {
         int end = min(start + ITEMS_PER_PAGE, inv.count);
         for (int j = start; j < end; j++) 
 		{
-			////////////////////////////////////////////////////////////////////////
-			H::setcolor(5);H::gotoxy(37,y);cout<<"       ";
-			H::setcolor(4);H::gotoxy(53,y);cout<<"       ";
-			H::setcolor(3);H::gotoxy(85,y);cout<<"       ";
-			H::setcolor(2);H::gotoxy(108,y);cout<<"       ";
-			H::setcolor(1);H::gotoxy(128,y);cout<<"       ";
 			////////////////////////////////////////////////////////////////////////
 			H::setcolor(5);H::gotoxy(37,y);cout<<j + 1;
 			H::setcolor(4);H::gotoxy(53,y);cout<<inv.items[j].product.GetFlowerName();
@@ -852,7 +1014,6 @@ void ShowAllInvoices() {
 		double kh = (inv.grandTotal*4100);
 		H::setcolor(4);H::gotoxy(115,32);cout << "KHR : " << fixed << setprecision(0) << kh;
 		H::HLine(31,33,109,2,196);	
-
         int key = _getch();
         if (key == 27)  // ESC
 		{
@@ -1880,11 +2041,14 @@ void test(){
 			while(true){
 				H::setcolor(0);
 				H::cls();
+				H::setcursor(1,8);
 				d.DesignDeleteFlower();	
 				DeleteFlowerData();
-				H::setcolor(7);H::gotoxy(56,29);cout<< "Press [ESC] For Back and Press [ENTER] For Input More..";
+				H::setcursor(0,8);
+				H::setcolor(7);H::gotoxy(56,29);cout<< "Press [ESC] For Back and Press [ENTER] For Delete Again";
 				H::setcolor(2);H::gotoxy(62,29);cout<< "[ESC]";
 				H::setcolor(2);H::gotoxy(87,29);cout<< "[ENTER]";
+				H::setcursor(0,8);
 				key = getch();
 				if (key == 13) {
 					continue;
@@ -1957,5 +2121,184 @@ void test(){
 		}
 	}while(true);
 }
+void DesignShowUserDate(){
+	//animation top left
+	H::HLine(0,0,85,153,255);
+	//animation top left
+	H::HLine(85,0,85,153,255);
+	
+	//left 
 
+	H::VLine(2,0,38,153,255);
+	H::VLine(3,0,38,153,255);
+	H::VLine(168,0,38,153,255);
+	H::VLine(169,0,38,153,255);
+	
+//////////////////////////////////////	
+	H::VLine(57,0,2,72,255);
+    H::VLine(59,0,2,72,255);
+
+    H::VLine(112,0,2,72,255);
+    H::VLine(114,0,2,72,255);
+/////////////////////////////////////// 
+	
+	H::HLine(50,3,70,213,255);
+	H::VLine(51,3,5,213,255);
+	H::VLine(52,3,5,213,255);
+	
+	H::VLine(120,3,5,213,255);
+	H::VLine(119,3,5,213,255);
+	H::HLine(50,9,70,213,255);
+	
+
+
+
+
+	H::setcolor(1);H::gotoxy(64,4);cout<<R"(  __  _____________     ___  ___ _________ )";    
+	H::setcolor(2);H::gotoxy(64,5);cout<<R"( / / / / __/ __/ _ \   / _ \/ _ /_  __/ _ | )";   
+	H::setcolor(3);H::gotoxy(64,6);cout<<R"(/ /_/ /\ \/ _// , _/  / // / __ |/ / / __ | )";   
+	H::setcolor(4);H::gotoxy(64,7);cout<<R"(\____/___/___/_/|_|  /____/_/ |_/_/ /_/ |_|  )"; 
+
+ 
+	H::setcolor(1); H::gotoxy(53,5); cout << R"(  _ " _ )";
+	H::setcolor(5); H::gotoxy(53,6); cout << R"( (_\|/_))";
+	H::setcolor(3); H::gotoxy(53,7); cout << R"(  (/|\))";
+	
+	H::setcolor(3); H::gotoxy(108,5); cout << R"(  _ " _ )";
+	H::setcolor(2); H::gotoxy(108,6); cout << R"( (_\|/_))";
+	H::setcolor(6); H::gotoxy(108,7); cout << R"(  (/|\))";
+	
+	H::setcolor(3); H::gotoxy(17,2); cout << R"(          ')";
+	H::setcolor(3); H::gotoxy(17,3); cout << R"(        \  ,  /)";
+	H::setcolor(4); H::gotoxy(17,4); cout << R"(    ' ,___/_\___, ')";
+	H::setcolor(4); H::gotoxy(17,5); cout << R"(       \ /o.o\ /)";
+	H::setcolor(5); H::gotoxy(17,6); cout << R"(   -=   > \_/ <   =-)";
+	H::setcolor(5); H::gotoxy(17,7); cout << R"(       /_\___/_\)";
+	H::setcolor(2); H::gotoxy(17,8); cout << R"(    . `   \ /   ` .)";
+	H::setcolor(2); H::gotoxy(17,9); cout << R"(        /  `  \)";
+	H::setcolor(2); H::gotoxy(17,10); cout << R"(           .	)";
+	
+	H::setcolor(3); H::gotoxy(128,2); cout << R"(          ')";
+	H::setcolor(3); H::gotoxy(128,3); cout << R"(        \  ,  /)";
+	H::setcolor(4); H::gotoxy(128,4); cout << R"(    ' ,___/_\___, ')";
+	H::setcolor(4); H::gotoxy(128,5); cout << R"(       \ /o.o\ /)";
+	H::setcolor(5); H::gotoxy(128,6); cout << R"(   -=   > \_/ <   =-)";
+	H::setcolor(5); H::gotoxy(128,7); cout << R"(       /_\___/_\)";
+	H::setcolor(2); H::gotoxy(128,8); cout << R"(    . `   \ /   ` .)";
+	H::setcolor(2); H::gotoxy(128,9); cout << R"(        /  `  \)";
+	H::setcolor(2); H::gotoxy(128,10); cout << R"(           .	)";
+	
+	H::drawBoxDoubleLineWithBG(25,11,120,14,4);
+	H::setcolor(6);H::gotoxy(37,12);cout<<"ID";
+	H::setcolor(6);H::gotoxy(55,12);cout<<"NAME";
+	H::setcolor(6);H::gotoxy(76,12);cout<<"GENDER";
+	H::setcolor(6);H::gotoxy(97,12);cout<<"PHONE NUMBER";
+	H::setcolor(6);H::gotoxy(124,12);cout<<"PASSWORD";
+//////////////////////////////////////////////bOX FOR OUTPUT/////////////////////////////////////
+	H::drawBoxSingleLineWithBG(30,13,110,9,2);
+////////////////////////////////////////////////////////////////////////////////////////////////  	
+	// H::setcolor(7);H::gotoxy(79,24);cout<<"PAGE";
+	// H::setcolor(1);H::gotoxy(84,24);cout<<"1/1";
+	H::setcolor(7);H::gotoxy(61,25);cout<<"USE [LEFT] [RIGHT] ARROW KEY FOR SEE NEXT PAGE";
+	H::setcolor(2);H::gotoxy(65,25);cout<<"[LEFT]";
+	H::setcolor(4);H::gotoxy(72,25);cout<<"[RIGHT]";
+                                            
+	H::setcolor(7);H::gotoxy(67,28);cout<<"PRESS [ENTER] FOR SHOW AGAIN";
+	H::setcolor(2);H::gotoxy(73,28);cout<<"[ENTER]";
+	H::setcolor(5);H::gotoxy(85,28);cout<<"SEARCH USER DATA";
+	H::setcolor(7);H::gotoxy(74,30);cout<<"PRESS [ESC] FOR BACK";
+	H::setcolor(3);H::gotoxy(80,30);cout<<"[ESC]";
+	H::setcolor(6);H::gotoxy(90,30);cout<<"BACK";
+	
+	NewFlowerEdit();
+}
+
+void DesignShowUserDate2(){
+	//animation top left
+	H::HLine(0,0,85,153,255);
+	//animation top left
+	H::HLine(85,0,85,153,255);
+	
+	//left 
+
+	H::VLine(2,0,38,153,255);
+	H::VLine(3,0,38,153,255);
+	H::VLine(168,0,38,153,255);
+	H::VLine(169,0,38,153,255);
+	
+//////////////////////////////////////	
+	H::VLine(57,0,2,72,255);
+    H::VLine(59,0,2,72,255);
+
+    H::VLine(112,0,2,72,255);
+    H::VLine(114,0,2,72,255);
+/////////////////////////////////////// 
+	
+	H::HLine(50,3,70,213,255);
+	H::VLine(51,3,5,213,255);
+	H::VLine(52,3,5,213,255);
+	
+	H::VLine(120,3,5,213,255);
+	H::VLine(119,3,5,213,255);
+	H::HLine(50,9,70,213,255);
+	
+
+
+
+
+	H::setcolor(1);H::gotoxy(64,4);cout<<R"(  __  _____________     ___  ___ _________ )";    
+	H::setcolor(2);H::gotoxy(64,5);cout<<R"( / / / / __/ __/ _ \   / _ \/ _ /_  __/ _ | )";   
+	H::setcolor(3);H::gotoxy(64,6);cout<<R"(/ /_/ /\ \/ _// , _/  / // / __ |/ / / __ | )";   
+	H::setcolor(4);H::gotoxy(64,7);cout<<R"(\____/___/___/_/|_|  /____/_/ |_/_/ /_/ |_|  )"; 
+
+ 
+	H::setcolor(1); H::gotoxy(53,5); cout << R"(  _ " _ )";
+	H::setcolor(5); H::gotoxy(53,6); cout << R"( (_\|/_))";
+	H::setcolor(3); H::gotoxy(53,7); cout << R"(  (/|\))";
+	
+	H::setcolor(3); H::gotoxy(108,5); cout << R"(  _ " _ )";
+	H::setcolor(2); H::gotoxy(108,6); cout << R"( (_\|/_))";
+	H::setcolor(6); H::gotoxy(108,7); cout << R"(  (/|\))";
+	
+	H::setcolor(3); H::gotoxy(17,2); cout << R"(          ')";
+	H::setcolor(3); H::gotoxy(17,3); cout << R"(        \  ,  /)";
+	H::setcolor(4); H::gotoxy(17,4); cout << R"(    ' ,___/_\___, ')";
+	H::setcolor(4); H::gotoxy(17,5); cout << R"(       \ /o.o\ /)";
+	H::setcolor(5); H::gotoxy(17,6); cout << R"(   -=   > \_/ <   =-)";
+	H::setcolor(5); H::gotoxy(17,7); cout << R"(       /_\___/_\)";
+	H::setcolor(2); H::gotoxy(17,8); cout << R"(    . `   \ /   ` .)";
+	H::setcolor(2); H::gotoxy(17,9); cout << R"(        /  `  \)";
+	H::setcolor(2); H::gotoxy(17,10); cout << R"(           .	)";
+	
+	H::setcolor(3); H::gotoxy(128,2); cout << R"(          ')";
+	H::setcolor(3); H::gotoxy(128,3); cout << R"(        \  ,  /)";
+	H::setcolor(4); H::gotoxy(128,4); cout << R"(    ' ,___/_\___, ')";
+	H::setcolor(4); H::gotoxy(128,5); cout << R"(       \ /o.o\ /)";
+	H::setcolor(5); H::gotoxy(128,6); cout << R"(   -=   > \_/ <   =-)";
+	H::setcolor(5); H::gotoxy(128,7); cout << R"(       /_\___/_\)";
+	H::setcolor(2); H::gotoxy(128,8); cout << R"(    . `   \ /   ` .)";
+	H::setcolor(2); H::gotoxy(128,9); cout << R"(        /  `  \)";
+	H::setcolor(2); H::gotoxy(128,10); cout << R"(           .	)";
+	
+	H::drawBoxDoubleLineWithBG(25,11,120,14,4);
+	H::setcolor(6);H::gotoxy(37,12);cout<<"ID";
+	H::setcolor(6);H::gotoxy(55,12);cout<<"NAME";
+	H::setcolor(6);H::gotoxy(76,12);cout<<"GENDER";
+	H::setcolor(6);H::gotoxy(97,12);cout<<"PHONE NUMBER";
+	H::setcolor(6);H::gotoxy(124,12);cout<<"PASSWORD";
+//////////////////////////////////////////////bOX FOR OUTPUT/////////////////////////////////////
+	H::drawBoxSingleLineWithBG(30,13,110,9,2);
+////////////////////////////////////////////////////////////////////////////////////////////////  	
+	// H::setcolor(7);H::gotoxy(79,24);cout<<"PAGE";
+	// H::setcolor(1);H::gotoxy(84,24);cout<<"1/1";
+	H::setcolor(7);H::gotoxy(61,25);cout<<"USE [LEFT] [RIGHT] ARROW KEY FOR SEE NEXT PAGE";
+	H::setcolor(2);H::gotoxy(65,25);cout<<"[LEFT]";
+	H::setcolor(4);H::gotoxy(72,25);cout<<"[RIGHT]";
+                                            
+	H::setcolor(7);H::gotoxy(74,30);cout<<"PRESS [ESC] FOR BACK";
+	H::setcolor(3);H::gotoxy(80,30);cout<<"[ESC]";
+	H::setcolor(6);H::gotoxy(90,30);cout<<"BACK";
+	
+	NewFlowerEdit();
+}
 #endif

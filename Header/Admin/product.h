@@ -840,7 +840,7 @@ void UpdateFlowerData()
     bool isUpdated = false;
 
     H::setcolor(4);H::gotoxy(53,22);cout << "Input Product ID TO Update  ";
-    H::setcolor(4);H::gotoxy(86,22);cout<<":  P-";updateId = stoi(H::inputUNumber(strID, 10));
+    H::setcolor(4);H::gotoxy(86,22);cout<<":  P-";updateId = stoi(H::inputUNumber(strID, 6));
 	H::clearBox(48,20,73,5,1);
     proF.open("Data\\Product.flower", ios::in | ios::out | ios::binary);
     if (!proF) {
@@ -852,6 +852,9 @@ void UpdateFlowerData()
         if (updateId == p.GetFlowerId()) {
             isUpdated = true;
             p.EditFlowerData();
+			H::setcolor(6);H::gotoxy(56,31);cout<< "Press [ESC] For Back and Press [ENTER] For Update More";
+			H::setcolor(2);H::gotoxy(62,31);cout<< "[ESC]";
+			H::setcolor(2);H::gotoxy(87,31);cout<< "[ENTER]";
             proF.seekp((int)proF.tellg() - sizeof(p));
             proF.write((char*)&p, sizeof(p));
             break;
@@ -861,11 +864,11 @@ void UpdateFlowerData()
     proF.close();
 
     if (!isUpdated)
-        cout << "\tThis Product ID is not found for Update!" << endl;
-    else
+    { 
         H::drawBoxDoubleLine(76,28,59,1,2);
-		H::setcolor(6);H::gotoxy(82,29);cout<<">>>>>>>> FLOWER  UPDATE SUCCESSFULLY <<<<<<<<";
+		H::setcolor(6);H::gotoxy(77,29);cout<<">>>>>>>> This Product ID is not found for Update <<<<<<<<";
 		Design::Footer();
+	}
 }
 //###############################################################################################
 void SearchFlowerData()
@@ -900,9 +903,13 @@ void SearchFlowerData()
 
     if (!found)
 	{
+		H::setcursor(0,8);
 		d.DesignSearchFlower();
         H::setcolor(3);H::gotoxy(53,22);cout << "Product ID not found!";
 		H::setcolor(3);H::gotoxy(86,22);cout << "Product ID not found!";
+		H::setcolor(6);H::gotoxy(56,29);cout<< "Press [ESC] For Back and Press [ENTER] For Search More";
+		H::setcolor(2);H::gotoxy(62,29);cout<< "[ESC]";
+		H::setcolor(2);H::gotoxy(87,29);cout<< "[ENTER]";
 	}	
     else
     {
@@ -965,7 +972,6 @@ void DeleteFlowerData()
         
         H::setcolor(6);H::gotoxy(52,27);cout << "\t Product with ID: P-" << deletedID 
              << " (" << deletedName << ") is deleted successfully!" << endl;
-        	getch();
     }
     else
     {

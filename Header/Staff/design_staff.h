@@ -4,6 +4,7 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include "../ANTHeader/ANTHinsyOOP"
 #include "staff.h"
+#include "../User/User.h"
 using namespace ANTHinsyOOP;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -399,7 +400,7 @@ void Menu(int x, int y)
 	
 	//update
 	H::drawBoxSingleLineWithBG(44,25,16,1,213);
-	H::setcolor(215); H::gotoxy(49,26); cout << "UPDATE";
+	H::setcolor(215); H::gotoxy(45,26); cout << "SHOW USER DATA";
 	
 	//flower ascii2
 	H::HLine(61,26,20,2,220);
@@ -428,7 +429,7 @@ void Menu(int x, int y)
 	
 	//delete
 	H::drawBoxSingleLineWithBG(113,25,16,1,213);
-	H::setcolor(215); H::gotoxy(118,26); cout << "DELETE";
+	H::setcolor(215); H::gotoxy(113,26); cout << "SEARCH USER DATA";
 	
 	//back
 	H::HLine(57,19,22,2,220);
@@ -468,11 +469,11 @@ void Menu(int x, int y)
 	}
     if(x==1 && y==0)
 	{
-		H::drawBoxSingleLineWithBG(44,25,16,1,196); H::setcolor(192);  H::gotoxy(49,26),  cout << "UPDATE";
+		H::drawBoxSingleLineWithBG(44,25,16,1,196); H::setcolor(192);  H::gotoxy(45,26),  cout << "SHOW USER DATA";
 	} 
     if(x==1 && y==1)
 	{
-		H::drawBoxSingleLineWithBG(113,25,16,1,196); H::setcolor(192);  H::gotoxy(118,26), cout << "DELETE";
+		H::drawBoxSingleLineWithBG(113,25,16,1,196); H::setcolor(192);  H::gotoxy(113,26), cout << "SEARCH USER DATA";
 	} 
     if(x==2 && y==0)
 	{
@@ -576,8 +577,6 @@ void StaffFeature()
 				}
 				
                 case 27: {		
-                    cout << "\nExiting Program...";
-                    H::delay(1000);
                     break;
 				}  
 				  
@@ -618,7 +617,7 @@ void StaffFeature()
 //                cout << "\n\n-------------------- UPDATE STAFF --------------------\n";
 //                staffs.UpdateFromFile();
 //                cout << "\nPress [ ESC ] to Exit or any key to continue...";
-				designUpdate();
+				ShowUserData2();
 //                key = _getch();
                 H::cls();
 //            } while (key != 27);
@@ -630,7 +629,7 @@ void StaffFeature()
 //                cout << "\n\n-------------------- DELETE STAFF --------------------\n";
 //                staffs.DeleteFromFile();
 //                cout << "\nPress [ ESC ] to Exit or any key to continue...";
-				designDelete();
+				SearchUserData();
 //                key = _getch();
                 H::cls();
 //            } while (key != 27);
