@@ -21,8 +21,14 @@ A
 void NewFlowerEdit();
 void inputPasswordToggle(int x, int y, char* password, int maxLen);
 void clear_Screen2();
-
+void CarAnimation();
 /////////////////////////////////////////////////////////////////
+void CarAnimation()
+{
+
+
+
+}
 void DesignImportFlowerData(){
 	Design::BoxOfHeader();
 	H::setcolor(1);H::gotoxy(35,6);cout<<R"(   ______   ____ _      _________     ______  ______  ____  ___  ______   ______________  _______ __)";
@@ -256,12 +262,12 @@ void DesignBuyingFlower(){
 	H::setcolor(2);H::gotoxy(141,38);cout<<R"(^^^^^^^^^^^^^^^^^^^^)";                                              
 
 //////////////////////////////////////////// buy already and then show presss//////////////////////////////////////////////////////////////////////////
-	H::setcolor(7);H::gotoxy(10,19);cout<<"PRESS         FOR ";
-	H::setcolor(2);H::gotoxy(16,19);cout<<"[ENTER]";
-	H::setcolor(1);H::gotoxy(13,21);cout<<"BUYING MORE";
-	H::setcolor(7);H::gotoxy(143,19);cout<<"PRESS       FOR ";
-	H::setcolor(4);H::gotoxy(149,19);cout<<"[ESC]";
-	H::setcolor(6);H::gotoxy(147,21);cout<<"BACK...";
+	// H::setcolor(7);H::gotoxy(10,19);cout<<"PRESS         FOR ";
+	// H::setcolor(2);H::gotoxy(16,19);cout<<"[ENTER]";
+	// H::setcolor(1);H::gotoxy(13,21);cout<<"BUYING MORE";
+	// H::setcolor(7);H::gotoxy(143,19);cout<<"PRESS       FOR ";
+	// H::setcolor(4);H::gotoxy(149,19);cout<<"[ESC]";
+	// H::setcolor(6);H::gotoxy(147,21);cout<<"BACK...";
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 void DesignInvoice(){
@@ -369,7 +375,7 @@ void DesignInvoice(){
  ////////For output invoice date and exchange/////////////////////////
 	H::setcolor(4);H::gotoxy(102,10);cout<<"INVOICE NO  : ";
 	H::setcolor(5);H::gotoxy(102,11);cout<<"DATE        : ";
-	H::setcolor(6);H::gotoxy(102,12);cout<<"EXCHANGE    : ";
+	H::setcolor(6);H::gotoxy(102,12);cout<<"EXCHANGE    :    1$ = 4200";
 ////////////////////HLINe/////////////////////////////////////////////
 //	H::HLine(31,14,109,3,223);
 	H::HLine(31,13,109,2,196);
@@ -398,10 +404,10 @@ void DesignInvoice(){
 	H::setcolor(3);H::gotoxy(95,34);cout<<"Thank you for buying flowers from our shop.";
 	H::setcolor(3);H::gotoxy(105,35);cout<<"Have a good day ^_^.";
 	                      	
-	H::setcolor(7);H::gotoxy(54,37);cout<<"[TIP] : PRESS       OR              FOR GO TO ";
-	H::setcolor(2);H::gotoxy(68,37);cout<<"[ESC]";
-	H::setcolor(4);H::gotoxy(77,37);cout<<"[BACK SPACE]";
-	H::setcolor(6);H::gotoxy(100,37);cout<<"MAIN MENU...";
+	// H::setcolor(7);H::gotoxy(54,37);cout<<"[TIP] : PRESS       OR              FOR GO TO ";
+	// H::setcolor(2);H::gotoxy(68,37);cout<<"[ESC]";
+	// H::setcolor(4);H::gotoxy(77,37);cout<<"[BACK SPACE]";
+	// H::setcolor(6);H::gotoxy(100,37);cout<<"MAIN MENU...";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

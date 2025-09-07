@@ -52,6 +52,7 @@ void designInsert()
 
 	staffs.WriteToFile();
 	
+	H::setcolor(6); H::gotoxy(30,30); cout << "                                                      ";
 	H::drawBoxSingleLine(55,29,63,1,5);
 	H::setcolor(6); H::gotoxy(58,30); cout << "Press [ ESC ] For Back and Press [ ENTER ] For Input More ";
 	

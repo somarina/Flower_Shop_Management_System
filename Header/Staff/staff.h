@@ -352,6 +352,7 @@ fstream autoId;
 		H::HLine(92,19,33,135,255);
 		H::setcolor(135); H::gotoxy(97,19); H::inputLetter(this->staff_name, 20);
 		H::HLine(92,21,33,135,255);
+		H::setcolor(6); H::gotoxy(30,30); cout << "TIP: USE [LEFT/RIGHT] ARROW KEY AND [ENTER] FOR SELECT";
 		// H::setcolor(135); H::gotoxy(97,21); H::inputLetter(this->staff_gender, 10);/
 		H::setcolor(135); H::gotoxy(97,21);SelectGender(97,21,staff_gender);
 		H::HLine(92,23,33,135,255);
@@ -494,13 +495,14 @@ fstream autoId;
 		        	int lastbyte = Myfile.tellg();
 		     		
 //		     		H::drawBoxSingleLine(38,19,97,5,0);
-		            H::setcolor(1); H::gotoxy(62,20); cout << ">>>>>>>>>>>>>>> ENTER NEW DATA <<<<<<<<<<<<<<<";	            
-		       
+		            H::setcolor(1); H::gotoxy(62,20); cout << ">>>>>>>>>>>>>>> ENTER NEW DATA <<<<<<<<<<<<<<<";
 		            H::setcolor(3); H::gotoxy(41,22); cout << "UPDATE STAFF NAME  : "; 
 					H::setcolor(6); H::inputLetter(staffs.staff_name, 20);          
 		          
 				    H::setcolor(3); H::gotoxy(95,22);  cout << "UPDATE STAFF GENDER       : ";
-					H::setcolor(6); H::inputLetter(staffs.staff_gender, 10);				    
+					H::setcolor(4); H::gotoxy(56, 26); cout << "GENDER TIP USE LEFT/RIGHT ARROW KEY AND PRESS ENTER FOR SELECT";
+					// H::setcolor(6); H::inputLetter(staffs.staff_gender, 10);
+					SelectGender(124,22,staffs.staff_gender);				    
 	
 				    H::setcolor(3); H::gotoxy(41,24);  cout << "UPDATE STAFF EMAIL : ";
 					H::setcolor(6); H::inputEmail(staffs.staff_email, 25);				    
@@ -513,7 +515,7 @@ fstream autoId;
 				    int cycle = 0;
 				    while (cycle < 10) {
 				        if (m > 14) m = 1;
-				
+						
 				        H::setcolor(m++); H::gotoxy(58, 27); cout << ">>>>>>>>>>>>>>> STAFF UPDATED SUCCESSFULLY <<<<<<<<<<<<<<<";			
 				        H::delay(50);
 				        cycle++;

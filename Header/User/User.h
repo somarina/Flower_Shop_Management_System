@@ -28,6 +28,8 @@ void SearchUserData();
 void ShowUserData2();
 void DesignShowUserDate2();
 void DesignUserInformation();
+void printWrapped(const char* text, int width, int startX, int startY);
+void DesignGiveFeedBack();
 //================================ User Class ==============================
 class UserData {
 private:
@@ -475,20 +477,31 @@ bool findUserById(const char* id, UserData &user) {
     return false;
 }
 
-void printWrapped(const char* text, int width) {
+void printWrapped(const char* text, int width, int startX, int startY) {
+    int x = startX;
+    int y = startY;
     int count = 0;
-    for (int i = 0; text[i] != '\0'; i++) {
-        cout << text[i];
-        count++;
-        if (count % width == 0) cout << "\n";
-    }
-    cout << endl;
-}
 
+    for (int i = 0; text[i] != '\0'; i++) {
+        H::gotoxy(x, y);
+        cout << text[i];
+        x++;
+        count++;
+
+        if (count % width == 0) {   // wrap line
+            x = startX;             // reset X
+            y++;                    // move to next row
+        }
+    }
+}
 void ShowFeedbackPages() {
+	H::setcursor(0,8);
     ifstream fin("Data/Feedback.flower", ios::binary);
     if (!fin) {
-        cout << "No feedback found.\n";
+		H::setcursor(0,8);
+		DesignUserFeedback();
+        H::setcolor(195);H::gotoxy(55,20);cout << "No feedback found.\n";
+		H::setcursor(0,8);
         return;
     }
 
@@ -500,37 +513,49 @@ void ShowFeedbackPages() {
     fin.close();
 
     if (count == 0) {
-        cout << "No feedback data.\n";
+		H::setcursor(0,8);
+		DesignUserFeedback();
+        H::setcolor(195);H::gotoxy(55,20);cout << "No feedback data.\n";
+		H::setcursor(0,8);
         return;
     }
 
     int index = 0;
     char key;
-
+	H::setcursor(0,8);
+	DesignUserFeedback();
     do {
-        system("cls");
+		H::setcursor(0,8);
+		H::clearBox(34,19,105,9,196);			
+		H::clearBox(60,12,20,1,136);
+		H::setcursor(0,8);
+		// DesignUserFeedback();
+        // system("cls");
+		// DesignUserFeedback();
 
         UserData user;
+		H::setcursor(0,8);
         if (findUserById(fb[index].userId, user)) {
-            cout << "USER ID          : " << user.getId()
-                 << setw(20) << "FEEDBACK : " << fb[index].feedbackId << endl;
-            cout << "USER NAME        : " << user.getUserName()
-                 << setw(20) << "DATE     : " << fb[index].date << endl;
-            cout << "USER PHONE NUMBER: " << user.getPhoneNumber() << endl;
+			H::setcolor(135);H::gotoxy(62,11);cout << user.getId();
+			H::setcolor(135);H::gotoxy(62,12);cout << user.getUserName();
+			H::setcolor(135);H::gotoxy(62,13);cout << user.getPhoneNumber();
+			H::setcolor(135);H::gotoxy(115,11);cout << fb[index].feedbackId;
+			H::setcolor(135);H::gotoxy(115,12);cout << fb[index].date;
         } else {
-            cout << "USER ID          : " << fb[index].userId
-                 << setw(20) << "FEEDBACK : " << fb[index].feedbackId << endl;
-            cout << "USER NAME        : [User not found]"
-                 << setw(20) << "DATE     : " << fb[index].date << endl;
+			H::setcolor(135);H::gotoxy(35,11);cout << fb[index].userId;
+			H::setcolor(135);H::gotoxy(35,12);cout << "[User not found]";
+			H::setcolor(135);H::gotoxy(98,11);cout << fb[index].feedbackId;
+			H::setcolor(135);H::gotoxy(98,12);cout << fb[index].date;
         }
 
-        cout << "-------------------------------------------------------\n";
-        printWrapped(fb[index].message, 50);
+        // cout << "-------------------------------------------------------\n";
+        H::setcolor(195);printWrapped(fb[index].message, 50, 55, 18);  // start at (33,18)
 
-        cout << "\nUse [LEFT] [RIGHT] ARROW KEY FOR SEE NEXT FEEDBACK AND [ESC] Exit\n";
+        // cout << "\nUse [LEFT] [RIGHT] ARROW KEY FOR SEE NEXT FEEDBACK AND [ESC] Exit\n";
 
         key = _getch(); 
         if (key == 0 || key == -32) { 
+			H::setcursor(0,8);
             key = _getch();
             switch (key) {
                 case 75: index = (index == 0) ? (count - 1) : (index - 1); break; // Left
@@ -819,293 +844,75 @@ a:
 //         }
 //     }
 // }
-// void MessageBox(){
-// 	H::setcursor(0,0);
-// 	H::clearBox(49,16,35,3,0);
-// 	H::clearBox(86,21,35,3,0);
-// 	H::drawBoxSingleLineWithBG(43,15,83,10,0);
-//     H::drawBoxSingleLine(43,15,83,10,162);
-//     H::drawBoxSingleLineWithBG(44,16,81,1,213);
-//     H::setcolor(215);H::gotoxy(80,17);cout<<"MESSAGE";
-    
-    
-//     int x=0;
-//     char op;
-//     do{
-//     	//arrow key lef
-// 	    H::drawBoxSingleLineWithBG(44,23,21,1,153);
-// 	    H::setcolor(151);H::gotoxy(45,24);cout<<"[ENTER] TO BUY MORE";
-// 	    //ARROE KEY RIGHT
-// 	    H::drawBoxSingleLineWithBG(100,23,25,1,153);
-// 	    H::setcolor(151);H::gotoxy(101,24);cout<<"[ESC] FOR PRINT INVOICE";
-// 	    if(x==0){
-// 	    	H::drawBoxSingleLineWithBG(44,23,21,1,136);
-// 	    	H::setcolor(135);H::gotoxy(45,24);cout<<"[ENTER] TO BUY MORE";
-// 		}
-// 		if(x==1){
-// 			H::drawBoxSingleLineWithBG(100,23,25,1,136);
-// 	    	H::setcolor(135);H::gotoxy(101,24);cout<<"[ESC] FOR PRINT INVOICE";
-// 		}
-// 		op=getch();
-// 		switch(op){
-// 			case 75:{
-// 				x--;
-// 				if(x<0){
-// 					x=1;
-// 				}
-// 				break;
-// 			}
-// 			case 77:{
-// 				x++;
-// 				if(x>1){
-// 					x=0;
-// 				}
-// 				break;
-// 			}
-// 		}
-// 	}while(op!=13);
-	
-// }
-// //================ Buying Function =================
-// void Buying() 
-// {
-//     vector<BoughtItem> cart;
-//     char key;
-// 	char op3;
-   
-//     do {
-//         H::setcolor(0);
-//         system("cls");
-//         DesignBuyingFlower();
-
-//         bool found = false;
-//         Product flower;
-//         int buyQty;
-//         string srtBuyQty;
-//         char input[50];
-
-//         while (!found) {
-//             H::setcolor(3);H::gotoxy(53,18);cout << "Enter Flower ID or Name ";
-//             H::setcolor(3);H::gotoxy(90,18);cout << ":  ";H::inputAll(input,10);
-
-//             ifstream fin("Data\\Product.flower", ios::binary);
-//             if (!fin) {
-//                 H::drawBoxSingleLineWithBG(49,16,72,9,6);
-//                 H::setcolor(4);H::gotoxy(55,20);cout << "Error: Product.flower not found!";
-//                 return;
-//             }
-
-//             found = false;
-
-//             while (fin.read((char*)&flower, sizeof(Product))) {
-				
-//                 if (strcmp(flower.GetFlowerName(), input) == 0 ||
-//                     flower.GetFlowerId() == atoi(input)) {
-//                     found = true;
-
-//                   do {
-// 					e:
-// 						H::setcolor(3);H::gotoxy(53,23); cout << "Enter Quantity to buy";
-// 						H::setcolor(3);H::gotoxy(90,23); cout << ":  ";
-// 						buyQty = stoi(H::inputUNumber(srtBuyQty, 6));
-
-// 						if (buyQty > flower.GetFlowerQty()) {
-// 							H::setcolor(4);
-// 							H::gotoxy(53,24);
-// 							cout << " Not enough stock! Available: " << flower.GetFlowerQty();
-// 							H::setcolor(3);H::gotoxy(90,22); cout << ":             ";
-							
-// 							goto e;
-							
-// 						} else if (buyQty <= 0) {
-// 							H::setcolor(4);
-// 							H::gotoxy(53,24);
-// 							cout << " Quantity must be at least 1.";
-// 						} else {
-// 							break; // valid quantity
-// 						}
-// 					} while (true);
-//                     // Reduce stock
-//                     flower.SetFlowerQty(flower.GetFlowerQty() - buyQty);
-
-//                     // Update Product.flower
-//                     fin.close();
-//                     fstream fout("Data\\Product.flower", ios::binary | ios::in | ios::out);
-//                     Product temp;
-//                     while (fout.read((char*)&temp, sizeof(Product))) {
-//                         if (temp.GetFlowerId() == flower.GetFlowerId()) {
-//                             fout.seekp((int)fout.tellg() - sizeof(Product));
-//                             fout.write((char*)&flower, sizeof(Product));
-//                             break;
-//                         }
-//                     }
-//                     fout.close();
-
-//                     // Add to cart
-//                     BoughtItem item;
-//                     item.product = flower;
-//                     item.qty = buyQty;
-//                     cart.push_back(item);
-
-// //                    cout << "\nItem added successfully!\n";
-				
-//                     break;
-//                 }
-//             }
-//             fin.close();
-// ////////////////////////////////////////////////////////////////////////Meyly Change//////////////////////////////
-//             if (!found) {     	
-//                 H::setcolor(2);H::gotoxy(55,21);cout <<"This flower ID or Name doesn't exist in our system. Try again.";
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
-//             }
-//         }
-// ////////////////////////////////////////////////////////////Meyly Change///////////////////////////
-// 	H::setcolor(2);H::gotoxy(70,21);cout << "Item added successfully!";
-// 	MessageBox();
-	        
-// /////////////////////////////////////////////////////////////////////////////////////////////////////////////	    
-//         key = _getch();
-
-//     } while (key == 13);
-
-//     // Save invoice
-//     int count = cart.size();
-//     double grandTotal = 0;
-//     for (auto &item : cart) grandTotal += item.getTotal();
-
-//     ofstream fout("Data\\Invoice.flower", ios::binary | ios::app);
-//     fout.write((char*)&currentUser, sizeof(UserData));
-//     fout.write((char*)&count, sizeof(int));
-//     fout.write((char*)cart.data(), sizeof(BoughtItem) * count);
-//     fout.write((char*)&grandTotal, sizeof(double));
-//     fout.close();
-
-//     // Show invoice
-//     ShowInvoice(currentUser, cart.data(), count);
-// }
-//================ ShowAllInvoices Function =================
-// void ShowAllInvoices() {
-// 	H::setcursor(0,8);
-//     struct Invoice {
-//         UserData user;
-//         int count;
-//         BoughtItem items[100];
-//         double grandTotal;
-//     };
-
-//     ifstream fin("Data/Invoice.flower", ios::binary);
-//     if (!fin || fin.peek() == ifstream::traits_type::eof()) {
-// 		H::setcursor(0,8);
-// 		DesignInvoice();
-//         cout << "No invoices.\n";
-//         return;
-//     }
-
-//     vector<Invoice> invoices;
-
-//     while (true) {
-//         Invoice inv;
-//         if (!fin.read((char*)&inv.user, sizeof(UserData))) break;
-//         if (!fin.read((char*)&inv.count, sizeof(int))) break;
-//         if (!fin.read((char*)inv.items, sizeof(BoughtItem) * inv.count)) break;
-//         if (!fin.read((char*)&inv.grandTotal, sizeof(double))) break;
-
-//         invoices.push_back(inv);
-//     }
-//     fin.close();
-
-//     if (invoices.empty()) {
-// 		H::setcursor(0,8);
-// 		DesignInvoice();
-//         cout << "No invoices.\n";
-//         return;
-//     }
-
-//     int index = 0;
-//     int page = 0;
-//     const int ITEMS_PER_PAGE = 10;
-// 	H::setcursor(0,8);
-//     while (true) {
-// 		int y=20;
-// 		DesignInvoice();
-// 		H::clearBox(36,20,100,9,7);
-// 		H::clearBox(58,15,15,1,7);
-//         Invoice &inv = invoices[index];
-
-//         // cout << "========== Invoice " << index + 1 << " / " << invoices.size() << " ==========\n";
-// 		H::setcolor(1);H::gotoxy(60,14);cout << inv.user.getId();
-//         H::setcolor(2);H::gotoxy(60,15);cout << inv.user.getUserName();
-//         H::setcolor(3);H::gotoxy(60,16);cout << inv.user.getPhoneNumber();
-
-//         int start = page * ITEMS_PER_PAGE;
-//         int end = min(start + ITEMS_PER_PAGE, inv.count);
-//         for (int j = start; j < end; j++) 
-// 		{
-// 			////////////////////////////////////////////////////////////////////////
-// 			H::setcolor(5);H::gotoxy(37,y);cout<<j + 1;
-// 			H::setcolor(4);H::gotoxy(53,y);cout<<inv.items[j].product.GetFlowerName();
-// 			H::setcolor(3);H::gotoxy(85,y);cout<<inv.items[j].qty;
-// 			H::setcolor(2);H::gotoxy(108,y);cout<<"$"<<inv.items[j].product.GetFlowerPrice();
-// 			H::setcolor(1);H::gotoxy(128,y);cout<<"$"<<inv.items[j].getTotal() << endl;
-// 			y++;
-//         }
-// 		H::HLine(31,30,109,2,196);
-// 		H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
-// 		H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
-// 		H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : $" << fixed << setprecision(2) << inv.grandTotal;
-// 		double kh = (inv.grandTotal*4100);
-// 		H::setcolor(4);H::gotoxy(115,32);cout << "KHR : " << fixed << setprecision(0) << kh;
-// 		H::HLine(31,33,109,2,196);	
-//         int key = _getch();
-//         if (key == 27)  // ESC
-// 		{
-// 			return;
-// 		}
-
-//         if (key == 0 || key == 224) {
-//             key = _getch();
-//             if (key == 75) { // LEFT
-//                 index--; page = 0;
-//                 if (index < 0) index = invoices.size() - 1;
-//             }
-//             else if (key == 77) { // RIGHT
-//                 index++; page = 0;
-//                 if (index >= invoices.size()) index = 0;
-//             }
-//             else if (key == 72) { // UP
-//                 page--;
-//                 if (page < 0) page = 0;
-//             }
-//             else if (key == 80) { // DOWN
-//                 int maxPage = (inv.count + ITEMS_PER_PAGE - 1) / ITEMS_PER_PAGE - 1;
-//                 page++;
-//                 if (page > maxPage) page = maxPage;
-//             }
-//         }
-//     }
-// }
-
-//================ Show One Invoice =================
 void ShowInvoice(const Invoice& inv) {
-    system("cls");
-    cout << "\n==============================================\n";
-    cout << "Invoice No: " << inv.invoiceNo << "\n";
-    cout << "User: " << inv.username << "   Phone: " << inv.phone << "\n";
-    cout << "User ID: " << inv.userId << "\n";
-    cout << "Date: " << inv.date << "\n";
-    cout << "----------------------------------------------\n";
-    cout << "ID    Name           Qty   Price    Total\n";
-    cout << "----------------------------------------------\n";
-    for (int i = 0; i < inv.itemCount; i++) {
-        cout << inv.items[i].product.GetFlowerId() << "   "
-             << inv.items[i].product.GetFlowerName() << "   "
-             << inv.items[i].qty << "   "
-             << inv.items[i].product.GetFlowerPrice() << "   "
-             << inv.items[i].getTotal() << "\n";
+	H::setcolor(0);
+	H::cls();
+	H::setcursor(0,8);
+	DesignInvoice();
+    int startItem = 0;
+    int itemsPerPage = 6;
+    // int totalItems = inv.items.size();
+	int totalItems = inv.itemCount; 
+    char key;
+
+    do {
+    DesignInvoice();
+    H::setcolor(4);H::gotoxy(120,10);cout << inv.invoiceNo;
+    H::setcolor(5);H::gotoxy(120,11);cout << inv.date;
+    H::setcolor(1);H::gotoxy(60,14);cout << inv.userId;
+    H::setcolor(2);H::gotoxy(60,15);cout << inv.username;
+    H::setcolor(3);H::gotoxy(60,16);cout << inv.phone;
+
+    int j = 1;   // reset numbering
+    int y = 19;  // reset row start
+
+    for (int i = startItem; i < startItem + itemsPerPage && i < totalItems; i++) {
+        const BoughtItem &item = inv.items[i];
+        H::setcolor(5);H::gotoxy(37,y);cout<< j;
+        H::setcolor(4);H::gotoxy(53,y);cout<< item.product.GetFlowerName();
+        H::setcolor(3);H::gotoxy(85,y);cout<< item.qty;
+        H::setcolor(2);H::gotoxy(108,y);cout<<"$"<< item.product.GetFlowerPrice();
+        H::setcolor(1);H::gotoxy(128,y);cout<<"$"<< item.getTotal();    
+        y++;
+        j++;
     }
-    cout << "----------------------------------------------\n";
-    cout << "Grand Total: " << inv.grandTotal() << "\n";
-    cout << "==============================================\n\n";
+		H::HLine(31,30,109,2,196);
+		H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
+		H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
+		H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : $" << fixed << setprecision(2) << inv.grandTotal();
+		double kh = (inv.grandTotal() * 4100);
+		H::setcolor(4);H::gotoxy(115,32);cout << "KHR : " << fixed << setprecision(0) << kh;
+		H::HLine(31,33,109,2,196);	
+	
+        H::setcolor(7);H::gotoxy(50,37);cout << "[TIP] : PRESS [ESC] FOR BACK AND [ENTER] FOR BUY AGAIN";
+		H::setcolor(6);H::gotoxy(50,37);cout << "[ITP]";
+		H::setcolor(2);H::gotoxy(64,37);cout << "[ESC]";
+		H::setcolor(4);H::gotoxy(83,37);cout << "[ENTER]";
+           key = _getch();
+        if (key == 0 || key == -32) { // arrow keys
+            key = _getch();
+            switch (key) {
+                case 72: // UP arrow
+                    startItem -= itemsPerPage;
+                    if (startItem < 0) startItem = 0;
+                    break;
+                case 80: // DOWN arrow
+                    startItem += itemsPerPage;
+                    if (startItem >= totalItems) startItem = totalItems - itemsPerPage;
+                    if (startItem < 0) startItem = 0;
+                    break;
+            }
+        } 
+        else if (key == 13) { 
+            // ENTER pressed → Buy 
+			H::setcursor(1,8);
+			H::setcolor(0);
+			H::cls();
+            Buying();
+            return; // exit this invoice after starting new buying
+        }
+
+    } while (key != 27); // ESC to exit
 }
 
 //================ Show All Invoices =================
@@ -1149,36 +956,52 @@ void ShowAllInvoices() {
         }
     }
 }
-
 //================ Buying Flow =================
 void Buying() {
+	H::setcursor(0,8);
     cart.clear();
     Invoice inv;
     inv.invoiceNo = ++invoiceCounter;
     inv.itemCount = 0;
 
     // Use global currentUser directly
-	strcpy(inv.userId, currentUser.getId());
-	strcpy(inv.username, currentUser.getUserName());
-	strcpy(inv.phone, currentUser.getPhoneNumber());
-	getCurrentDate(inv.date);
+    strcpy(inv.userId, currentUser.getId());
+    strcpy(inv.username, currentUser.getUserName());
+    strcpy(inv.phone, currentUser.getPhoneNumber());
+    getCurrentDate(inv.date);
 
     char key;
-    do {
-        //================ OLD BUYING LOGIC =================
-        bool found = false;
-        Product flower;
-        int buyQty;
-        string srtBuyQty;
-        char input[50];
+    Product flower;
+    bool buying = true;
 
+    while (buying) {
+		H::setcursor(0,8);
+        bool found = false;
+        char input[50];
+        DesignBuyingFlower();
+		H::setcursor(0,8);
+
+        //================ Search Product =================
         while (!found) {
-            H::setcolor(3);H::gotoxy(53,18);cout << "Enter Flower ID or Name ";
-            H::setcolor(3);H::gotoxy(90,18);cout << ":  ";H::inputAll(input,10);
+			H::setcursor(0,8);
+			H::clearBox(53,23,66,1,6);
+			DesignBuyingFlower();
+			H::setcursor(0,8);
+			H::setcolor(7);H::gotoxy(10,19);cout<<"                  ";
+			H::setcolor(2);H::gotoxy(16,19);cout<<"       ";
+			H::setcolor(1);H::gotoxy(13,21);cout<<"            ";
+			H::setcolor(7);H::gotoxy(143,19);cout<<"                ";
+			H::setcolor(4);H::gotoxy(149,19);cout<<"     ";
+			H::setcolor(6);H::gotoxy(147,21);cout<<"            ";
+			H::setcolor(3); H::gotoxy(90,18); cout << ":  ";cout << "          ";
+			H::setcursor(1,8);
+            H::setcolor(3); H::gotoxy(53,18); cout << "Enter Flower ID or Name ";
+            H::setcolor(3); H::gotoxy(90,18); cout << ":  "; H::inputAll(input,10);
 
             ifstream fin("Data\\Product.flower", ios::binary);
             if (!fin) {
-                H::setcolor(4);H::gotoxy(55,20);
+                DesignBuyingFlower();
+                H::setcolor(4); H::gotoxy(55,20);
                 cout << "Error: Product.flower not found!";
                 return;
             }
@@ -1187,75 +1010,140 @@ void Buying() {
                 if (strcmp(flower.GetFlowerName(), input) == 0 ||
                     flower.GetFlowerId() == atoi(input)) {
                     found = true;
-
-                    // Quantity loop
-                    do {
-                        H::setcolor(3);H::gotoxy(53,23); cout << "Enter Quantity to buy";
-                        H::setcolor(3);H::gotoxy(90,23); cout << ":  ";
-                        buyQty = stoi(H::inputUNumber(srtBuyQty, 6));
-
-                        if (buyQty > flower.GetFlowerQty()) {
-                            H::setcolor(4);
-                            H::gotoxy(53,24);
-                            cout << " Not enough stock! Available: " << flower.GetFlowerQty();
-                        } else if (buyQty <= 0) {
-                            H::setcolor(4);
-                            H::gotoxy(53,24);
-                            cout << " Quantity must be at least 1.";
-                        } else break; // valid
-                    } while (true);
-
-                    // Reduce stock and update Product.flower
-                    flower.SetFlowerQty(flower.GetFlowerQty() - buyQty);
-                    fin.close();
-                    fstream fout("Data\\Product.flower", ios::binary | ios::in | ios::out);
-                    Product temp;
-                    while (fout.read((char*)&temp, sizeof(Product))) {
-                        if (temp.GetFlowerId() == flower.GetFlowerId()) {
-                            fout.seekp((int)fout.tellg() - sizeof(Product));
-                            fout.write((char*)&flower, sizeof(Product));
-                            break;
-                        }
-                    }
-                    fout.close();
-
-                    // Add to cart
-                    BoughtItem item;
-                    item.product = flower;
-                    item.qty = buyQty;
-                    cart.push_back(item);
                     break;
                 }
             }
             fin.close();
 
             if (!found) {
-                H::setcolor(2);H::gotoxy(55,21);
-                cout <<"This flower ID or Name doesn't exist in our system. Try again.";
+				H::setcursor(0,8);
+				H::drawBoxSingleLineWithBG(49,21,72,3,6);
+                H::setcolor(2); H::gotoxy(65,23);cout << "This flower ID or Name doesn't exist!";
+                H::setcolor(3); H::gotoxy(55,22);
+				H::setcolor(7);H::gotoxy(10,19);cout<<"PRESS         FOR ";
+				H::setcolor(2);H::gotoxy(16,19);cout<<"[ENTER]";
+				H::setcolor(1);H::gotoxy(13,21);cout<<"SEARCH AGAIN";
+				H::setcolor(7);H::gotoxy(143,19);cout<<"PRESS       FOR ";
+				H::setcolor(4);H::gotoxy(149,19);cout<<"[ESC]";
+				H::setcolor(6);H::gotoxy(147,21);cout<<"BACK...";
+                key = _getch();
+                if (key == 27) 
+				{
+					return; // ESC → cancel whole buying
+				}
             }
         }
-        //================ END OLD CODE =================
 
-        cout << "\nPress ENTER to buy more, ESC to finish invoice...\n";
+        //================ Quantity Input =================
+        int buyQty = 0;
+        string srtBuyQty;
+        bool validQty = false;
+
+        while (!validQty) {
+			H::setcursor(0,8);
+			H::clearBox(53,23,66,1,6);
+			H::setcolor(7);H::gotoxy(10,19);cout<<"                  ";
+			H::setcolor(2);H::gotoxy(16,19);cout<<"       ";
+			H::setcolor(1);H::gotoxy(13,21);cout<<"               ";
+			H::setcolor(7);H::gotoxy(143,19);cout<<"                ";
+			H::setcolor(4);H::gotoxy(149,19);cout<<"     ";
+			H::setcolor(6);H::gotoxy(147,21);cout<<"           ";
+			H::setcolor(3); H::gotoxy(90,23); cout << ":  ";cout << "     ";
+			H::setcursor(1,8);
+			H::drawBoxSingleLineWithBG(49,21,35,3,6);
+    		H::drawBoxSingleLineWithBG(86,21,35,3,6);
+            H::setcolor(3); H::gotoxy(53,23); cout << "Enter Quantity to buy";
+            H::setcolor(3); H::gotoxy(90,23); cout << ":  ";
+            buyQty = stoi(H::inputUNumber(srtBuyQty, 5));
+
+            if (buyQty > flower.GetFlowerQty()) {
+				H::drawBoxSingleLineWithBG(49,21,72,3,6);
+                H::setcolor(4); H::gotoxy(55,23);
+                cout << "Not enough stock! Available: " << flower.GetFlowerQty();
+                H::setcolor(3); H::gotoxy(55,23);
+                H::setcolor(3); H::gotoxy(55,22);
+				H::setcolor(7);H::gotoxy(10,19);cout<<"PRESS         FOR ";
+				H::setcolor(2);H::gotoxy(16,19);cout<<"[ENTER]";
+				H::setcolor(1);H::gotoxy(13,21);cout<<"ENTER QTY AGAIN";
+				H::setcolor(7);H::gotoxy(143,19);cout<<"PRESS       FOR ";
+				H::setcolor(4);H::gotoxy(149,19);cout<<"[ESC]";
+				H::setcolor(6);H::gotoxy(147,21);cout<<"CANCEL ITEM";
+                key = _getch();
+                if (key == 27) goto NextItem; // cancel this item
+            } else if (buyQty <= 0) {
+                H::setcolor(4); H::gotoxy(55,23);
+                cout << "Quantity must be at least 1.";
+				H::setcolor(3); H::gotoxy(55,23);
+                H::setcolor(3); H::gotoxy(55,22);
+				H::setcolor(7);H::gotoxy(10,19);cout<<"PRESS         FOR ";
+				H::setcolor(2);H::gotoxy(16,19);cout<<"[ENTER]";
+				H::setcolor(1);H::gotoxy(13,21);cout<<"ENTER AGAIN";
+				H::setcolor(7);H::gotoxy(143,19);cout<<"PRESS       FOR ";
+				H::setcolor(4);H::gotoxy(149,19);cout<<"[ESC]";
+				H::setcolor(6);H::gotoxy(147,21);cout<<"CANCEL ITEM";
+                key = _getch();
+                if (key == 27) goto NextItem;
+            } else {
+                validQty = true;
+            }
+        }
+
+        //================ Update Product Stock =================
+        {
+            fstream fout("Data\\Product.flower", ios::binary | ios::in | ios::out);
+            Product temp;
+            while (fout.read((char*)&temp, sizeof(Product))) {
+                if (temp.GetFlowerId() == flower.GetFlowerId()) {
+                    flower.SetFlowerQty(flower.GetFlowerQty() - buyQty);
+                    fout.seekp((int)fout.tellg() - sizeof(Product));
+                    fout.write((char*)&flower, sizeof(Product));
+                    break;
+                }
+            }
+            fout.close();
+        }
+
+        //================ Add to Cart =================
+        {
+            BoughtItem item;
+            item.product = flower;
+            item.qty = buyQty;
+            cart.push_back(item);
+        }
+
+        // Success message
+		H::drawBoxSingleLineWithBG(49,21,72,3,6);
+        H::setcolor(2); H::gotoxy(73,23);
+        cout << "Item added successfully";
+		H::setcolor(3); H::gotoxy(55,23);
+		H::setcolor(3); H::gotoxy(55,22);
+		H::setcolor(7);H::gotoxy(10,19);cout<<"PRESS         FOR ";
+		H::setcolor(2);H::gotoxy(16,19);cout<<"[ENTER]";
+		H::setcolor(1);H::gotoxy(13,21);cout<<"BUYING MORE";
+		H::setcolor(7);H::gotoxy(143,19);cout<<"PRESS       FOR ";
+		H::setcolor(4);H::gotoxy(149,19);cout<<"[ESC]";
+		H::setcolor(6);H::gotoxy(147,21);cout<<"SHOW INVOICE";
         key = _getch();
-    } while (key == 13); // ENTER = buy more
+        if (key == 27) buying = false; // ESC → stop buying
 
-    // Move cart -> invoice
+        NextItem:; // label for skipping item
+    }
+
+    //================ Save Invoice =================
     inv.itemCount = cart.size();
     for (int i = 0; i < cart.size(); i++)
         inv.items[i] = cart[i];
 
-    // Save invoice to file
     ofstream fout("Data\\Invoice.flower", ios::binary | ios::app);
     fout.write((char*)&inv, sizeof(Invoice));
     fout.close();
 
-    // Show invoice
+    //================ Show Invoice =================
     ShowInvoice(inv);
 
-    cout << "\nPress ENTER to Start New Invoice, ESC to Back to Menu...\n";
     key = _getch();
 }
+
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 // //=============================== User Menu ===============================
@@ -2615,5 +2503,97 @@ void DesignUserInformation(){
 	// H::setcolor(6);H::gotoxy(88,31);cout<<"BACK";
 	NewFlowerEdit();
 }
+void DesignGiveFeedBack()
+{
+    //animation top left
+	H::HLine(0,0,85,145,255);
+	
+	//animation top left
+	H::HLine(85,0,85,145,255);
+	
+	//animation bottom left
+	H::HLine(0,39,85,145,255);
+	
+	//animation bottom right
+	H::HLine(85,39,85,145,255);
+	
+	//border left
+	H::VLine(1,0,39,145,255);
+	H::VLine(2,0,39,145,255);
+	
+	//border right
+	H::VLine(169,0,39,145,255);
+	H::VLine(170,0,39,145,255);
+	
+	//////////////////////////////////////
+    H::VLine(50,0,2,68,219);
+    H::VLine(52,0,2,68,219);
 
+    H::VLine(125,0,2,68,219);
+    H::VLine(127,0,2,68,219);
+    
+    H::HLine(45,2,91,6,223);
+    H::HLine(43,3,91,5,223);
+    H::HLine(41,4,91,4,223);
+    H::HLine(39,5,91,3,223);
+    H::HLine(37,6,91,2,223);
+    H::HLine(35,7,91,1,220);
+	//////////////////////////////////////
+
+    H::setcolor(1);H::gotoxy(50,3);cout<<R"(  ___  __  _  _  ____    ____  ____  ____  ____  ____   __    ___  __ _ )";
+    H::setcolor(2);H::gotoxy(50,4);cout<<R"( / __)(  )/ )( \(  __)  (  __)(  __)(  __)(    \(  _ \ / _\  / __)(  / ))";
+    H::setcolor(3);H::gotoxy(50,5);cout<<R"(( (_ \ )( \ \/ / ) _)    ) _)  ) _)  ) _)  ) D ( ) _ (/    \( (__  )  ( )";
+    H::setcolor(4);H::gotoxy(50,6);cout<<R"( \___/(__) \__/ (____)  (__)  (____)(____)(____/(____/\_/\_/ \___)(__\_))";
+
+    //sky
+	H::setcolor(1);H::gotoxy(13,1);cout<<R"(     .-.    )";                                
+	H::setcolor(1);H::gotoxy(13,2);cout<<R"(  .-(   )-.  )";                           
+	H::setcolor(1);H::gotoxy(13,3);cout<<R"( (     __) )-. )";                      
+	H::setcolor(1);H::gotoxy(13,4);cout<<R"(  `-(       __) )";                     
+	H::setcolor(1);H::gotoxy(13,5);cout<<R"(    `(____)-',  )";                      
+	H::setcolor(6);H::gotoxy(13,6);cout<<R"(  - -  :   :  - -)";
+	H::setcolor(6);H::gotoxy(13,7);cout<<R"(      / `-' \)";
+	H::setcolor(6);H::gotoxy(13,8);cout<<R"(    ,    |   .)";
+	H::setcolor(6);H::gotoxy(13,9);cout<<R"(         .    )"; 	
+	//star
+	
+	H::setcolor(6);H::gotoxy(142,1);cout<<R"(      ,)"; 
+	H::setcolor(6);H::gotoxy(142,2);cout<<R"(   \  :  /)"; 
+	H::setcolor(1);H::gotoxy(142,3);cout<<R"(`. __/ \__ .')"; 
+	H::setcolor(1);H::gotoxy(142,4);cout<<R"(_ _\     /_ _)"; 
+	H::setcolor(2);H::gotoxy(142,5);cout<<R"(   /_   _\)"; 
+	H::setcolor(2);H::gotoxy(142,6);cout<<R"( .'  \ /  `.)"; 
+	H::setcolor(3);H::gotoxy(142,7);cout<<R"(   /  :  \   )";  
+	H::setcolor(3);H::gotoxy(142,8);cout<<R"(      ')"; 
+	
+
+    //BOX FOR BODY
+	H::drawBoxSingleLineWithBG(30,10,110,3,136);
+	H::setcolor(135);H::gotoxy(35,11);cout<<"USER ID             : ";
+	H::setcolor(135);H::gotoxy(58,11);cout<<"U-100";
+    
+
+	H::setcolor(135);H::gotoxy(35,12);cout<<"USER NAME           : ";
+    H::setcolor(135);H::gotoxy(58,12);cout<<"KEAT SOMARINA";
+
+	H::setcolor(135);H::gotoxy(35,13);cout<<"USER PHONE NUMBER   : ";
+    H::setcolor(135);H::gotoxy(58,13);cout<<"016269851";
+
+	H::setcolor(135);H::gotoxy(98,11);cout<<"FEEDBACK   : ";
+    H::setcolor(135);H::gotoxy(112,11);cout<<"fed-0001";
+
+	H::setcolor(135);H::gotoxy(98,12);cout<<"DATE       : ";
+    H::setcolor(135);H::gotoxy(112,12);cout<<"23-11-2005";
+
+    H::setcolor(6);H::gotoxy(30,17);cout<<"GIVE US YOUR FEEDBACK";
+
+	H::drawBoxSingleLineWithBG(30,18,110,10,247);
+
+    H::setcolor(245);H::gotoxy(35,19); cout << ">>>>>"; H::setcolor(248); cout << " NOTED : YOU CAN INPUT ONLY 250 CHARACTERS "; H::setcolor(245); cout << "<<<<<";
+    
+    H::drawBoxSingleLineWithBG(35,20,100,6,136);
+    H::setcolor(135);H::gotoxy(40,21);cout<<"YOUR FEEDBACK.....";
+
+    NewFlowerEdit();
+}
 #endif

@@ -226,7 +226,7 @@ void designDisplay() {
         }
 
         H::setcolor(3);H::gotoxy(78, 29); cout << "Page " << page + 1 << "/" << ((totalStaff + pageSize - 1) / pageSize);
-		H::setcolor(6); H::gotoxy(58,30); cout << "Use Left/Right arrows to Show Next PAGE Anf [ ESC ] For Back";
+		H::setcolor(6); H::gotoxy(58,30); cout << "Use Left/Right arrows to Show Next PAGE And [ ESC ] For Back";
 
         key = getch();
         if (key == 0 || key == -32) {
@@ -260,7 +260,7 @@ void designSearch()
 	staffs.SearchFromFile();
 	
 	H::drawBoxSingleLine(55,29,63,1,5);
-	H::setcolor(6); H::gotoxy(58,30); cout << "Press [ ESC ] For Back and Press [ ENTER ] For Input More ";
+	H::setcolor(6); H::gotoxy(58,30); cout << "Press [ ESC ] For Back and Press [ ENTER ] For Search More ";
 	
 	H::setcursor(0,0);
     int m=1;
