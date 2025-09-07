@@ -10,6 +10,7 @@ void FirstConsole();
 void BigMenu();
 void LoginAsAdmin();
 void AfterLoginAdmin();
+void DesignExit();
 //////////////////////////////////////////////////////////////////////////////////////
 int main()
 {
@@ -28,6 +29,7 @@ int main()
 	int x = 1;             
 	char op,key;
 	do{ 
+		
 		f:
 		H::setcursor(0,0);	
 		BigMenu();
@@ -121,8 +123,8 @@ int main()
 		if(x=5)
 		{
 			H::cls();
-			H::gotoxy(30,20);MNM2("Exiting The System .......");
-			exit(0);
+			DesignExit();
+			goto f;
 		}
 	}while(true);
 	getch();
@@ -456,6 +458,7 @@ void LoginAsAdmin()
             H::gotoxy(69,29); cout << "         Login Success           ";
 			H::setcolor(0);
 			H::cls();
+			clear_Screen2();
 			AfterLoginAdmin();			
             break;
         }
@@ -944,4 +947,275 @@ void BigMenu()
   H::setcolor(7); H::gotoxy(108,24); cout << "AND ";  H::setcolor(1); cout << "ENTER ";  H::setcolor(7); cout << "FOR SELECT";
 
 
+}
+
+void DesignExit(){
+	//animation top left
+	H::HLine(0,0,85,153,255);
+	//animation top left
+	H::HLine(85,0,85,153,255);
+	
+	//left 
+
+	H::VLine(2,0,38,153,255);
+	H::VLine(3,0,38,153,255);
+	H::VLine(168,0,38,153,255);
+	H::VLine(169,0,38,153,255);
+	
+//////////////////////////////////////	
+	H::VLine(53,0,2,136,255);
+    H::VLine(55,0,2,136,255);
+
+    H::VLine(112,0,2,136,255);
+    H::VLine(114,0,2,136,255);
+/////////////////////////////////////// 
+	
+	H::HLine(39,3,90,72,255);
+	H::VLine(40,3,5,72,255);
+	H::VLine(41,3,5,72,255);
+	
+	H::VLine(128,3,5,72,255);
+	H::VLine(129,3,5,72,255);
+	H::HLine(39,9,90,72,255);
+    
+    H::HLine(31,5,8,4,220);
+    H::HLine(31,7,8,4,220);
+    H::HLine(129,5,8,4,220);
+    H::HLine(129,7,8,4,220);
+    
+	H::setcolor(1);H::gotoxy(47,4);cout<<R"(  _____  _____ _____ ___ _  _  ___   ___ ___  ___   ___ ___    _   __  __ )";
+	H::setcolor(2);H::gotoxy(47,5);cout<<R"( | __\ \/ /_ _|_   _|_ _| \| |/ __| | _ \ _ \/ _ \ / __| _ \  /_\ |  \/  |)";
+	H::setcolor(3);H::gotoxy(47,6);cout<<R"( | _| >  < | |  | |  | || .` | (_ | |  _/   / (_) | (_ |   / / _ \| |\/| |)";
+	H::setcolor(4);H::gotoxy(47,7);cout<<R"( |___/_/\_\___| |_| |___|_|\_|\___| |_| |_|_\\___/ \___|_|_\/_/ \_\_|  |_|)";
+                                                                              
+    
+	H::setcolor(1); H::gotoxy(10,2); cout << R"(        .)";
+	H::setcolor(2); H::gotoxy(10,3); cout << R"(      \ | /)";
+	H::setcolor(3); H::gotoxy(10,4); cout << R"(    '-.;;;.-')";
+	H::setcolor(4); H::gotoxy(10,5); cout << R"(   -==;;;;;==-)";
+	H::setcolor(5); H::gotoxy(10,6); cout << R"(    .-';;;'-.)";
+	H::setcolor(6); H::gotoxy(10,7); cout << R"(      / | \)";
+	H::setcolor(1); H::gotoxy(10,8); cout << R"(        '   )";
+	
+	H::setcolor(1); H::gotoxy(143,2); cout << R"(        .)";
+	H::setcolor(2); H::gotoxy(143,3); cout << R"(      \ | /)";
+	H::setcolor(3); H::gotoxy(143,4); cout << R"(    '-.;;;.-')";
+	H::setcolor(4); H::gotoxy(143,5); cout << R"(   -==;;;;;==-)";
+	H::setcolor(5); H::gotoxy(143,6); cout << R"(    .-';;;'-.)";
+	H::setcolor(6); H::gotoxy(143,7); cout << R"(      / | \)";
+	H::setcolor(1); H::gotoxy(143,8); cout << R"(        '   )";
+    
+    
+    H::setcolor(1); H::gotoxy(6,10); cout << R"(  _ " _ )";
+	H::setcolor(5); H::gotoxy(6,11); cout << R"( (_\|/_))";
+	H::setcolor(3); H::gotoxy(6,12); cout << R"(  (/|\))";
+	
+	H::setcolor(6); H::gotoxy(26,11); cout << R"(  _ " _ )";
+	H::setcolor(3); H::gotoxy(26,12); cout << R"( (_\|/_))";
+	H::setcolor(5); H::gotoxy(26,13); cout << R"(  (/|\))";
+	
+	H::setcolor(3); H::gotoxy(15,14); cout << R"(  _ " _ )";
+	H::setcolor(2); H::gotoxy(15,15); cout << R"( (_\|/_))";
+	H::setcolor(6); H::gotoxy(15,16); cout << R"(  (/|\))";
+
+
+	H::setcolor(1); H::gotoxy(155,10); cout << R"(  _ " _ )";
+	H::setcolor(5); H::gotoxy(155,11); cout << R"( (_\|/_))";
+	H::setcolor(3); H::gotoxy(155,12); cout << R"(  (/|\))";
+	
+	H::setcolor(6); H::gotoxy(135,11); cout << R"(  _ " _ )";
+	H::setcolor(3); H::gotoxy(135,12); cout << R"( (_\|/_))";
+	H::setcolor(5); H::gotoxy(135,13); cout << R"(  (/|\))";
+	
+	H::setcolor(3); H::gotoxy(146,14); cout << R"(  _ " _ )";
+	H::setcolor(2); H::gotoxy(146,15); cout << R"( (_\|/_))";
+	H::setcolor(6); H::gotoxy(146,16); cout << R"(  (/|\))";
+
+	
+	H::drawBoxDoubleLine(35,13,100,7,7);
+	H::setcolor(2);H::gotoxy(65,15);cout<<"THANK YOU FOR USING OUR APPLICATION.";
+	H::setcolor(6);H::gotoxy(59,17);cout<<"WE ARE HERE TO MAKE YOUR EXPERIENCE EVEN BETTER.";
+	H::setcolor(199);H::gotoxy(42,19);cout<<"WISING YOU ENDLESS ENJOYMENT AND PRODUCTIVITY AS YOU CONTINUE USING OUR APPLICATION.";
+	
+	H::HLine(6,20,16,4,220);
+	H::HLine(9,21,10,2,220);
+	H::HLine(9,22,10,1,220);
+	H::HLine(9,23,10,5,220);
+	H::HLine(9,24,10,6,220);
+	H::HLine(9,25,10,7,220);
+	H::HLine(9,26,10,7,220);
+	H::HLine(9,27,10,6,220);
+	H::HLine(9,28,10,5,220);
+	H::HLine(9,29,10,1,220);
+	H::HLine(9,30,10,2,220);
+	H::HLine(6,31,16,4,220);
+	
+	H::HLine(148,20,16,4,220);
+	H::HLine(151,21,10,2,220);
+	H::HLine(151,22,10,1,220);
+	H::HLine(151,23,10,5,220);
+	H::HLine(151,24,10,6,220);
+	H::HLine(151,25,10,7,220);
+	H::HLine(151,26,10,7,220);
+	H::HLine(151,27,10,6,220);
+	H::HLine(151,28,10,5,220);
+	H::HLine(151,29,10,1,220);
+	H::HLine(151,30,10,2,220);
+	H::HLine(148,31,16,4,220);
+	
+	H::setcolor(4); H::gotoxy(30,24); cout << R"( __   __   ___     ___ )";  
+	H::setcolor(4); H::gotoxy(30,25); cout << R"( \ \ / /  | __|   / __| )"; 
+	H::setcolor(4); H::gotoxy(30,26); cout << R"(  \ V /   | _|    \__ \ )"; 
+	H::setcolor(4); H::gotoxy(30,27); cout << R"(  _|_|_   |___|   |___/ )"; 
+	H::setcolor(3); H::gotoxy(30,28); cout << R"(_| """ |_|"""""|_|"""""| )";
+	H::setcolor(3); H::gotoxy(30,29); cout << R"("`-0-0-'"`-0-0-'"`-0-0-')"; 
+	
+	H::setcolor(4); H::gotoxy(125,24); cout << R"(  _  _     ___  )";  
+	H::setcolor(4); H::gotoxy(125,25); cout << R"( | \| |   / _ \ )";  
+	H::setcolor(4); H::gotoxy(125,26); cout << R"( | .` |  | (_) | )"; 
+	H::setcolor(4); H::gotoxy(125,27); cout << R"( |_|\_|   \___/ )";  
+	H::setcolor(3); H::gotoxy(125,28); cout << R"(_|"""""|_|"""""| )"; 
+	H::setcolor(3); H::gotoxy(125,29); cout << R"("`-0-0-'"`-0-0-' )"; 
+	
+		
+	
+/////////////////////Footer////////////////////////////////////////////////////    
+    H::drawBoxDoubleLine(4,33,162,1,4);
+    H::HLine(4,34,162,2,221); 
+    H::HLine(6,36,158,5,219);
+    H::setcolor(215);H::gotoxy(10,36);cout<<"USE ARROW KEYS [LEFT] OR [RIGHT] AND PRESS [ENTER] FOR SELECT";
+    H::setcolor(211);H::gotoxy(25,36);cout<<"[LEFT]";
+    H::setcolor(214);H::gotoxy(35,36);cout<<"[RIGHT]";
+    H::setcolor(209);H::gotoxy(53,36);cout<<"[ENTER]";
+    H::setcolor(215);H::gotoxy(105,36);cout<<"FLOWER SHOP MANAGEMENT SYSTEM";
+    H::setcolor(215);H::gotoxy(85,36);cout<<"^-^ ^-^ ^-^";
+    H::setcolor(215);H::gotoxy(148,36);cout<<"CREDIT : M N M"; 
+    H::drawBoxDoubleLine(4,37,162,1,4);
+    H::HLine(4,38,162,2,221);
+//////////////////////////////////////////////////////////////////////////////    
+    
+    
+    H::gotoxy(60,22);H::setcolor(2);cout << R"(                 _)";
+    H::gotoxy(60,23);H::setcolor(2);cout << R"(               _(_)_                          wWWWw )";
+    H::gotoxy(60,24);H::setcolor(2);cout << R"(   @@@@       (_)@(_)   vVVVv     _     @@@@  (___))";
+    H::gotoxy(60,25);H::setcolor(2);cout << R"(  @@()@@ wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  .oOOo.)";
+    H::gotoxy(60,26);H::setcolor(2);cout << R"(   @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \|/ OO()OO)";
+    H::gotoxy(60,27);H::setcolor(2);cout << R"(    /      Y       \|    \|/    /(_)    \|      |/ 'OOOO')";
+    H::gotoxy(60,28);H::setcolor(2);cout << R"( \ |     \ |/       | / \ | /  \|/       |/    \|    \|)";
+    H::gotoxy(60,29);H::setcolor(2);cout << R"( \ |     \ |/       | / \ | /  \|/       |/    \|    \|)";
+    H::gotoxy(26,30);H::setcolor(2);cout << R"( \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|// \\|//\\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|// \\|// \|/)";
+    H::gotoxy(26,31);H::setcolor(2);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
+    
+    
+    
+    
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(60,24);H::setcolor(4);cout << R"(   @@@@  )";
+    H::gotoxy(60,25);H::setcolor(4);cout << R"(  @@()@@ )";
+    H::gotoxy(60,26);H::setcolor(4);cout << R"(   @@@@  )";
+ 
+   
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    H::gotoxy(69,25);H::setcolor(5);cout << R"(wWWWw )";
+    H::gotoxy(69,26);H::setcolor(5);cout << R"((___) )";  
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//   
+    H::gotoxy(74,22);H::setcolor(1);cout << R"(   _)";
+    H::gotoxy(74,23);H::setcolor(1);cout << R"( _(_)_)";
+    H::gotoxy(74,24);H::setcolor(1);cout << R"((_)@(_))";
+    H::gotoxy(74,25);H::setcolor(1);cout << R"(  (_)\)"; 
+    H::gotoxy(79,25);H::setcolor(2);cout << R"(\)";
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(84,24);H::setcolor(6);cout << R"(vVVVv)";
+    H::gotoxy(84,25);H::setcolor(6);cout << R"((___))";
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(90,24);H::setcolor(3);cout << R"(    _)";
+    H::gotoxy(90,25);H::setcolor(3);cout << R"(  _(_)_)";
+    H::gotoxy(90,26);H::setcolor(3);cout << R"( (_)@(_))";
+    H::gotoxy(90,27);H::setcolor(3);cout << R"(  /(_))";
+    H::gotoxy(91,27);H::setcolor(2);cout << R"( /)";
+   
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    H::gotoxy(99,24);H::setcolor(5);cout << R"( @@@@)";
+    H::gotoxy(99,25);H::setcolor(5);cout << R"(@@()@@)";
+    H::gotoxy(99,26);H::setcolor(5);cout << R"( @@@@)";
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(106,23);H::setcolor(5);cout << R"(wWWWw)";
+    H::gotoxy(106,24);H::setcolor(5);cout << R"((___))";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+    H::gotoxy(110,25);H::setcolor(4);cout << R"( .oOOo.)";
+    H::gotoxy(110,26);H::setcolor(4);cout << R"( OO()OO)";
+    H::gotoxy(110,27);H::setcolor(4);cout << R"( 'OOOO' )";
+    
+    do{
+    int x=0;
+	char op;
+	do{
+		H::setcolor(4); H::gotoxy(30,24); cout << R"( __   __   ___     ___ )";  
+		H::setcolor(4); H::gotoxy(30,25); cout << R"( \ \ / /  | __|   / __| )"; 
+		H::setcolor(4); H::gotoxy(30,26); cout << R"(  \ V /   | _|    \__ \ )"; 
+		H::setcolor(4); H::gotoxy(30,27); cout << R"(  _|_|_   |___|   |___/ )"; 
+		H::setcolor(3); H::gotoxy(30,28); cout << R"(_| """ |_|"""""|_|"""""| )";
+		H::setcolor(3); H::gotoxy(30,29); cout << R"("`-0-0-'"`-0-0-'"`-0-0-')"; 
+		
+		H::setcolor(4); H::gotoxy(125,24); cout << R"(  _  _     ___  )";  
+		H::setcolor(4); H::gotoxy(125,25); cout << R"( | \| |   / _ \ )";  
+		H::setcolor(4); H::gotoxy(125,26); cout << R"( | .` |  | (_) | )"; 
+		H::setcolor(4); H::gotoxy(125,27); cout << R"( |_|\_|   \___/ )";  
+		H::setcolor(3); H::gotoxy(125,28); cout << R"(_|"""""|_|"""""| )"; 
+		H::setcolor(3); H::gotoxy(125,29); cout << R"("`-0-0-'"`-0-0-' )"; 
+		
+		if(x==0){
+			H::setcolor(6); H::gotoxy(30,24); cout << R"( __   __   ___     ___ )";  
+			H::setcolor(6); H::gotoxy(30,25); cout << R"( \ \ / /  | __|   / __| )"; 
+			H::setcolor(6); H::gotoxy(30,26); cout << R"(  \ V /   | _|    \__ \ )"; 
+			H::setcolor(6); H::gotoxy(30,27); cout << R"(  _|_|_   |___|   |___/ )"; 
+			H::setcolor(3); H::gotoxy(30,28); cout << R"(_| """ |_|"""""|_|"""""| )";
+			H::setcolor(3); H::gotoxy(30,29); cout << R"("`-0-0-'"`-0-0-'"`-0-0-')";
+		}
+		if(x==1){
+			H::setcolor(6); H::gotoxy(125,24); cout << R"(  _  _     ___  )";  
+			H::setcolor(6); H::gotoxy(125,25); cout << R"( | \| |   / _ \ )";  
+			H::setcolor(6); H::gotoxy(125,26); cout << R"( | .` |  | (_) | )"; 
+			H::setcolor(6); H::gotoxy(125,27); cout << R"( |_|\_|   \___/ )";  
+			H::setcolor(3); H::gotoxy(125,28); cout << R"(_|"""""|_|"""""| )"; 
+			H::setcolor(3); H::gotoxy(125,29); cout << R"("`-0-0-'"`-0-0-' )";
+		}
+		op=getch();
+		
+		switch(op){
+			case 75:{
+				x--;
+				if(x<0){
+					x=1;
+				}
+				break;
+			}
+			case 77:{
+				x++;
+				if(x>1){
+					x=0;
+				}
+				break;
+			}
+		}
+	}while(op!=13);	
+	if(x==0)
+	{
+		H::cls();
+		exit(0);
+	}
+	if(x==1)
+	{
+		H::cls();
+		clear_Screen2();
+		return;
+	}
+	}while(true);
 }
