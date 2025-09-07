@@ -345,6 +345,39 @@ struct Feedback {
     char date[15];         // e.g., 23-11-2005
     char message[201];     // feedback message (max 200 chars)
 };
+//================ Invoice =================
+// struct Invoice {
+//     int invoiceNo;
+//     string userName;
+//     string phone;
+//     string date;
+//     vector<BoughtItem> items;
+
+//     double grandTotal() const {
+//         double sum = 0;
+//         for (auto &i : items) sum += i.getTotal();
+//         return sum;
+//     }
+// };
+//================ Invoice =================
+struct Invoice {
+    int invoiceNo;
+    char username[20];
+    char userId[10];
+    char phone[20];
+    char date[20];
+    BoughtItem items[50];  // max 50 items per invoice
+    int itemCount;
+
+    double grandTotal() const {
+        double sum = 0;
+        for (int i = 0; i < itemCount; i++) sum += items[i].getTotal();
+        return sum;
+    }
+};
+
+vector<Invoice> invoices;
+// int invoiceCounter = 1000;
 
 //================ Generate Next Feedback ID =================
 void generateFeedbackId(char* feedbackId) {
@@ -716,135 +749,423 @@ a:
 }
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-//================ ShowInvoice Function =================
-void ShowInvoice(UserData &user, BoughtItem items[], int count) {
+// //================ ShowInvoice Function =================
+// void ShowInvoice(UserData &user, BoughtItem items[], int count) {
 	
-    int page = 0;
-    const int pageSize = 10;
-    int totalPages = (count + pageSize - 1) / pageSize;
+//     int page = 0;
+//     const int pageSize = 10;
+//     int totalPages = (count + pageSize - 1) / pageSize;
 
-    int currentInvoiceNo = invoiceCounter++;
-    char invoiceStr[20];
-    sprintf(invoiceStr, "INV%04d", currentInvoiceNo);
+//     int currentInvoiceNo = invoiceCounter++;
+//     char invoiceStr[20];
+//     sprintf(invoiceStr, "INV%04d", currentInvoiceNo);
 
-    time_t now = time(0);
-    tm* ltm = localtime(&now);
+//     time_t now = time(0);
+//     tm* ltm = localtime(&now);
 
+//     while (true) {
+// 		DesignInvoice();
+//         double grandTotal = 0;
+
+//         // cout << "================ FLOWER SHOP INVOICE ================\n";
+// 		H::setcolor(4);H::gotoxy(120,10);cout << invoiceStr;
+//         H::setcolor(5);H::gotoxy(120,11);cout << 1900 + ltm->tm_year << "-"
+//              << 1 + ltm->tm_mon << "-" << ltm->tm_mday << " "
+//              << setw(2) << setfill('0') << ltm->tm_hour << ":"
+//              << setw(2) << setfill('0') << ltm->tm_min << setfill(' ') << "\n\n";
+
+//         H::setcolor(1);H::gotoxy(60,14);cout << user.getId();
+//         H::setcolor(2);H::gotoxy(60,15);cout << user.getUserName();
+//         H::setcolor(3);H::gotoxy(60,16);cout << user.getPhoneNumber();
+//         int start = page * pageSize;
+//         int end = min(start + pageSize, count);
+// 		int y=20;
+//         for (int i = start; i < end; i++) {
+// 				H::setcolor(5);H::gotoxy(37,y);cout<<i + 1;
+// 				H::setcolor(4);H::gotoxy(53,y);cout<<items[i].product.GetFlowerName();
+// 				H::setcolor(3);H::gotoxy(85,y);cout<<items[i].qty;
+// 				H::setcolor(2);H::gotoxy(108,y);cout<<"$"<<items[i].product.GetFlowerPrice();
+// 				H::setcolor(1);H::gotoxy(128,y);cout<<"$"<<items[i].getTotal();	
+//             grandTotal += items[i].getTotal();
+// 			y++;
+//         }
+// 		H::HLine(31,30,109,2,196);
+// 		H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
+// 		H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
+// 		H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : $" << fixed << setprecision(2) << grandTotal;
+// 		double kh = (grandTotal * 4100);
+// 		H::setcolor(4);H::gotoxy(115,32);cout << "KHR : " << fixed << setprecision(0) << kh;
+// 		H::HLine(31,33,109,2,196);	
+//         // cout << "-------------------------------------------------\n";
+//         // cout << "Grand Total: $" << grandTotal << endl;
+//         // cout << "=================================================\n";
+
+//         // cout << "\nPage " << (page + 1) << " of " << totalPages << endl;
+//         // cout << "Use UP/DOWN to view more items.\n";
+//         // cout << "Press ENTER to Buy Again, ESC/BACKSPACE to return to Main Menu...\n";
+
+//         char ch = _getch();
+//         if (ch == 13) {       // ENTER
+//             Buying();
+//             return;
+//         } 
+//         else if (ch == 27 || ch == 8) { // ESC or BACKSPACE
+//             return;
+//         }
+//         else if (ch == -32) { // arrow key prefix
+//             ch = _getch();
+//             if (ch == 80 && page < totalPages - 1) page++;   // DOWN
+//             else if (ch == 72 && page > 0) page--;           // UP
+//         }
+//     }
+// }
+// void MessageBox(){
+// 	H::setcursor(0,0);
+// 	H::clearBox(49,16,35,3,0);
+// 	H::clearBox(86,21,35,3,0);
+// 	H::drawBoxSingleLineWithBG(43,15,83,10,0);
+//     H::drawBoxSingleLine(43,15,83,10,162);
+//     H::drawBoxSingleLineWithBG(44,16,81,1,213);
+//     H::setcolor(215);H::gotoxy(80,17);cout<<"MESSAGE";
+    
+    
+//     int x=0;
+//     char op;
+//     do{
+//     	//arrow key lef
+// 	    H::drawBoxSingleLineWithBG(44,23,21,1,153);
+// 	    H::setcolor(151);H::gotoxy(45,24);cout<<"[ENTER] TO BUY MORE";
+// 	    //ARROE KEY RIGHT
+// 	    H::drawBoxSingleLineWithBG(100,23,25,1,153);
+// 	    H::setcolor(151);H::gotoxy(101,24);cout<<"[ESC] FOR PRINT INVOICE";
+// 	    if(x==0){
+// 	    	H::drawBoxSingleLineWithBG(44,23,21,1,136);
+// 	    	H::setcolor(135);H::gotoxy(45,24);cout<<"[ENTER] TO BUY MORE";
+// 		}
+// 		if(x==1){
+// 			H::drawBoxSingleLineWithBG(100,23,25,1,136);
+// 	    	H::setcolor(135);H::gotoxy(101,24);cout<<"[ESC] FOR PRINT INVOICE";
+// 		}
+// 		op=getch();
+// 		switch(op){
+// 			case 75:{
+// 				x--;
+// 				if(x<0){
+// 					x=1;
+// 				}
+// 				break;
+// 			}
+// 			case 77:{
+// 				x++;
+// 				if(x>1){
+// 					x=0;
+// 				}
+// 				break;
+// 			}
+// 		}
+// 	}while(op!=13);
+	
+// }
+// //================ Buying Function =================
+// void Buying() 
+// {
+//     vector<BoughtItem> cart;
+//     char key;
+// 	char op3;
+   
+//     do {
+//         H::setcolor(0);
+//         system("cls");
+//         DesignBuyingFlower();
+
+//         bool found = false;
+//         Product flower;
+//         int buyQty;
+//         string srtBuyQty;
+//         char input[50];
+
+//         while (!found) {
+//             H::setcolor(3);H::gotoxy(53,18);cout << "Enter Flower ID or Name ";
+//             H::setcolor(3);H::gotoxy(90,18);cout << ":  ";H::inputAll(input,10);
+
+//             ifstream fin("Data\\Product.flower", ios::binary);
+//             if (!fin) {
+//                 H::drawBoxSingleLineWithBG(49,16,72,9,6);
+//                 H::setcolor(4);H::gotoxy(55,20);cout << "Error: Product.flower not found!";
+//                 return;
+//             }
+
+//             found = false;
+
+//             while (fin.read((char*)&flower, sizeof(Product))) {
+				
+//                 if (strcmp(flower.GetFlowerName(), input) == 0 ||
+//                     flower.GetFlowerId() == atoi(input)) {
+//                     found = true;
+
+//                   do {
+// 					e:
+// 						H::setcolor(3);H::gotoxy(53,23); cout << "Enter Quantity to buy";
+// 						H::setcolor(3);H::gotoxy(90,23); cout << ":  ";
+// 						buyQty = stoi(H::inputUNumber(srtBuyQty, 6));
+
+// 						if (buyQty > flower.GetFlowerQty()) {
+// 							H::setcolor(4);
+// 							H::gotoxy(53,24);
+// 							cout << " Not enough stock! Available: " << flower.GetFlowerQty();
+// 							H::setcolor(3);H::gotoxy(90,22); cout << ":             ";
+							
+// 							goto e;
+							
+// 						} else if (buyQty <= 0) {
+// 							H::setcolor(4);
+// 							H::gotoxy(53,24);
+// 							cout << " Quantity must be at least 1.";
+// 						} else {
+// 							break; // valid quantity
+// 						}
+// 					} while (true);
+//                     // Reduce stock
+//                     flower.SetFlowerQty(flower.GetFlowerQty() - buyQty);
+
+//                     // Update Product.flower
+//                     fin.close();
+//                     fstream fout("Data\\Product.flower", ios::binary | ios::in | ios::out);
+//                     Product temp;
+//                     while (fout.read((char*)&temp, sizeof(Product))) {
+//                         if (temp.GetFlowerId() == flower.GetFlowerId()) {
+//                             fout.seekp((int)fout.tellg() - sizeof(Product));
+//                             fout.write((char*)&flower, sizeof(Product));
+//                             break;
+//                         }
+//                     }
+//                     fout.close();
+
+//                     // Add to cart
+//                     BoughtItem item;
+//                     item.product = flower;
+//                     item.qty = buyQty;
+//                     cart.push_back(item);
+
+// //                    cout << "\nItem added successfully!\n";
+				
+//                     break;
+//                 }
+//             }
+//             fin.close();
+// ////////////////////////////////////////////////////////////////////////Meyly Change//////////////////////////////
+//             if (!found) {     	
+//                 H::setcolor(2);H::gotoxy(55,21);cout <<"This flower ID or Name doesn't exist in our system. Try again.";
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+//             }
+//         }
+// ////////////////////////////////////////////////////////////Meyly Change///////////////////////////
+// 	H::setcolor(2);H::gotoxy(70,21);cout << "Item added successfully!";
+// 	MessageBox();
+	        
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////	    
+//         key = _getch();
+
+//     } while (key == 13);
+
+//     // Save invoice
+//     int count = cart.size();
+//     double grandTotal = 0;
+//     for (auto &item : cart) grandTotal += item.getTotal();
+
+//     ofstream fout("Data\\Invoice.flower", ios::binary | ios::app);
+//     fout.write((char*)&currentUser, sizeof(UserData));
+//     fout.write((char*)&count, sizeof(int));
+//     fout.write((char*)cart.data(), sizeof(BoughtItem) * count);
+//     fout.write((char*)&grandTotal, sizeof(double));
+//     fout.close();
+
+//     // Show invoice
+//     ShowInvoice(currentUser, cart.data(), count);
+// }
+//================ ShowAllInvoices Function =================
+// void ShowAllInvoices() {
+// 	H::setcursor(0,8);
+//     struct Invoice {
+//         UserData user;
+//         int count;
+//         BoughtItem items[100];
+//         double grandTotal;
+//     };
+
+//     ifstream fin("Data/Invoice.flower", ios::binary);
+//     if (!fin || fin.peek() == ifstream::traits_type::eof()) {
+// 		H::setcursor(0,8);
+// 		DesignInvoice();
+//         cout << "No invoices.\n";
+//         return;
+//     }
+
+//     vector<Invoice> invoices;
+
+//     while (true) {
+//         Invoice inv;
+//         if (!fin.read((char*)&inv.user, sizeof(UserData))) break;
+//         if (!fin.read((char*)&inv.count, sizeof(int))) break;
+//         if (!fin.read((char*)inv.items, sizeof(BoughtItem) * inv.count)) break;
+//         if (!fin.read((char*)&inv.grandTotal, sizeof(double))) break;
+
+//         invoices.push_back(inv);
+//     }
+//     fin.close();
+
+//     if (invoices.empty()) {
+// 		H::setcursor(0,8);
+// 		DesignInvoice();
+//         cout << "No invoices.\n";
+//         return;
+//     }
+
+//     int index = 0;
+//     int page = 0;
+//     const int ITEMS_PER_PAGE = 10;
+// 	H::setcursor(0,8);
+//     while (true) {
+// 		int y=20;
+// 		DesignInvoice();
+// 		H::clearBox(36,20,100,9,7);
+// 		H::clearBox(58,15,15,1,7);
+//         Invoice &inv = invoices[index];
+
+//         // cout << "========== Invoice " << index + 1 << " / " << invoices.size() << " ==========\n";
+// 		H::setcolor(1);H::gotoxy(60,14);cout << inv.user.getId();
+//         H::setcolor(2);H::gotoxy(60,15);cout << inv.user.getUserName();
+//         H::setcolor(3);H::gotoxy(60,16);cout << inv.user.getPhoneNumber();
+
+//         int start = page * ITEMS_PER_PAGE;
+//         int end = min(start + ITEMS_PER_PAGE, inv.count);
+//         for (int j = start; j < end; j++) 
+// 		{
+// 			////////////////////////////////////////////////////////////////////////
+// 			H::setcolor(5);H::gotoxy(37,y);cout<<j + 1;
+// 			H::setcolor(4);H::gotoxy(53,y);cout<<inv.items[j].product.GetFlowerName();
+// 			H::setcolor(3);H::gotoxy(85,y);cout<<inv.items[j].qty;
+// 			H::setcolor(2);H::gotoxy(108,y);cout<<"$"<<inv.items[j].product.GetFlowerPrice();
+// 			H::setcolor(1);H::gotoxy(128,y);cout<<"$"<<inv.items[j].getTotal() << endl;
+// 			y++;
+//         }
+// 		H::HLine(31,30,109,2,196);
+// 		H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
+// 		H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
+// 		H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : $" << fixed << setprecision(2) << inv.grandTotal;
+// 		double kh = (inv.grandTotal*4100);
+// 		H::setcolor(4);H::gotoxy(115,32);cout << "KHR : " << fixed << setprecision(0) << kh;
+// 		H::HLine(31,33,109,2,196);	
+//         int key = _getch();
+//         if (key == 27)  // ESC
+// 		{
+// 			return;
+// 		}
+
+//         if (key == 0 || key == 224) {
+//             key = _getch();
+//             if (key == 75) { // LEFT
+//                 index--; page = 0;
+//                 if (index < 0) index = invoices.size() - 1;
+//             }
+//             else if (key == 77) { // RIGHT
+//                 index++; page = 0;
+//                 if (index >= invoices.size()) index = 0;
+//             }
+//             else if (key == 72) { // UP
+//                 page--;
+//                 if (page < 0) page = 0;
+//             }
+//             else if (key == 80) { // DOWN
+//                 int maxPage = (inv.count + ITEMS_PER_PAGE - 1) / ITEMS_PER_PAGE - 1;
+//                 page++;
+//                 if (page > maxPage) page = maxPage;
+//             }
+//         }
+//     }
+// }
+
+//================ Show One Invoice =================
+void ShowInvoice(const Invoice& inv) {
+    system("cls");
+    cout << "\n==============================================\n";
+    cout << "Invoice No: " << inv.invoiceNo << "\n";
+    cout << "User: " << inv.username << "   Phone: " << inv.phone << "\n";
+    cout << "User ID: " << inv.userId << "\n";
+    cout << "Date: " << inv.date << "\n";
+    cout << "----------------------------------------------\n";
+    cout << "ID    Name           Qty   Price    Total\n";
+    cout << "----------------------------------------------\n";
+    for (int i = 0; i < inv.itemCount; i++) {
+        cout << inv.items[i].product.GetFlowerId() << "   "
+             << inv.items[i].product.GetFlowerName() << "   "
+             << inv.items[i].qty << "   "
+             << inv.items[i].product.GetFlowerPrice() << "   "
+             << inv.items[i].getTotal() << "\n";
+    }
+    cout << "----------------------------------------------\n";
+    cout << "Grand Total: " << inv.grandTotal() << "\n";
+    cout << "==============================================\n\n";
+}
+
+//================ Show All Invoices =================
+// ================== Show All Invoices Paginated ==================
+void ShowAllInvoices() {
+    ifstream fin("Data\\Invoice.flower", ios::binary);
+    if (!fin) {
+        cout << "No invoices found!\n";
+        return;
+    }
+
+    vector<Invoice> invoices;
+    Invoice inv;
+    while (fin.read((char*)&inv, sizeof(Invoice))) {
+        invoices.push_back(inv);
+    }
+    fin.close();
+
+    if (invoices.empty()) {
+        cout << "No invoices found!\n";
+        return;
+    }
+
+    int currentPage = 0;
     while (true) {
-		DesignInvoice();
-        double grandTotal = 0;
+        ShowInvoice(invoices[currentPage]);
 
-        // cout << "================ FLOWER SHOP INVOICE ================\n";
-		H::setcolor(4);H::gotoxy(120,10);cout << invoiceStr;
-        H::setcolor(5);H::gotoxy(120,11);cout << 1900 + ltm->tm_year << "-"
-             << 1 + ltm->tm_mon << "-" << ltm->tm_mday << " "
-             << setw(2) << setfill('0') << ltm->tm_hour << ":"
-             << setw(2) << setfill('0') << ltm->tm_min << setfill(' ') << "\n\n";
+        char key = _getch();
+        if (key == 27) break; // ESC to exit
 
-        H::setcolor(1);H::gotoxy(60,14);cout << user.getId();
-        H::setcolor(2);H::gotoxy(60,15);cout << user.getUserName();
-        H::setcolor(3);H::gotoxy(60,16);cout << user.getPhoneNumber();
-        int start = page * pageSize;
-        int end = min(start + pageSize, count);
-		int y=20;
-        for (int i = start; i < end; i++) {
-				H::setcolor(5);H::gotoxy(37,y);cout<<i + 1;
-				H::setcolor(4);H::gotoxy(53,y);cout<<items[i].product.GetFlowerName();
-				H::setcolor(3);H::gotoxy(85,y);cout<<items[i].qty;
-				H::setcolor(2);H::gotoxy(108,y);cout<<"$"<<items[i].product.GetFlowerPrice();
-				H::setcolor(1);H::gotoxy(128,y);cout<<"$"<<items[i].getTotal();	
-            grandTotal += items[i].getTotal();
-			y++;
-        }
-		H::HLine(31,30,109,2,196);
-		H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
-		H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
-		H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : $" << fixed << setprecision(2) << grandTotal;
-		double kh = (grandTotal * 4100);
-		H::setcolor(4);H::gotoxy(115,32);cout << "KHR : " << fixed << setprecision(0) << kh;
-		H::HLine(31,33,109,2,196);	
-        // cout << "-------------------------------------------------\n";
-        // cout << "Grand Total: $" << grandTotal << endl;
-        // cout << "=================================================\n";
-
-        // cout << "\nPage " << (page + 1) << " of " << totalPages << endl;
-        // cout << "Use UP/DOWN to view more items.\n";
-        // cout << "Press ENTER to Buy Again, ESC/BACKSPACE to return to Main Menu...\n";
-
-        char ch = _getch();
-        if (ch == 13) {       // ENTER
-            Buying();
-            return;
-        } 
-        else if (ch == 27 || ch == 8) { // ESC or BACKSPACE
-            return;
-        }
-        else if (ch == -32) { // arrow key prefix
-            ch = _getch();
-            if (ch == 80 && page < totalPages - 1) page++;   // DOWN
-            else if (ch == 72 && page > 0) page--;           // UP
+        // Arrow keys handling
+        if (key == 0 || key == -32) { // special keys
+            key = _getch();
+            if (key == 75) { // LEFT
+                currentPage--;
+                if (currentPage < 0) currentPage = invoices.size() - 1; // loop to last
+            } else if (key == 77) { // RIGHT
+                currentPage++;
+                if (currentPage >= invoices.size()) currentPage = 0; // loop to first
+            }
         }
     }
 }
-void MessageBox(){
-	H::setcursor(0,0);
-	H::clearBox(49,16,35,3,0);
-	H::clearBox(86,21,35,3,0);
-	H::drawBoxSingleLineWithBG(43,15,83,10,0);
-    H::drawBoxSingleLine(43,15,83,10,162);
-    H::drawBoxSingleLineWithBG(44,16,81,1,213);
-    H::setcolor(215);H::gotoxy(80,17);cout<<"MESSAGE";
-    
-    
-    int x=0;
-    char op;
-    do{
-    	//arrow key lef
-	    H::drawBoxSingleLineWithBG(44,23,21,1,153);
-	    H::setcolor(151);H::gotoxy(45,24);cout<<"[ENTER] TO BUY MORE";
-	    //ARROE KEY RIGHT
-	    H::drawBoxSingleLineWithBG(100,23,25,1,153);
-	    H::setcolor(151);H::gotoxy(101,24);cout<<"[ESC] FOR PRINT INVOICE";
-	    if(x==0){
-	    	H::drawBoxSingleLineWithBG(44,23,21,1,136);
-	    	H::setcolor(135);H::gotoxy(45,24);cout<<"[ENTER] TO BUY MORE";
-		}
-		if(x==1){
-			H::drawBoxSingleLineWithBG(100,23,25,1,136);
-	    	H::setcolor(135);H::gotoxy(101,24);cout<<"[ESC] FOR PRINT INVOICE";
-		}
-		op=getch();
-		switch(op){
-			case 75:{
-				x--;
-				if(x<0){
-					x=1;
-				}
-				break;
-			}
-			case 77:{
-				x++;
-				if(x>1){
-					x=0;
-				}
-				break;
-			}
-		}
-	}while(op!=13);
-	
-}
-//================ Buying Function =================
-void Buying() 
-{
-    vector<BoughtItem> cart;
-    char key;
-	char op3;
-   
-    do {
-        H::setcolor(0);
-        system("cls");
-        DesignBuyingFlower();
 
+//================ Buying Flow =================
+void Buying() {
+    cart.clear();
+    Invoice inv;
+    inv.invoiceNo = ++invoiceCounter;
+    inv.itemCount = 0;
+
+    // Use global currentUser directly
+	strcpy(inv.userId, currentUser.getId());
+	strcpy(inv.username, currentUser.getUserName());
+	strcpy(inv.phone, currentUser.getPhoneNumber());
+	getCurrentDate(inv.date);
+
+    char key;
+    do {
+        //================ OLD BUYING LOGIC =================
         bool found = false;
         Product flower;
         int buyQty;
@@ -857,45 +1178,35 @@ void Buying()
 
             ifstream fin("Data\\Product.flower", ios::binary);
             if (!fin) {
-                H::drawBoxSingleLineWithBG(49,16,72,9,6);
-                H::setcolor(4);H::gotoxy(55,20);cout << "Error: Product.flower not found!";
+                H::setcolor(4);H::gotoxy(55,20);
+                cout << "Error: Product.flower not found!";
                 return;
             }
 
-            found = false;
-
             while (fin.read((char*)&flower, sizeof(Product))) {
-				
                 if (strcmp(flower.GetFlowerName(), input) == 0 ||
                     flower.GetFlowerId() == atoi(input)) {
                     found = true;
 
-                  do {
-					e:
-						H::setcolor(3);H::gotoxy(53,23); cout << "Enter Quantity to buy";
-						H::setcolor(3);H::gotoxy(90,23); cout << ":  ";
-						buyQty = stoi(H::inputUNumber(srtBuyQty, 6));
+                    // Quantity loop
+                    do {
+                        H::setcolor(3);H::gotoxy(53,23); cout << "Enter Quantity to buy";
+                        H::setcolor(3);H::gotoxy(90,23); cout << ":  ";
+                        buyQty = stoi(H::inputUNumber(srtBuyQty, 6));
 
-						if (buyQty > flower.GetFlowerQty()) {
-							H::setcolor(4);
-							H::gotoxy(53,24);
-							cout << " Not enough stock! Available: " << flower.GetFlowerQty();
-							H::setcolor(3);H::gotoxy(90,22); cout << ":             ";
-							
-							goto e;
-							
-						} else if (buyQty <= 0) {
-							H::setcolor(4);
-							H::gotoxy(53,24);
-							cout << " Quantity must be at least 1.";
-						} else {
-							break; // valid quantity
-						}
-					} while (true);
-                    // Reduce stock
+                        if (buyQty > flower.GetFlowerQty()) {
+                            H::setcolor(4);
+                            H::gotoxy(53,24);
+                            cout << " Not enough stock! Available: " << flower.GetFlowerQty();
+                        } else if (buyQty <= 0) {
+                            H::setcolor(4);
+                            H::gotoxy(53,24);
+                            cout << " Quantity must be at least 1.";
+                        } else break; // valid
+                    } while (true);
+
+                    // Reduce stock and update Product.flower
                     flower.SetFlowerQty(flower.GetFlowerQty() - buyQty);
-
-                    // Update Product.flower
                     fin.close();
                     fstream fout("Data\\Product.flower", ios::binary | ios::in | ios::out);
                     Product temp;
@@ -913,143 +1224,37 @@ void Buying()
                     item.product = flower;
                     item.qty = buyQty;
                     cart.push_back(item);
-
-//                    cout << "\nItem added successfully!\n";
-				
                     break;
                 }
             }
             fin.close();
-////////////////////////////////////////////////////////////////////////Meyly Change//////////////////////////////
-            if (!found) {     	
-                H::setcolor(2);H::gotoxy(55,21);cout <<"This flower ID or Name doesn't exist in our system. Try again.";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+
+            if (!found) {
+                H::setcolor(2);H::gotoxy(55,21);
+                cout <<"This flower ID or Name doesn't exist in our system. Try again.";
             }
         }
-////////////////////////////////////////////////////////////Meyly Change///////////////////////////
-	H::setcolor(2);H::gotoxy(70,21);cout << "Item added successfully!";
-	MessageBox();
-	        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////	    
+        //================ END OLD CODE =================
+
+        cout << "\nPress ENTER to buy more, ESC to finish invoice...\n";
         key = _getch();
+    } while (key == 13); // ENTER = buy more
 
-    } while (key == 13);
+    // Move cart -> invoice
+    inv.itemCount = cart.size();
+    for (int i = 0; i < cart.size(); i++)
+        inv.items[i] = cart[i];
 
-    // Save invoice
-    int count = cart.size();
-    double grandTotal = 0;
-    for (auto &item : cart) grandTotal += item.getTotal();
-
+    // Save invoice to file
     ofstream fout("Data\\Invoice.flower", ios::binary | ios::app);
-    fout.write((char*)&currentUser, sizeof(UserData));
-    fout.write((char*)&count, sizeof(int));
-    fout.write((char*)cart.data(), sizeof(BoughtItem) * count);
-    fout.write((char*)&grandTotal, sizeof(double));
+    fout.write((char*)&inv, sizeof(Invoice));
     fout.close();
 
     // Show invoice
-    ShowInvoice(currentUser, cart.data(), count);
-}
-//================ ShowAllInvoices Function =================
-void ShowAllInvoices() {
-	H::setcursor(0,8);
-    struct Invoice {
-        UserData user;
-        int count;
-        BoughtItem items[100];
-        double grandTotal;
-    };
+    ShowInvoice(inv);
 
-    ifstream fin("Data/Invoice.flower", ios::binary);
-    if (!fin || fin.peek() == ifstream::traits_type::eof()) {
-		H::setcursor(0,8);
-		DesignInvoice();
-        cout << "No invoices.\n";
-        return;
-    }
-
-    vector<Invoice> invoices;
-
-    while (true) {
-        Invoice inv;
-        if (!fin.read((char*)&inv.user, sizeof(UserData))) break;
-        if (!fin.read((char*)&inv.count, sizeof(int))) break;
-        if (!fin.read((char*)inv.items, sizeof(BoughtItem) * inv.count)) break;
-        if (!fin.read((char*)&inv.grandTotal, sizeof(double))) break;
-
-        invoices.push_back(inv);
-    }
-    fin.close();
-
-    if (invoices.empty()) {
-		H::setcursor(0,8);
-		DesignInvoice();
-        cout << "No invoices.\n";
-        return;
-    }
-
-    int index = 0;
-    int page = 0;
-    const int ITEMS_PER_PAGE = 10;
-	H::setcursor(0,8);
-    while (true) {
-		int y=20;
-		DesignInvoice();
-		H::clearBox(36,20,100,9,7);
-		H::clearBox(58,15,15,1,7);
-        Invoice &inv = invoices[index];
-
-        // cout << "========== Invoice " << index + 1 << " / " << invoices.size() << " ==========\n";
-		H::setcolor(1);H::gotoxy(60,14);cout << inv.user.getId();
-        H::setcolor(2);H::gotoxy(60,15);cout << inv.user.getUserName();
-        H::setcolor(3);H::gotoxy(60,16);cout << inv.user.getPhoneNumber();
-
-        int start = page * ITEMS_PER_PAGE;
-        int end = min(start + ITEMS_PER_PAGE, inv.count);
-        for (int j = start; j < end; j++) 
-		{
-			////////////////////////////////////////////////////////////////////////
-			H::setcolor(5);H::gotoxy(37,y);cout<<j + 1;
-			H::setcolor(4);H::gotoxy(53,y);cout<<inv.items[j].product.GetFlowerName();
-			H::setcolor(3);H::gotoxy(85,y);cout<<inv.items[j].qty;
-			H::setcolor(2);H::gotoxy(108,y);cout<<"$"<<inv.items[j].product.GetFlowerPrice();
-			H::setcolor(1);H::gotoxy(128,y);cout<<"$"<<inv.items[j].getTotal() << endl;
-			y++;
-        }
-		H::HLine(31,30,109,2,196);
-		H::setcolor(3);H::gotoxy(35,31);cout<<"DISCOUNT";
-		H::setcolor(1);H::gotoxy(35,32);cout<<"TOTAL PRICE : ";
-		H::setcolor(4);H::gotoxy(95,32);cout<<"USD  : $" << fixed << setprecision(2) << inv.grandTotal;
-		double kh = (inv.grandTotal*4100);
-		H::setcolor(4);H::gotoxy(115,32);cout << "KHR : " << fixed << setprecision(0) << kh;
-		H::HLine(31,33,109,2,196);	
-        int key = _getch();
-        if (key == 27)  // ESC
-		{
-			return;
-		}
-
-        if (key == 0 || key == 224) {
-            key = _getch();
-            if (key == 75) { // LEFT
-                index--; page = 0;
-                if (index < 0) index = invoices.size() - 1;
-            }
-            else if (key == 77) { // RIGHT
-                index++; page = 0;
-                if (index >= invoices.size()) index = 0;
-            }
-            else if (key == 72) { // UP
-                page--;
-                if (page < 0) page = 0;
-            }
-            else if (key == 80) { // DOWN
-                int maxPage = (inv.count + ITEMS_PER_PAGE - 1) / ITEMS_PER_PAGE - 1;
-                page++;
-                if (page > maxPage) page = maxPage;
-            }
-        }
-    }
+    cout << "\nPress ENTER to Start New Invoice, ESC to Back to Menu...\n";
+    key = _getch();
 }
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
