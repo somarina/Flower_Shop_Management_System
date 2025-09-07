@@ -1,3 +1,6 @@
+#ifndef ___INC_MAINHEADER_H___
+#define ___INC_MAINHEADER_H___
+
 #include "../User/User.h"
 #include "../Staff/design_staff.h"
 #include "../Staff/staff.h"
@@ -96,7 +99,7 @@ void main1()
 		if(x==3)
 		{
 			H::cls();
-			StaffFeature();
+			LoginAsStaff();
 			H::setcolor(0);
 			H::cls();
 			goto f;
@@ -118,124 +121,7 @@ void main1()
 		}
 	}while(true);
 }
-// int main()
-// {
-// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ////  H::DisableButtonClose();
-//    H::setConsoleTitle("Flower Shop Management System");
-//    H::DisableScreenResize();
-//    H::setFixedScreenConsole(170,40);
-//    H::setFont(18,700);
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
-// ////								test for main design on The first console
-// 	H::setcursor(0,0);
-// 	FirstConsole();
-// 	getch();
-// 	H::cls();
-// 	int x = 1;             
-// 	char op,key;
-// 	do{ 
-// 		f:
-// 		H::setcursor(0,0);	
-// 		BigMenu();
-// 		// start:
-// 		do{
-// 			// H::cls();
-// 			BigMenu();
-
-// 			if(x==1)
-// 			{
-// 				H::drawBoxSingleLineWithBG(33,12,23,3,130);
-// 				H::setcolor(228); H::gotoxy(38,14); cout << "ADMIN PROFILE";
-// 			}	
-// 			if(x==2)
-// 			{
-// 				H::drawBoxSingleLineWithBG(33,17,23,3,130); 
-// 				H::setcolor(228); H::gotoxy(42,19); cout << "ADMIN";
-  
-// 			}
-// 			if(x==3)
-// 			{
-// 				H::drawBoxSingleLineWithBG(33,22,23,3,130);
-// 				H::setcolor(228); H::gotoxy(42,24); cout << "STAFF";
-  
-// 			}
-// 			if(x==4)
-// 			{
-// 				H::drawBoxSingleLineWithBG(33,27,23,3,130); 
-// 				H::setcolor(228); H::gotoxy(42,29); cout << "USER";
-  
-// 			}
-// 			if(x==5)
-// 			{
-// 				H::drawBoxSingleLineWithBG(33,32,23,3,130);
-// 				H::setcolor(198); H::gotoxy(42,34); cout << "EXIT";
-// 			}
-
-// 			op = getch(); 
-// 		    if (op == -32 || op == 0){
-// 		        op = getch(); // actual key code
-// 		        switch(op) {
-// 		            case 72: { // Up
-// 						x--;
-// 						if(x<1) x=5;
-// 						break;
-// 					}
-// 					case 80: { // Down
-// 						x++;
-// 						if(x > 5) x=1;
-// 						break;
-// 					}
-// 				}
-// 		    }
-// 		} while (op != 13);  
-// 		H::setcolor(7);
-// 		if(x==1)
-// 		{
-// 			H::cls();
-// 			AboutUs();
-// 			H::setcolor(0);
-// 			H::cls();
-// 			goto f;
-			
-// 		}
-// 		if(x==2)
-// 		{
-// 			H::cls();
-// 			LoginAsAdmin();
-			  
-// 			H::setcolor(0);
-// 			H::cls();
-// 			goto f;
-// 		}
-// 		if(x==3)
-// 		{
-// 			H::cls();
-// 			StaffFeature();
-// 			H::setcolor(0);
-// 			H::cls();
-// 			goto f;
-
-// 		}
-// 		if(x==4)
-// 		{
-// 			H::cls();
-// 			UserBigMenu();
-// 			H::setcolor(0);
-// 			H::cls();
-// 			goto f;
-// 		}
-// 		if(x=5)
-// 		{
-// 			H::cls();
-// 			H::gotoxy(30,20);MNM2("Exiting The System .......");
-// 			exit(0);
-// 		}
-// 	}while(true);
-// 	getch();
-// 	return 0;
-// }
-
+//////////////////////////////////////////////////////////////////////////////////
 void AfterLoginAdmin()
 {
 	H::setcolor(0);
@@ -397,16 +283,14 @@ do{
 	}
 	if(x==2)
 	{
-		char op7;
+		H::setcursor(0,8);
 		H::setcolor(2);
 		H::cls();
 		ShowUserData();
-		cout << "PRESS ESC FOR BACK";
-		op7 = getch();
-		if(op7 == 27)
-		{
-			goto d;
-		}
+		H::setcolor(2);
+		H::cls();
+		goto d;
+		
 	}
 	if(x==3)
 	{
@@ -441,7 +325,6 @@ void LoginAsAdmin()
 	// b:
     while (true)
     {
-	H::setcursor(1,8);
 	NewFlowerEdit();
     //animation top left
 	H::HLine(0,0,85,51,219);
@@ -546,17 +429,21 @@ void LoginAsAdmin()
 
 		H::drawBoxSingleLineWithBG(66,17,39,1,145); 
 		H::drawBoxSingleLineWithBG(66,23,39,1,145);
-
+		H::setcursor(1,8);
     	H::setcolor(135); H::gotoxy(66,16); cout << "USERNAME";
         H::setcolor(135); H::gotoxy(66,22); cout << "PASSWORD";
+		
    		H::setcolor(151); H::gotoxy(70,18); H::inputLetter(username,5);
-    	H::setcolor(151); H::gotoxy(70,24); H::inputPasswordMask(password,8);
+		H::setcolor(38); H::gotoxy(64,27);cout << "TIP: USE [TAB] KEY FOR SHOW / HIDE PASSWORD";
+    	
+		H::setcolor(151); H::gotoxy(70,24); inputPasswordToggle(70, 24, password,8);
 
-		H::setcursor(0,0);
+		H::setcursor(0,8);
         // ===== Check login =====
         if ((strcmp(username, "fsms") == 0 || strcmp(username, "FSMS") == 0) &&
             (strcmp(password, "fsms168") == 0 || strcmp(password, "FSMS168") == 0))
         {
+			H::setcursor(0,8);
             H::setcolor(10);
 			H::gotoxy(69,29); cout << "                                 ";
             H::gotoxy(69,29); cout << "         Login Success           ";
@@ -567,6 +454,7 @@ void LoginAsAdmin()
         }
         else
         {
+			H::setcursor(0,8);
             attempts++;
             H::setcolor(244);
             H::gotoxy(69,28); cout << " Incorrect Password  Or Username ";
@@ -583,6 +471,7 @@ void LoginAsAdmin()
             }
             else
             {
+				H::setcursor(0,8);
                 H::gotoxy(74,29); cout << " Try again (" << (3 - attempts) << " left)....";
 
             }
@@ -1049,3 +938,5 @@ void BigMenu()
 
 
 }
+
+#endif

@@ -14,10 +14,14 @@ A
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include "productData.h"
 #include "ProductDesign.h"
+
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // void test();
 // void LoginAsAdmin();
 void NewFlowerEdit();
+void inputPasswordToggle(int x, int y, char* password, int maxLen);
+void clear_Screen2();
+
 /////////////////////////////////////////////////////////////////
 void DesignImportFlowerData(){
 	Design::BoxOfHeader();
@@ -1731,6 +1735,70 @@ void NewFlowerEdit()
 //     }
 
 // }
+void inputPasswordToggle(int x, int y, char* password, int maxLen) {
+    int i = 0;
+    bool show = false; // default = hidden
+    char ch;
 
+    while (true) {
+        ch = _getch();  // read key without echo
 
+        // Enter → finish input
+        if (ch == 13) { // ENTER key
+            password[i] = '\0';
+            break;
+        }
+        // Backspace
+        else if (ch == 8 && i > 0) {
+            i--;
+            H::gotoxy(x + i, y);
+            cout << " ";      // erase last char
+            H::gotoxy(x + i, y); // move cursor back
+        }
+        // Tab → toggle visibility
+        else if (ch == 9) { 
+            show = !show;
+            // Reprint entire password at same place
+            H::gotoxy(x, y);
+            for (int j = 0; j < i; j++) {
+                cout << (show ? password[j] : '*');
+            }
+            // Fill remaining space with spaces if password shorter than maxLen
+            for (int j = i; j < maxLen; j++) cout << " ";
+            H::gotoxy(x + i, y); // move cursor to end
+        }
+        // Normal character
+        else if (i < maxLen && ch >= 32 && ch <= 126) {
+            password[i++] = ch;
+            H::gotoxy(x + i - 1, y);
+            cout << (show ? ch : '*');
+        }
+    }
+}
+
+void clear_Screen2()
+{
+	H::setcolor(1);  H::gotoxy(6,33);cout << R"(      wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw )";
+	H::setcolor(3);  H::gotoxy(6,34);cout << R"(vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv)";
+	H::setcolor(4);  H::gotoxy(6,35);cout << R"((___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___))";
+	H::setcolor(5);  H::gotoxy(6,36);cout << R"( ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~)";
+	H::setcolor(2);  H::gotoxy(6,37);cout << R"( \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |)";
+	H::setcolor(2);  H::gotoxy(6,38);cout << R"(\\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/ )";
+	H::setcolor(2);  H::gotoxy(6,39);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
+		
+	int color = 78;
+	for(int i = 1; i <= 167; i++)
+	{
+		if(i >=84)
+		{
+			color = 153;
+		}
+		H::drawBoxSingleLineWithBG(i, 1,3, 30,color);
+		H::drawBoxSingleLineWithBG(168-i, 1,3, 30,color);H::delay(2);
+	}
+	H::foreColor(1);
+	// cls();
+	// bird();
+	H::cls();
+}
 #endif

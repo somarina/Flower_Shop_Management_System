@@ -8,6 +8,16 @@
 using namespace ANTHinsyOOP;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void LoginAsStaff();
+void StaffFeature();
+void Menu(int x, int y);
+void designUpdate();
+void designDelete();
+void designSearch();
+void designDisplay();
+void design();
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void design()
 {
@@ -92,7 +102,49 @@ void design()
 		
 }
 
-void designDisplay()
+// void designDisplay()
+// {
+// 	design();
+// 	H::setcolor(1);	H::gotoxy(48,5);cout << R"(    ____  _________ ____  __    _____  __   ______________    ____________ )";
+// 	H::setcolor(1);	H::gotoxy(48,6);cout << R"(   / __ \/  _/ ___// __ \/ /   /   \ \/ /  / ___/_  __/   |  / ____/ ____/ )";
+// 	H::setcolor(1);	H::gotoxy(48,7);cout << R"(  / / / // / \__ \/ /_/ / /   / /| |\  /   \__ \ / / / /| | / /_  / /_     )";
+// 	H::setcolor(2);	H::gotoxy(48,8);cout << R"( / /_/ _/ / ___/ / ____/ /___/ ___ |/ /   ___/ // / / ___ |/ __/ / __/     )";
+// 	H::setcolor(2);	H::gotoxy(48,9);cout << R"(/_____/___//____/_/   /_____/_/  |_/_/   /____//_/ /_/  |_/_/   /_/        )";                                                              
+	
+// 	staffs.ReadAllFromFile();
+// 	H::drawBoxSingleLine(70,29,28,1,5);
+// 	H::setcolor(6); H::gotoxy(73,30); cout << "Press [ ESC ] For Back";
+	
+// 	H::setcursor(0,0);
+//     int m=1;
+//     while(true)
+//     {
+// 	    if(m>14)
+// 	    {
+// 	      m=1;
+// 	    }
+    
+// 	    H::setcolor(m++);  H::gotoxy(6,32);cout << R"(      wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw )";
+// 	    H::setcolor(m++);  H::gotoxy(6,33);cout << R"(vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv)";
+// 	    H::setcolor(m++);  H::gotoxy(6,34);cout << R"((___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___))";
+// 	    H::setcolor(m++);  H::gotoxy(6,35);cout << R"( ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~)";
+// 	    H::setcolor(m++);  H::gotoxy(6,36);cout << R"( \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |)";
+// 	    H::setcolor(m++);  H::gotoxy(6,37);cout << R"(\\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/ )";
+// 	    H::setcolor(m++);  H::gotoxy(6,38);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
+		
+// 		H::delay(500);
+
+//         if (_kbhit()) {
+//             char key = _getch();
+//             if (key == 27)
+// 	       	{
+// 	        	H::cls();
+// 	            break;
+// 	        }
+//         }
+// 	}
+// }
+void DesignDisplay1()
 {
 	design();
 	H::setcolor(1);	H::gotoxy(48,5);cout << R"(    ____  _________ ____  __    _____  __   ______________    ____________ )";
@@ -101,39 +153,92 @@ void designDisplay()
 	H::setcolor(2);	H::gotoxy(48,8);cout << R"( / /_/ _/ / ___/ / ____/ /___/ ___ |/ /   ___/ // / / ___ |/ __/ / __/     )";
 	H::setcolor(2);	H::gotoxy(48,9);cout << R"(/_____/___//____/_/   /_____/_/  |_/_/   /____//_/ /_/  |_/_/   /_/        )";                                                              
 	
-	staffs.ReadAllFromFile();
-	H::drawBoxSingleLine(70,29,28,1,5);
-	H::setcolor(6); H::gotoxy(73,30); cout << "Press [ ESC ] For Back";
+	// staffs.ReadAllFromFile();
+	// H::drawBoxSingleLine(70,29,28,1,5);
 	
-	H::setcursor(0,0);
-    int m=1;
-    while(true)
-    {
-	    if(m>14)
-	    {
-	      m=1;
-	    }
+	
+// 	H::setcursor(0,0);
     
-	    H::setcolor(m++);  H::gotoxy(6,32);cout << R"(      wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw )";
-	    H::setcolor(m++);  H::gotoxy(6,33);cout << R"(vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv)";
-	    H::setcolor(m++);  H::gotoxy(6,34);cout << R"((___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___))";
-	    H::setcolor(m++);  H::gotoxy(6,35);cout << R"( ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~)";
-	    H::setcolor(m++);  H::gotoxy(6,36);cout << R"( \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |)";
-	    H::setcolor(m++);  H::gotoxy(6,37);cout << R"(\\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/ )";
-	    H::setcolor(m++);  H::gotoxy(6,38);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
+	H::setcolor(1);  H::gotoxy(6,32);cout << R"(      wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw               wWWWw )";
+	H::setcolor(3);  H::gotoxy(6,33);cout << R"(vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv  vVVVv (___) wWWWw         (___)  vVVVv)";
+	H::setcolor(4);  H::gotoxy(6,34);cout << R"((___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___)  (___)  ~Y~  (___)  vVVVv   ~Y~   (___))";
+	H::setcolor(5);  H::gotoxy(6,35);cout << R"( ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~    ~Y~   \|    ~Y~   (___)    |/    ~Y~)";
+	H::setcolor(2);  H::gotoxy(6,36);cout << R"( \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |/    \|   \ |/   \| /  \~Y~/   \|    \ |)";
+	H::setcolor(2);  H::gotoxy(6,37);cout << R"(\\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/// \\|// \\|// \\|/// \\|//  \\|// \\\|/ )";
+	H::setcolor(2);  H::gotoxy(6,38);cout << R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
 		
-		H::delay(500);
+// 		H::delay(500);
 
-        if (_kbhit()) {
-            char key = _getch();
-            if (key == 27)
-	       	{
-	        	H::cls();
-	            break;
-	        }
-        }
-	}
+//         if (_kbhit()) {
+//             char key = _getch();
+//             if (key == 27)
+// 	       	{
+// 	        	H::cls();
+// 	            break;
+// 	        }
+//         }
+// 	}
+// }	
 }
+void designDisplay() {
+
+	
+    fstream file;
+    Staff tempStaff;
+    file.open("Data/staff.flower", ios::in | ios::binary);
+    if (!file) {
+		DesignDisplay1();
+		Staff::HeaderDisplay();
+        H::setcolor(4); H::gotoxy(50, 16);
+        cout << "No staff data found!";
+        return;
+    }
+
+    const int pageSize = 5; // show 5 records per page
+    int totalStaff = 0;
+
+    // count total records
+    while (file.read((char*)&tempStaff, sizeof(Staff)))
+        totalStaff++;
+    file.clear(); file.seekg(0, ios::beg); // reset file pointer
+
+    int page = 0;
+    char key;
+	DesignDisplay1();
+	Staff::HeaderDisplay();
+    do {
+		H::clearBox(34,19,100,9,7);
+        int startIndex = page * pageSize;
+        int endIndex = min(startIndex + pageSize, totalStaff);
+
+        int i = 0;
+		int j = 1;
+        file.clear(); file.seekg(0, ios::beg);
+        while (file.read((char*)&tempStaff, sizeof(Staff))) {
+            if (i >= startIndex && i < endIndex)
+                tempStaff.DisplayStaff(i - startIndex,j);
+			j++;
+            i++;
+			if(j>7)
+			{
+				j=1;
+			}
+        }
+
+        H::setcolor(3);H::gotoxy(78, 29); cout << "Page " << page + 1 << "/" << ((totalStaff + pageSize - 1) / pageSize);
+		H::setcolor(6); H::gotoxy(58,30); cout << "Use Left/Right arrows to Show Next PAGE Anf [ ESC ] For Back";
+
+        key = getch();
+        if (key == 0 || key == -32) {
+            key = getch();
+            if (key == 77 && (page + 1) * pageSize < totalStaff) page++; // right arrow
+            if (key == 75 && page > 0) page--; // left arrow
+        }
+    } while (key != 27); // ESC to exit
+
+    file.close();
+}
+
 
 void designSearch()
 {
@@ -641,6 +746,180 @@ void StaffFeature()
 
 
     } while (true);
+}
+
+void LoginAsStaff()
+{
+	char username[50], password[50];
+    int attempts = 0;
+	// b:
+    while (true)
+    {
+	NewFlowerEdit();
+    //animation top left
+	H::HLine(0,0,85,51,219);
+	
+	//animation top left
+	H::HLine(85,0,85,51,219);
+	
+    //border left
+	H::VLine(2,0,39,51,219);
+	H::VLine(3,0,39,51,219);
+
+    //border right
+	H::VLine(168,0,39,51,219);
+	H::VLine(169,0,39,51,219);
+
+    H::drawBoxSingleLineWithBG(47,3,81,3,136); //grey
+    H::drawBoxSingleLineWithBG(45,4,81,3,145); //blue
+
+//////////////////////////////////////
+    H::VLine(52,0,2,68,219);
+    H::VLine(54,0,2,68,219);
+
+    H::VLine(122,0,2,68,219);
+    H::VLine(124,0,2,68,219);
+
+
+//////////////////////////////////////
+                                                
+
+    H::setcolor(151); H::gotoxy(50,4); cout << R"( __     __    ___  __  __ _     __   ____    ___  ____   __    ____  ____ )";
+    H::setcolor(151); H::gotoxy(50,5); cout << R"((  )   /  \  / __)(  )(  ( \   / _\ / ___)  / __)(_  _) /__\  ( ___)( ___))";
+    H::setcolor(151); H::gotoxy(50,6); cout << R"(/ (_/\(  O )( (_ \ )( /    /  /    \\___ \  \__ \  )(  /(__)\  )__)  )__))";
+    H::setcolor(151); H::gotoxy(50,7); cout << R"(\____/ \__/  \___/(__)\_)__)  \_/\_/(____/  (___/ (__)(__)(__)(__)  (__))";
+  
+
+
+    //arrow left (animation)
+    H::HLine(5,14,20,4,220);
+    H::HLine(9,15,20,1,220);
+    H::HLine(13,16,20,6,220);
+    H::HLine(18,17,20,3,220);
+
+    H::HLine(22,18,20,5,220);
+
+    H::HLine(18,19,20,3,220);
+    H::HLine(13,20,20,6,220);
+    H::HLine(9,21,20,1,220);
+    H::HLine(5,22,20,4,220);
+
+
+    //arrow right (animation)
+    H::HLine(145,14,20,4,220);
+    H::HLine(141,15,20,1,220);
+    H::HLine(137,16,20,6,220);
+    H::HLine(133,17,20,3,220);
+
+    H::HLine(129,18,20,5,220);
+
+    H::HLine(133,19,20,3,220);
+    H::HLine(137,20,20,6,220);
+    H::HLine(141,21,20,1,220);
+    H::HLine(145,22,20,4,220);
+
+    //upper box username
+    H::VLine(61,10,3,6,219);
+    H::VLine(111,10,3,6,219);
+    H::HLine(61,11,49,6,223);
+
+    H::HLine(64,12,10,5,220);
+    H::HLine(75,12,10,2,220);
+    H::HLine(86,12,10,3,220);
+    H::HLine(97,12,10,4,220);
+
+    //left box username
+    H::VLine(51,15,11,6,219);
+    H::HLine(50,15,5,6,220);
+    H::HLine(50,26,5,6,223);
+    H::VLine(53,15,10,70,237);
+    H::VLine(54,15,10,70,237);
+
+    //right box username
+    H::VLine(121,15,11,6,219);
+    H::HLine(116,15,5,6,220);
+    H::HLine(116,26,5,6,223);
+    H::VLine(118,15,10,70,237);
+    H::VLine(119,15,10,70,237);
+
+    //box username
+    H::drawBoxSingleLineWithBG(56,14,59,12,136); 
+
+    // H::setcolor(135); H::gotoxy(66,16); cout << "USERNAME";
+    // H::drawBoxSingleLineWithBG(66,17,39,1,145); H::setcolor(151); H::gotoxy(70,18); cout << "FSMS";
+
+    // H::setcolor(135); H::gotoxy(66,22); cout << "PASSWORD";
+    // H::drawBoxSingleLineWithBG(66,23,39,1,145); H::setcolor(151); H::gotoxy(70,24); cout << "Fsms168";
+
+    H::VLine(66,27,3,145,219);
+    H::HLine(65,31,41,1,223);
+    H::VLine(106,27,3,145,219);
+
+        // ===== UI DESIGN (your H:: code goes here) =====
+        H::drawBoxSingleLineWithBG(56,14,59,12,136); 
+
+		H::drawBoxSingleLineWithBG(66,17,39,1,145); 
+		H::drawBoxSingleLineWithBG(66,23,39,1,145);
+		H::setcursor(1,8);
+    	H::setcolor(135); H::gotoxy(66,16); cout << "USERNAME";
+        H::setcolor(135); H::gotoxy(66,22); cout << "PASSWORD";
+   		H::setcolor(151); H::gotoxy(70,18); H::inputLetter(username,10);
+		H::setcolor(38); H::gotoxy(64,27);cout << "TIP: USE [TAB] KEY FOR SHOW / HIDE PASSWORD";
+    	H::setcolor(151); H::gotoxy(70,24); inputPasswordToggle(70, 24, password, 12);
+
+		H::setcursor(0,8);
+        // ===== Check login =====
+        if (
+			// Mana account
+			((strcmp(username, "Mana") == 0 || strcmp(username, "mana") == 0) &&
+				(strcmp(password, "Manafsms") == 0 || strcmp(password, "ManaFSMS") == 0)) ||
+
+			// Naihuoy account
+			((strcmp(username, "Naihuoy") == 0 || strcmp(username, "naihuoy") == 0) &&
+				(strcmp(password, "Naihuoyfsms") == 0 || strcmp(password, "NaihuoyFSMS") == 0)) ||
+
+			// Meyly account
+			((strcmp(username, "Meyly") == 0 || strcmp(username, "meyly") == 0) &&
+				(strcmp(password, "Meylyfsms") == 0|| strcmp(password, "MeylyFSMS") == 0))
+			)
+		{
+			H::setcursor(0,8);
+            H::setcolor(10);
+			H::gotoxy(69,29); cout << "                                 ";
+            H::gotoxy(69,29); cout << "         Login Success           ";
+			H::setcolor(0);
+			H::cls();
+			clear_Screen2();
+			StaffFeature();
+            break;
+        }
+        else
+        {
+			H::setcursor(0,8);
+            attempts++;
+            H::setcolor(244);
+            H::gotoxy(69,28); cout << " Incorrect Password  Or Username ";
+
+
+            if (attempts == 3)
+            {
+                H::gotoxy(66,29); cout << " Too many attempts! Wait 10 seconds....";
+                H::delay(10000); // 10 seconds
+                attempts = 0; // reset attempts after lockout
+				H::setcolor(0);
+				H::setcursor(0,0);
+				H::cls();
+            }
+            else
+            {
+				H::setcursor(0,8);
+                H::gotoxy(74,29); cout << " Try again (" << (3 - attempts) << " left)....";
+
+            }
+        }
+    }
+
+
 }
 
 

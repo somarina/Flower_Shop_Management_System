@@ -30,7 +30,7 @@ class Staff{
 		
 		//simple method
 		void InsertStaff();
-		void DisplayStaff(int i);
+		void DisplayStaff(int i,int j);
 		
 		// File
 	    void WriteToFile();
@@ -360,7 +360,7 @@ fstream autoId;
 		H::setcolor(135); H::gotoxy(97,25);H::input4Tel(strPhoneNum, 10); strcpy(this->staff_PhoneNumber, strPhoneNum);
 	}
 	
-	void Staff::DisplayStaff(int i) {	
+	void Staff::DisplayStaff(int i,int j) {	
 		H::setcursor(0,8);
 		int y = 19 + i*2; 
    
@@ -375,7 +375,7 @@ fstream autoId;
 		H::VLine(30,27,1,0,200);
 		H::VLine(141,27,1,0,188);
 		
-		H::setcolor(1);
+		H::setcolor(j);
 		H::gotoxy(35,y); cout << "S-" << this->staff_id;
 		H::gotoxy(53,y); cout << this->staff_name;
 		H::gotoxy(76,y); cout << this->staff_gender;
@@ -396,13 +396,18 @@ fstream autoId;
 	}
 	
 	void Staff::ReadAllFromFile() {
-		int i=0;
+		int i=0,j=1;
 	    Myfile.open("Data/staff.flower", ios::in | ios::binary);
 	    Staff::HeaderDisplay();
 	    while (Myfile.read((char*)&staffs, sizeof(Staff)))
 	    {
-	    	staffs.DisplayStaff(i);
+	    	staffs.DisplayStaff(i,j);
 	    	i++;
+			j++;
+			if(j>7)
+			{
+				j=1;
+			}
 		}
 	    Myfile.close();
 	}
