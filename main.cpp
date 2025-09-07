@@ -104,7 +104,7 @@ int main()
 		if(x==3)
 		{
 			H::cls();
-			StaffFeature();
+			LoginAsStaff();
 			H::setcolor(0);
 			H::cls();
 			goto f;
@@ -290,16 +290,14 @@ do{
 	}
 	if(x==2)
 	{
-		char op7;
+		H::setcursor(0,8);
 		H::setcolor(2);
 		H::cls();
 		ShowUserData();
-		cout << "PRESS ESC FOR BACK";
-		op7 = getch();
-		if(op7 == 27)
-		{
-			goto d;
-		}
+		H::setcolor(2);
+		H::cls();
+		goto d;
+		
 	}
 	if(x==3)
 	{
@@ -441,8 +439,11 @@ void LoginAsAdmin()
 		H::setcursor(1,8);
     	H::setcolor(135); H::gotoxy(66,16); cout << "USERNAME";
         H::setcolor(135); H::gotoxy(66,22); cout << "PASSWORD";
+		
    		H::setcolor(151); H::gotoxy(70,18); H::inputLetter(username,5);
-    	H::setcolor(151); H::gotoxy(70,24); H::inputPasswordMask(password,8);
+		H::setcolor(38); H::gotoxy(64,27);cout << "TIP: USE [TAB] KEY FOR SHOW / HIDE PASSWORD";
+    	
+		H::setcolor(151); H::gotoxy(70,24); inputPasswordToggle(70, 24, password,8);
 
 		H::setcursor(0,8);
         // ===== Check login =====
@@ -455,7 +456,7 @@ void LoginAsAdmin()
             H::gotoxy(69,29); cout << "         Login Success           ";
 			H::setcolor(0);
 			H::cls();
-			AfterLoginAdmin();
+			AfterLoginAdmin();			
             break;
         }
         else
